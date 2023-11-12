@@ -166,7 +166,15 @@ figure {
 
 img {
   vertical-align: middle;
-  border-style: none; }
+  border-style: none; 
+}
+
+.app-icon{
+    margin-bottom:10px;
+    height:25%;
+    width:25%;
+    border-radius: 10%;
+}
 
 svg {
   overflow: hidden;
