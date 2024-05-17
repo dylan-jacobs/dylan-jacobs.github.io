@@ -8411,6 +8411,15 @@ h1, h2, h3, h4, h5,
       opacity: 0;
       display: none; } }
 
+.background-tint{
+  background-color: rgba(0,0,0,.5);
+  background-blend-mode: multiply;
+}
+.fill-height{
+  position: absolute;
+  height: 100%;
+}
+
 .owl-carousel {
   position: relative; }
   .owl-carousel .owl-item {
@@ -8454,7 +8463,8 @@ h1, h2, h3, h4, h5,
       background-position: center center;
       height: 750px;
       position: relative;
-      z-index: 0; }
+      z-index: 0; 
+    }
       @media (max-width: 1199.98px) {
         .owl-carousel.home-slider .slider-item {
           background-position: center center !important; } }
