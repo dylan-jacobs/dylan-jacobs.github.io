@@ -178,6 +178,24 @@ img {
     border-radius: 10%;
 }
 
+.app-icon-blog{
+  margin-bottom:10px;
+  height:auto;
+  width:75%;
+  border-radius: 10%;
+  margin-top: 60px;
+  margin-left: 10px;
+  margin-right: 60px;
+  margin-bottom: 0px;
+  object-fit: scale-down;
+  object-position: center;
+}
+.project-link-blog{
+  margin-top: 20px;
+  margin-left: 10px;
+  
+}
+
 svg {
   overflow: hidden;
   vertical-align: middle; }
@@ -490,6 +508,8 @@ pre {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px; }
+
+
 
 .no-gutters {
   margin-right: 0;
