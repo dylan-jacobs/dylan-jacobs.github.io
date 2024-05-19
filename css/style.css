@@ -181,11 +181,12 @@ img {
 .app-icon-blog{
   height:auto;
   width:75%;
+  aspect-ratio:calc();
   border-radius: 10%;
   margin-left: 10px;
   margin-right: 60px;
   margin-bottom: 0px;
-  object-fit: scale-down;
+  object-fit:fill;
 }
 .project-link-blog{
   margin-top: 20px;
