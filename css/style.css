@@ -171,6 +171,21 @@ img {
   border-style: none; 
 }
 
+.more-text{
+  display: none;
+}
+
+.read-more-button{
+  background-color: green; /*rgb(43, 43, 43); */
+  color: rgb(185, 185, 185);
+  border: none;
+  border-radius: 1rem;
+  padding-right: 1%;
+  padding-left: 1%;
+  padding-top: 0.2%;
+  padding-bottom: 0.2%;
+}
+
 .app-icon{
     margin-bottom:10px;
     height:100px;
@@ -181,7 +196,7 @@ img {
 .app-icon-blog{
   height:auto;
   width:75%;
-  aspect-ratio:calc();
+  aspect-ratio:1;
   border-radius: 10%;
   margin-left: 10px;
   margin-right: 60px;
