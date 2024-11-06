@@ -194,6 +194,16 @@ img {
     border-radius: 10%;
 }
 
+.headshot{
+  height:auto;
+  width:66%;
+  border-radius: 10%;
+  margin-left: 10px;
+  margin-right: 60px;
+  margin-bottom: 0px;
+  object-fit:contain;
+}
+
 .app-icon-blog{
   height:auto;
   width:75%;
