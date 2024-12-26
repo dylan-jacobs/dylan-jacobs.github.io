@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchDebates() {
     try {
-        const response = await fetch(`http://localhost:${PORT}/api/debates`);
+        const response = await fetch(`/api/debates`);
         const debates = await response.json();
         displayDebates(debates);
     } catch (error) {
