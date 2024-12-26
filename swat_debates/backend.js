@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const Airtable = require('airtable');
+try{
 require('dotenv').config();
+} catch (error) {console.log('Not applicable: ', error);}
 const app = express();
 const airtableAPIKey = process.env.AIRTABLE_API;
 const airtableBaseID = process.env.AIRTABLE_BASE_ID;
