@@ -1,4 +1,7 @@
-const PORT = 5500;
+try{
+require('dotenv').config();
+} catch (error) {console.log('Not applicable: ', error);}
+const port = process.env.PORT;
 
 document.addEventListener('DOMContentLoaded', function() {
     fetchDebates();
@@ -7,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchDebates() {
     try {
-        const response = await fetch(`http://localhost:${PORT}/api/debates`);
+        const response = await fetch(`${PORT}/api/debates`);
         const debates = await response.json();
         displayDebates(debates);
     } catch (error) {
