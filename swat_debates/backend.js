@@ -1,15 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const Airtable = require('airtable');
+require('dotenv').config();
+const airtableAPIKey = process.env.airtableAPIKey;
+const airtableBaseID = process.env.airtableBaseID;
 
 const app = express();
 const PORT = 5500;
 
-const airtableAPIKey = 'patxtimTn04JsMYfm.44ac81076169a3d10e074744a91fe6d6666f83495081c23e08de38088a24c004';
-const baseID = 'appRSkomBUwtwjCjN';
+const base = new Airtable({ apiKey: airtableAPIKey }).base(airtableBaseID);
 const tableName = 'Debates';
-
-const base = new Airtable({ apiKey: airtableAPIKey }).base(baseID);
 
 // Enable CORS for communication between backend and frontend
 app.use(cors());
