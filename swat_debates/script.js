@@ -1,7 +1,9 @@
+const express = require('express');
 try{
 require('dotenv').config();
 } catch (error) {console.log('Not applicable: ', error);}
-const port = process.env.PORT;
+const app = express();
+const PORT = process.env.PORT || 5500;
 
 document.addEventListener('DOMContentLoaded', function() {
     fetchDebates();

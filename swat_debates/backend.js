@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 const airtableAPIKey = process.env.AIRTABLE_API;
 const airtableBaseID = process.env.AIRTABLE_BASE_ID;
-const port = process.env.PORT;
+const port = process.env.PORT || 5500;
 
 const base = new Airtable({ apiKey: airtableAPIKey }).base(airtableBaseID);
 const tableName = 'Debates';
