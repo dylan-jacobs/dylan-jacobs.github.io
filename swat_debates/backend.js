@@ -7,7 +7,6 @@ require('dotenv').config();
 const app = express();
 const airtableAPIKey = process.env.AIRTABLE_API;
 const airtableBaseID = process.env.AIRTABLE_BASE_ID;
-const port = process.env.PORT || 5500;
 
 const base = new Airtable({ apiKey: airtableAPIKey }).base(airtableBaseID);
 const tableName = 'Debates';
@@ -16,7 +15,7 @@ const tableName = 'Debates';
 app.use(cors());
 
 // Route to fetch debates
-app.get('/api/debates', async (req, res) => {
+app.get(`/api/debates`, async (req, res) => {
     try {
         const debates = [];
         base(tableName).select().eachPage(
@@ -41,4 +40,5 @@ app.get('/api/debates', async (req, res) => {
     }
 });
 
+const port = process.env.PORT || 5500;
 app.listen(port, () => console.log(`Server running at ${port}`));

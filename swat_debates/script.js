@@ -1,7 +1,4 @@
-try{
-require('dotenv').config();
-} catch (error) {console.log('Not applicable: ', error);}
-const PORT = process.env.PORT || 5500;
+const url = 'https://swat-debates.onrender.com';
 
 document.addEventListener('DOMContentLoaded', function() {
     fetchDebates();
@@ -10,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchDebates() {
     try {
-        const response = await fetch(`${PORT}/api/debates`);
+        const response = await fetch(`${url}/api/debates`);
         const debates = await response.json();
         displayDebates(debates);
     } catch (error) {
