@@ -2,11 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const Airtable = require('airtable');
 require('dotenv').config();
-const airtableAPIKey = process.env.airtableAPIKey;
-const airtableBaseID = process.env.airtableBaseID;
-
 const app = express();
-const PORT = 5500;
+const airtableAPIKey = process.env.AIRTABLE_API;
+const airtableBaseID = process.env.AIRTABLE_BASE_ID;
+const port = process.env.PORT;
 
 const base = new Airtable({ apiKey: airtableAPIKey }).base(airtableBaseID);
 const tableName = 'Debates';
@@ -40,4 +39,4 @@ app.get('/api/debates', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
