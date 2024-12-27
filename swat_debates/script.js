@@ -45,4 +45,7 @@ function displayDebates(data) {
         debateItem.appendChild(details);
         debatesContainer.append(debateItem);
     });
+
+    const debatesLoader = document.getElementById('debates-loader');
+    debatesLoader.style.display = 'none';
 }
