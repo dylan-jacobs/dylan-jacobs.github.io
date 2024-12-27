@@ -47,11 +47,16 @@
 /* Popup content */
 .popup-content {
     background: white;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
-    width: 300px;
+    width: 66%;
+    height: 66%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;   
+    gap: 10px; 
 }
 
 /* Close button */
@@ -62,10 +67,19 @@
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: auto;
 }
 
 .close-btn:hover {
     background: darkred;
+}
+
+.clickable {
+    cursor: pointer; /* Changes cursor to a hand icon */
+}
+
+.clickable:hover {
+    background-color: rgba(164, 193, 255, 0.319); /* Change color on hover for better feedback */
 }
   
 @keyframes spin {
