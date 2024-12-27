@@ -13,6 +13,10 @@ const tableName = 'Debates';
 // Enable CORS for communication between backend and frontend
 app.use(cors());
 
+app.get('/', async (req, res) => {
+    res.send('Welcome to Swat-Debates API!');
+});
+
 // Route to fetch debates
 app.get(`/api/debates`, async (req, res) => {
     try {
