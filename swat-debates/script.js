@@ -1,4 +1,5 @@
 const url = 'https://swat-debates.onrender.com';
+//const url = 'http://localhost:5500';
 
 document.addEventListener('DOMContentLoaded', function() {
     fetchDebates();
@@ -85,3 +86,14 @@ window.onclick = function(event) {
         hidePopup();
     }
 };
+
+function showHideCalendarView(){
+    const calendar = document.getElementById("airtable-calendar");
+    const calendarViewToggle = document.getElementById("calendar-view-switch");
+    if (calendarViewToggle.checked) {
+        calendar.style.display = '';
+    }
+    else {
+        calendar.style.display = 'none';
+    }
+}

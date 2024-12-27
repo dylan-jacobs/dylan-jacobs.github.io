@@ -7,7 +7,6 @@ require('dotenv').config();
 const app = express();
 const airtableAPIKey = process.env.AIRTABLE_API;
 const airtableBaseID = process.env.AIRTABLE_BASE_ID;
-
 const base = new Airtable({ apiKey: airtableAPIKey }).base(airtableBaseID);
 const tableName = 'Debates';
 
@@ -21,7 +20,14 @@ app.get(`/api/debates`, async (req, res) => {
         base(tableName).select().eachPage(
             (records, fetchNextPage) => {
                 records.forEach(record => {
-                    debates.push(record.fields); // Push only fields to the result
+                    res.send(json(record.fields));
+                    var date = new Date(json(record.fields).when);
+                    if (date.getTime() < Date.now()){
+                        base(tableName).destroy(record.id);
+                    }
+                    else{
+                        debates.push(record.fields); // Push only fields to the result
+                    }
                 });
                 fetchNextPage();
             },

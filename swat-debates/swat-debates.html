@@ -12,12 +12,22 @@
     <!-- Current debates-->
     <div class="row">
       <div id="debates-container" class="column-container">
-        <h1>Upcoming debates</h1>
+        <div class="row">
+          <h1>Upcoming debates</h1>
+          <div class="switch-container">
+            <span>Calendar view</span>
+            <label class="switch">
+              <input id="calendar-view-switch" type="checkbox" onclick="showHideCalendarView()">
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
         <div id="debates-loader" class="loader"></div>
+        <iframe id="airtable-calendar" class="airtable-embed" src="https://airtable.com/embed/appRSkomBUwtwjCjN/shr3UBOWPAKlP02zj" frameborder="0" onmousewheel="" width="100%" height="533" style="overflow: hidden; display: none; background: transparent; border-radius: 10px; border: 1px solid #ccc;"></iframe>
       </div>
       <div id="debates-scheduler-container" class="column-container">
         <h1>Create new debate</h1>
-        <iframe class="airtable-embed" src="https://airtable.com/embed/appRSkomBUwtwjCjN/pag76mSJpzZjgojmy/form" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border-radius: 10px; border: 1px solid #ccc;"></iframe>
+        <iframe class="airtable-embed" src="https://airtable.com/embed/appRSkomBUwtwjCjN/pag76mSJpzZjgojmy/form" frameborder="0" onmousewheel="" width="100%" height="700" style="background: transparent; border-radius: 10px; border: 1px solid #ccc;"></iframe>
       </div>
     </div>
 
@@ -32,7 +42,6 @@
     </div>
 
     <div class="row">
-
     </div>
     <script src="script.js"></script>
   </body>
