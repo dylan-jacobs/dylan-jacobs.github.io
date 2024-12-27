@@ -1,5 +1,5 @@
-const url = 'https://swat-debates.onrender.com';
-//const url = 'http://localhost:5500';
+const url = 'https://swat-debates.onrender.com'; // prod
+//const url = 'http://localhost:5500'; // dev
 
 document.addEventListener('DOMContentLoaded', function() {
     fetchDebates();

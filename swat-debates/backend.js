@@ -20,13 +20,16 @@ app.get(`/api/debates`, async (req, res) => {
         base(tableName).select().eachPage(
             (records, fetchNextPage) => {
                 records.forEach(record => {
-                    res.send(json(record.fields));
-                    var date = new Date(json(record.fields).when);
+                    try{
+                    var date = new Date(record.fields.when);
                     if (date.getTime() < Date.now()){
                         base(tableName).destroy(record.id);
                     }
                     else{
                         debates.push(record.fields); // Push only fields to the result
+                    }
+                    } catch(error){
+                        console.log('Get records failed: ', error);
                     }
                 });
                 fetchNextPage();
