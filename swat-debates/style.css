@@ -154,6 +154,23 @@
     align-items: center; /* Align the switch and text vertically */
     gap: 0.5rem; /* Space between the switch and the text */
 }
+.background-overlay {
+    background-position: center;
+    height: 400px; 
+    display: flex;
+    justify-content: center;
+    overflow: hidden; /* Hide the overflow (crop the image's width) */
+    align-items: center;
+    color: white; /* Text color */
+    font-size: xxx-large;
+}
+.background-overlay img {
+    height: 100%; /* Make the image fit the container's height */
+    width: auto; /* Keep the image's aspect ratio */
+}
+
+
+
 @keyframes spin {
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
