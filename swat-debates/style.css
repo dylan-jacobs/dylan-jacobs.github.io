@@ -15,6 +15,12 @@
     position: relative;
     overflow: hidden;
 }
+.column-container.primary{
+    flex: 66%;
+}
+.column-container.secondary{
+    flex: 33%;
+}
 .debate-item {
     border: 1px solid #ccc;
     padding: 10px;
@@ -155,18 +161,16 @@
     gap: 0.5rem; /* Space between the switch and the text */
 }
 .background-overlay {
-    background-position: center;
-    height: 400px; 
+    height: 50vh; /* Full viewport height */
+    width: 100%; /* Full width */
+    background-position: center; /* Center cropped portion */
+    background-repeat:repeat-x; 
+    color: white;
     display: flex;
     justify-content: center;
-    overflow: hidden; /* Hide the overflow (crop the image's width) */
     align-items: center;
     color: white; /* Text color */
     font-size: xxx-large;
-}
-.background-overlay img {
-    height: 100%; /* Make the image fit the container's height */
-    width: auto; /* Keep the image's aspect ratio */
 }
 
 
