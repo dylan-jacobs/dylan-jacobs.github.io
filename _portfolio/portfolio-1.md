@@ -1,6 +1,7 @@
 ---
 title: "Line Dash"
-excerpt: "Fast-paced, addictive arcade game published on the Google Play store.<br/><img src='/images/project_icons/line_dash_icon.png'>"
+date: April 2019 - October 2019
+excerpt: "Fast-paced, addictive arcade game published on the Google Play store.<br/><img src='/images/project_icons/line_dash_icon.png' width='500'>"
 collection: portfolio
 ---
 Fast-paced, addictive arcade game published on Google Play. Developed using the Unity game engine and C# scripts. 

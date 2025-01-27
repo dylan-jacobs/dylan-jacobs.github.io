@@ -7,8 +7,11 @@
 main:
   - title: "Resume"
     url: /cv/
+        
+  - title: "Projects"
+    url: /portfolio/
 
-  - title: "Publications"
+  - title: "Posters"
     url: /publications/
 
   # - title: "Talks"
@@ -16,12 +19,12 @@ main:
 
   #- title: "Teaching"
   #  url: /teaching/    
-    
-  - title: "Portfolio"
-    url: /portfolio/
         
-  - title: "Blog Posts"
-    url: /year-archive/
+  # - title: "Blog Posts"
+  #  url: /year-archive/
+
+  - title: "Contact"
+    url: /contact/
     
   #- title: "Guide"
   #  url: /markdown/
