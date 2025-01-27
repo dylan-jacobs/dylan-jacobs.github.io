@@ -1,7 +1,6 @@
 ---
-title: "Portfolio item number 1"
-excerpt: "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+title: "Vlasov-Poisson plasma model solver"
+excerpt: "Vlasov-Poisson plasma model solver demonstrated on problems such as weak-Landau-damping and two-stream instability.<br/><img src='/images/project_icons/vp-solver-2-stream-instability-solution-wk7.jpg'>"
 collection: portfolio
 ---
-
-This is an item in your portfolio. It can be have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML. 
+Vlasov-Poisson plasma model solver demonstrated on problems such as weak-Landau-damping and two-stream instability.
