@@ -10,4 +10,4 @@ An iterative, inverse-kinematics **Python** algorithm to model the optimal movem
 
 Presentation:
 ------
-<embed src='/files/E21 Final Project Presentation Slides.pdf' type='application/pdf' width='100%' height='300px'>
+<embed src='/files/E21 Final Project Presentation Slides.pdf' type='application/pdf' width='100%' height='500px'>
