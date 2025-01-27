@@ -1,6 +1,6 @@
 ---
-title: "Vlasov-Poisson plasma model solver"
-excerpt: "Vlasov-Poisson plasma model solver demonstrated on problems such as weak-Landau-damping and two-stream instability.<br/><img src='/images/project_icons/vp-solver-2-stream-instability-solution-wk7.jpg'>"
+title: "Line Dash"
+excerpt: "<br/><img src='/images/project_icons/line_dash_icon.png'>"
 collection: portfolio
 ---
-Vlasov-Poisson plasma model solver demonstrated on problems such as weak-Landau-damping and two-stream instability.
+Fast-paced, addictive arcade game
