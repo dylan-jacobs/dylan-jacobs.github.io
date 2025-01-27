@@ -10,8 +10,8 @@ Vlasov-Poisson plasma model solver demonstrated on problems such as weak-Landau-
 
 Presentation:
 ------
-<embed src='/files/Sigma-Xi-Poster-2024.pdf' type='application/pdf' width='100%' height='500px'>
+<embed src='/files/Sigma-Xi-Poster-2024.pdf' type='application/pdf' width='100%' height='600px'>
 
 Summer 2024 Research Documentation
 ------
-<embed src='/files/summer-2024-research-journal.pdf' type='application/pdf' width='100%' height='500px'>
+<embed src='/files/summer-2024-research-journal.pdf' type='application/pdf' width='100%' height='800px'>
