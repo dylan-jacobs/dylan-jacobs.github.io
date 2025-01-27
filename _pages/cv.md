@@ -14,14 +14,14 @@ Education
 * B.S. in General Engineering, B.A. in Applied Mathematics, Swarthmore College, 2027 (expected)
 
   Relevant coursework:
-  * Electrical circuit analysis, mechanics, data structures & algorithms, computer engineering
-  * Ordinary & partial differential equations, numerical methods for differential equations, directed reading group on tensors
+  * Electrical circuit analysis (ENGR 011), mechanics (ENGR 006), data structures & algorithms (CPSC 035), computer engineering (ENGR 021)
+  * Ordinary & partial differential equations (MATH 043, MATH 054), numerical methods for differential equations (MATH 093), directed reading group on tensors (MATH 093)
   
   GPA: 3.95/4.00
 
 Work & research experience
 ======
-* Jan 2024—present: Applied Mathematics Research Assistant                                                                
+* January 2024—present: Applied Mathematics Research Assistant                                                                
   * Utilizing principles of **computational fluid dynamics and numerical methods** to research high-order 
   accurate methods for time-dependent partial differential equations (PDEs), **plasma/kinetic models.** 
   * Using **MATLAB** to implement PDE-solvers 
@@ -29,16 +29,21 @@ Work & research experience
   * Developing a novel low-rank, structure-preserving, highly accurate integrator for the Vlasov-Fokker-
   Planck equation in cylindrical coordinates; documenting research results in LaTeX journal 
 
-* Dec 2023—May 2024: Electrical Engineering Research Assistant                                                        
+* December 2023—May 2024: Electrical Engineering Research Assistant (project [link](/_portfolio/portfolio-5.md))
   * Researched electrical and aerospace science behind oscillatory wind-energy devices to develop a 
   novel, small-scale wind-energy harvester. 
   * Used MATLAB and **Arduino** to record and analyze voltage data from electromagnetic induction. 
   * Simulations done using **Arduino, MATLAB** and **ViscousFlow.**
 
-* Jun 2022—Aug 2022: Software Engineering Intern, Oregon Health and Science University            
+* June 2022—August 2022: Software Engineering Intern, Oregon Health and Science University            
   * Developed mobile Android app in Kotlin 
   * Attended and presented weekly project updates and machine learning meetings; presented 
   machine-learning paper to reading group.
+
+* January 2021—June 2021
+  * Used statistical models in Python to predict the time and date of female patient parturition. 
+  * Attended weekly machine-learning presentations
+  * Analyzed large biomedical datasets in Python
   
 Skills
 ======
