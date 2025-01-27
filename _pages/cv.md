@@ -46,24 +46,27 @@ Skills
 * **Software**: VSCode, MATLAB, Git, SolidWorks, AutoCAD, MS Office 
 * **Foreign Languages**: Spanish (Fluent), Global Seal of Biliteracy (2022)
 
-Publications
+Projects
+======
+<ul>{% for post in site.portfolio reversed %}
+  {% include archive-single-cv.html %}
+  {% endfor %} </ul>
+
+[Publications
 ======
   <ul>{% for post in site.publications reversed %}
     {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Talks
+  {% endfor %}</ul>]: #
+
+[Talks
 ======
   <ul>{% for post in site.talks reversed %}
     {% include archive-single-talk-cv.html  %}
-  {% endfor %}</ul>
+  {% endfor %}</ul>]: #
   
-Teaching
+
+[Teaching
 ======
   <ul>{% for post in site.teaching reversed %}
     {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Service and leadership
-======
-* 
+  {% endfor %}</ul>]: #
