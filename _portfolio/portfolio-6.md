@@ -1,6 +1,6 @@
 ---
 title: "Vlasov-Poisson plasma model solver"
-modified: August 2024
+date: August 2024
 excerpt: "Vlasov-Poisson plasma model solver demonstrated on problems such as weak-Landau-damping and two-stream instability.<br/><img src='/images/project_icons/vp-solver-2-stream-instability-solution-wk7.jpg' width='500'>"
 collection: portfolio
 ---
