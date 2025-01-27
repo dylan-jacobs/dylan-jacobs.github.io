@@ -12,9 +12,9 @@ title                    : "Dylan Jacobs"
 title_separator          : "-"
 name                     : &name "Dylan Jacobs"
 description              : &description "General Engineering and Applied Mathematics double major at Swarthmore College"
-url                      : https://academicpages.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
+url                      : https://dylan-jacobs.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "academicpages/academicpages.github.io"
+# repository               : "academicpages/academicpages.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
@@ -25,18 +25,18 @@ author:
   name             : "Dylan Jacobs"
   pronouns         : "he/him"  
   bio              : "General Engineering and Applied Mathematics double major at Swarthmore College"
-  location         : "Philadelphia, Pennsylvania | Portland, Oregon"
+  location         : "Philadelphia, PA | Portland, OR"
   employer         : "Swarthmore College"
   uri              : # URL
   email            : "djacobs2@swarthmore.edu" 
 
   # Academic websites
   arxiv            : # URL - Update with the correct link to your profile
-  googlescholar    : "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
+  googlescholar    : # "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
   impactstory      : # URL
-  orcid            : "http://orcid.org/yourorcidurl"
+  orcid            : # "http://orcid.org/yourorcidurl"
   semantic         : # URL
-  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
+  pubmed           : # "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   researchgate     : # URL
   scopus           : # URL
 
@@ -58,7 +58,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : "dylan-t-jacobs"
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username
