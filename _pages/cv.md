@@ -14,8 +14,18 @@ Education
 * B.S. in General Engineering, B.A. in Applied Mathematics, Swarthmore College, 2027 (expected)
 
   Relevant coursework:
-  * Electrical circuit analysis (ENGR 011), mechanics (ENGR 006), data structures & algorithms (CPSC 035), computer engineering (ENGR 021)
-  * Ordinary & partial differential equations (MATH 043, MATH 054), numerical methods for differential equations (MATH 093), directed reading group on tensors (MATH 093)
+  * Linear physical systems (ENGR 012)
+  * Electrical circuit analysis (ENGR 011)
+  * Mechanics (ENGR 006)
+  * Data structures & algorithms (CPSC 035)
+  * Computer engineering (ENGR 021)
+  * Ordinary & partial differential equations (MATH 043, MATH 054)
+  * Electromagnetism, waves, and optics with biomedical applications (PHYS 004L)
+
+  Reading groups:
+  * Numerical methods for differential equations (Spring 2024)
+  * Kinetic modeling and computational fluid dynamics (Fall 2024)
+  * Directed reading group on tensors (Spring 2025)
   
   GPA: 3.95/4.00
 
