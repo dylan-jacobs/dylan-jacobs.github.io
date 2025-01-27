@@ -1,6 +1,6 @@
 ---
 title: "Snake 3D"
-date: June 2021
+modified: June 2021
 excerpt: "3D rendition of classic Snake game with Gaussian-noise-generated terrain maps.<br/><img src='/images/project_icons/snake_3d_icon.png' width='400'>"
 collection: portfolio
 ---
