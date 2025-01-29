@@ -6,7 +6,7 @@ redirect_from:
 ---
 
 My Research Background
-======
+------
 I am driven to utilize engineering and mathematics to solve pressing societal problems. Growing up in Portland, Oregon, witnessing the devastating climate-change-induced wildfires on Pacific Northwest forests impressed upon me the necessity of mitigating global warming. Studying engineering and applied mathematics has motivated me to use my
 STEM background to slow climate change by researching renewable energy sources. 
 
