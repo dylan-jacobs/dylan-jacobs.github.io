@@ -36,8 +36,7 @@ Work & research experience
   accurate methods for time-dependent partial differential equations (PDEs), **plasma/kinetic models.** 
   * Using **MATLAB** to implement PDE-solvers 
   * Presenting research results at Swarthmore Sigma Xi poster session.  
-  * Developing a novel low-rank, structure-preserving, highly accurate integrator for the Vlasov-Fokker-
-  Planck equation in cylindrical coordinates; documenting research results in LaTeX journal 
+  * Developing a novel low-rank, structure-preserving, highly accurate integrator for the Vlasov-Fokker-Planck equation in cylindrical coordinates; documenting research results in LaTeX journal 
 
 * December 2023—May 2024: Electrical Engineering Research Assistant (project [link](/_portfolio/portfolio-5.md))
   * Researched electrical and aerospace science behind oscillatory wind-energy devices to develop a 
