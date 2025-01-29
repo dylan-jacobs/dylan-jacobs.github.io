@@ -66,3 +66,9 @@ Projects
 <ul>{% for post in site.portfolio reversed %}
   {% include archive-single-cv.html %}
   {% endfor %} </ul>
+
+Awards
+======
+* [Delaware Valley Engineers Undergraduate Scholarship](https://www.engrclub.org/content.aspx?page_id=22&club_id=386597&module_id=316482), 2025
+* [Donna Prentice Memorial Scholarship - American Society of Highway Engineers](https://delvalley.ashe.pro/education/scholarships/), 2024
+* [National Merit Scholarship](https://www.nationalmerit.org/s/1758/start.aspx?gid=2&pgid=61), 2023
