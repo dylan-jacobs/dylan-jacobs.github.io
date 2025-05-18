@@ -19,16 +19,18 @@ Since January 2024, I have been applying my experience in MATLAB and fluid dynam
 **Preliminary results**
 I have achieved preliminary results for the Vlasov-Dougherty-Fokker-Planck system solver in cylindrical coordinates. I have solved the basic Fokker-Planck system 
 
-Plasma dynamics and fusion interaction models require systems of nonlinear PDEs. However, analytically solving nonlinear PDEs is often impossible, and experiments are resource-intensive, necessitating high-accuracy numerical solutions. Ideally, these solutions must capture sharp gradients, conserve physical structures (e.g. mass, momentum, energy), and maintain the positivity of the solution. Numerical solutions also suffer from the curse of dimensionality: increasing the numerical solution's dimensions causes exponential growth in computational cost. Plasma systems of interest are described in up to six-dimensional phase space--plus time--via probability density function \( f(x, v, t) \), which describes the likelihood particles exist at position \( \mathbf{x} \in \mathbb{R}^3 \) with velocity \( \mathbf{v} \in \mathbb{R}^3 \) at time \( t > 0 \). As a first step, my algorithm solves the spatially homogeneous 0D2V (zero spatial, two velocity dimensions) Dougherty-Fokker-Planck equation 
-\[
+Plasma dynamics and fusion interaction models require systems of nonlinear PDEs. However, analytically solving nonlinear PDEs is often impossible, and experiments are resource-intensive, necessitating high-accuracy numerical solutions. Ideally, these solutions must capture sharp gradients, conserve physical structures (e.g. mass, momentum, energy), and maintain the positivity of the solution. Numerical solutions also suffer from the curse of dimensionality: increasing the numerical solution's dimensions causes exponential growth in computational cost. Plasma systems of interest are described in up to six-dimensional phase space--plus time--via probability density function $ f(x, v, t) $, which describes the likelihood particles exist at position $ \mathbf{x} \in \mathbb{R}^3 $ with velocity $ \mathbf{v} \in \mathbb{R}^3 $ at time $ t > 0 $. As a first step, my algorithm solves the spatially homogeneous 0D2V (zero spatial, two velocity dimensions) Dougherty-Fokker-Planck equation 
+
+$$
 \begin{cases}
     f_t = \nabla_v \cdot \Big( (\mathbf{v} - \mathbf{u})f + \left(\mathbf{D} \nabla f \right)\Big), \quad \mathbf{v} \in \Omega, t > 0 \\
     f(\mathbf{v}; t=0) = f_0(\mathbf{v}), \quad \mathbf{v} \in \Omega
 \end{cases}
-\]
-in cylindrical coordinates with assumed azimuthal symmetry. \( \mathbf{D} \)is the anisotropic diffusion tensor and \( \mathbf{u} \) is the bulk velocity. While the above equation is spatially homogeneous, future goals involve solving the spatially inhomogeneous 1D2V Vlasov-Dougherty-Fokker-Planck equation.
+$$
 
-The preliminary results below demonstrate preservation of mass, high-order drive to the correct equilibrium solution (L1 decay), and positivity preservation for the probability distribution. Note that mass and positive are preserved to the system's truncation tolerance \( 10 ^{-6} \), and the numerical solution's L1 decay and relative entropy drivee to the same tolerance, indicating physical relevance.
+in cylindrical coordinates with assumed azimuthal symmetry. $ \mathbf{D} $is the anisotropic diffusion tensor and $ \mathbf{u} $ is the bulk velocity. While the above equation is spatially homogeneous, future goals involve solving the spatially inhomogeneous 1D2V Vlasov-Dougherty-Fokker-Planck equation.
+
+The preliminary results below demonstrate preservation of mass, high-order drive to the correct equilibrium solution (L1 decay), and positivity preservation for the probability distribution. Note that mass and positive are preserved to the system's truncation tolerance $ 10 ^{-6} $, and the numerical solution's L1 decay and relative entropy drivee to the same tolerance, indicating physical relevance.
 
 <div style="display: flex; gap: 10px;">
     <figure>
@@ -61,13 +63,12 @@ The preliminary results below demonstrate preservation of mass, high-order drive
 
 We are currently working to extend this **implicit, low-rank** solver to the **1D2V Vlasov-Dougherty-Fokker-Planck** system in cylindrical coordinates.
 
-{% raw %}
-\[
+$$
+
 \begin{cases}
 \partial_t f + \mathbf{v} \cdot \nabla_x f + \mathbf{E} \cdot \nabla_v f = C(f, f) \\
 C(f, f) = \nabla_v \cdot \Big( (\mathbf{v} - \mathbf{u})f + \left(\mathbf{D} \nabla f \right)\Big), \quad (\mathbf{x}, \mathbf{v}) \in \Omega = \Omega_{x} \times \Omega{v}, \quad t > 0 
 \end{cases}
-\]
-{% endraw %}
+$$
 
-where \( C(f, f) \) is the advection-diffusion Fokker-Planck operator.
+where $ C(f, f) $ is the advection-diffusion Fokker-Planck operator.
