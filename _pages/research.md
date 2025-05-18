@@ -2,6 +2,7 @@
 permalink: /research/
 title: 'My Research'
 author_profile: true
+math: true
 redirect_from: 
 ---
 
