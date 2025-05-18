@@ -60,11 +60,13 @@ The preliminary results below demonstrate preservation of mass, high-order drive
 
 We are currently working to extend this **implicit, low-rank** solver to the **1D2V Vlasov-Dougherty-Fokker-Planck** system in cylindrical coordinates.
 
+{% raw %}
 \[
 \begin{cases}
 \partial_t f + \mathbf{v} \cdot \nabla_x f + \mathbf{E} \cdot \nabla_v f = C(f, f) \\
 C(f, f) = \nabla_v \cdot \Big( (\mathbf{v} - \mathbf{u})f + \left(\mathbf{D} \nabla f \right)\Big), \quad (\mathbf{x}, \mathbf{v}) \in \Omega = \Omega_{x} \times \Omega{v}, \quad t > 0 
 \end{cases}
 \]
+{% endraw %}
 
 where \( C(f, f) \) is the advection-diffusion Fokker-Planck operator.
