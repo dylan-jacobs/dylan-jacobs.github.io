@@ -28,7 +28,7 @@ $$
 \end{cases}
 $$
 
-in cylindrical coordinates with assumed azimuthal symmetry. $ \mathbf{D} $is the anisotropic diffusion tensor and $ \mathbf{u} $ is the bulk velocity. While the above equation is spatially homogeneous, future goals involve solving the spatially inhomogeneous 1D2V Vlasov-Dougherty-Fokker-Planck equation.
+in cylindrical coordinates with assumed azimuthal symmetry. $ \mathbf{D} $ is the anisotropic diffusion tensor and $ \mathbf{u} $ is the bulk velocity. While the above equation is spatially homogeneous, future goals involve solving the spatially inhomogeneous 1D2V Vlasov-Dougherty-Fokker-Planck equation.
 
 The preliminary results below demonstrate preservation of mass, high-order drive to the correct equilibrium solution (L1 decay), and positivity preservation for the probability distribution. Note that mass and positive are preserved to the system's truncation tolerance $ 10 ^{-6} $, and the numerical solution's L1 decay and relative entropy drivee to the same tolerance, indicating physical relevance.
 
