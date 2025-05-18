@@ -14,23 +14,25 @@ Education
 * B.S. in General Engineering, B.A. in Applied Mathematics, Swarthmore College, 2027 (expected)
 
   Relevant coursework:
-  * Linear physical systems (ENGR 012)
-  * Electrical circuit analysis (ENGR 011)
-  * Mechanics (ENGR 006)
-  * Data structures & algorithms (CPSC 035)
-  * Computer engineering (ENGR 021)
-  * Ordinary & partial differential equations (MATH 043, MATH 054)
+  * Digital Signal Processing (ENGR 071)
   * Electromagnetism, waves, and optics with biomedical applications (PHYS 004L)
+  * Ordinary & partial differential equations (MATH 043, MATH 054)
+  * Linear physical systems (ENGR 012)
+  * Computer engineering (ENGR 021)
+  * Data structures & algorithms (CPSC 035)
+  * Mechanics (ENGR 006)
+  * Electrical circuit analysis (ENGR 011)
 
   Reading groups:
-  * Numerical methods for differential equations (Spring 2024)
-  * Kinetic modeling and computational fluid dynamics (Fall 2024)
-  * Directed reading group on tensors (Spring 2025)
+    * Tensor decompositions (Swarthmore College - Spring 2025)
+    * Kinetic modeling and computational fluid dynamics (Swarthmore College & University of Delaware - Fall 2024)
+    * Numerical methods for differential equations (Swarthmore College - Spring 2024)
   
   GPA: 3.95/4.00
 
 Work & research experience
 ======
+* May 2025-present: Research Intern at the Naval Research Laboratory (Washington DC)
 * January 2024—present: Applied Mathematics Research Assistant                                                                
   * Utilizing principles of **computational fluid dynamics and numerical methods** to research high-order 
   accurate methods for time-dependent partial differential equations (PDEs), **plasma/kinetic models.** 
