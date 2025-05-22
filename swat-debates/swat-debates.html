@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <title>SwatDebates</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
     <link rel="stylesheet" href="style.css">
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -12,6 +12,9 @@
     <!-- Background image -->
     <div class="background-overlay" style="background-image: url('images/swarthmore-background.png');">
       <h1>Swat Debates</h1>
+      <button class="icon-button" onclick="showPopup('login-popup')">
+        <i class="fas fa-sign-in-alt"></i> <!-- Login icon -->
+      </button>
     </div>
 
     <!-- Current debates-->
@@ -36,13 +39,56 @@
       </div>
     </div>
 
-    <div class="popup" id="popup">
+    <div class="popup" id="debate-popup">
       <div class="popup-content">
           <h2 id="debate-title">Debate title</h2>
           <p id="debate-topic">Debate topic</p>
           <p id="debate-time">Debate time</p>
           <p id="debate-location">Debate location</p>
-          <button class="close-btn" onclick="hidePopup()">Close</button>
+          <button class="close-button" onclick="hidePopup('debate-popup')">Close</button>
+      </div>
+    </div>
+
+    <div class="popup" id="login-popup">
+      <div class="popup-content">
+        <form action="/action_page.php" class="form-container">
+          <h1>Login</h1>
+      
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" name="email" required>
+      
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+      
+          <button type="submit">Login</button>
+        </form>
+        <h2>Need account?</h2>
+        <button onclick="hidePopup('login-popup'); showPopup('signup-popup')">Sign up</button>
+        <button class="close-button" onclick="hidePopup('login-popup')">Close</button>
+      </div>
+    </div>
+
+    <div class="popup" id="signup-popup">
+      <div class="popup-content">
+        <form id="signup-form" action="/action_page.php" class="form-container">
+          <h1>Create account</h1>
+
+          <label for="name"><b>Name</b></label>
+          <input type="test" placeholder="First and last name" name="name" required>
+      
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Enter email" name="email" required>
+          <label for="re-email"><b>Re-enter email</b></label>
+          <input type="text" placeholder="Re-enter email" name="re-email" required>
+      
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+          <label for="re-psw"><b>Re-enter password</b></label>
+          <input type="password" placeholder="Re-enter password" name="re-psw" required>
+      
+          <button type="submit">Create account</button>
+        </form>
+        <button class="close-button" onclick="hidePopup('signup-popup')">Close</button>
       </div>
     </div>
 

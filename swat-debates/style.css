@@ -65,20 +65,51 @@
     gap: 10px; 
 }
 
-/* Close button */
-.close-btn {
-    background: red;
+/* Buttons */
+button {
     color: white;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: auto;
+    background-color: #3b668a;
 }
 
-.close-btn:hover {
-    background: darkred;
+/* Close button */
+.close-button {
+    background: red;
 }
+
+.close-button:hover {
+    background-color:darkred;
+}
+button:hover{
+    background-color: #21394d;
+}
+
+.icon-button {
+    position: absolute; /* Position relative to the page */
+    top: 10px;          /* Distance from the top */
+    right: 10px;        /* Distance from the right */
+    background-color: #8f8f8f;
+    border-radius: 50%; /* Circular button */
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+
+  .icon-button i {
+    font-size: 20px; /* Adjust the icon size */
+  }
+
+  .icon-button:hover {
+    background-color: #616161; /* Darker grey on hover */
+  }
 
 .clickable {
     cursor: pointer; /* Changes cursor to a hand icon */

@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchDebates();
 });
 
+initSignup();
+
 
 async function fetchDebates() {
     try {
@@ -42,7 +44,7 @@ function displayDebates(data) {
         const debateItem = document.createElement('div');
         debateItem.classList.add('debate-item');
         debateItem.classList.add('clickable');
-        debateItem.addEventListener('click', () => showPopup(element));
+        debateItem.addEventListener('click', () => showDebatePopup(element));
         const details = document.createElement('p');
         debateItem.innerHTML = `
                 Topic: ${element.topic}<br>
@@ -59,8 +61,8 @@ function displayDebates(data) {
 }
 
 // popups!
-// Show the popup
-function showPopup(debate) {
+// Show debate popup
+function showDebatePopup(debate) {
     const debateTitle = document.getElementById('debate-title');
     const debateTopic = document.getElementById('debate-topic');
     const debateTime = document.getElementById('debate-time');
@@ -70,20 +72,27 @@ function showPopup(debate) {
     debateTopic.innerHTML = `Debate topic: ${debate.topic} hosted by ${debate.host}`;
     debateTime.innerHTML = `When: <time datetime=YYYY-MM-DDThh:mm>${formatDateTime(debate.when)}</time>`
     debateLocation.innerHTML = debate.where;
-    document.getElementById('popup').style.display = 'flex';
+    document.getElementById('debate-popup').style.display = 'flex';
 
 }
 
-// Hide the popup
-function hidePopup() {
-    document.getElementById('popup').style.display = 'none';
+// Hide debate popup
+function hidePopup(popupId) {
+    document.getElementById(popupId).style.display = 'none';
+}
+
+// login popup
+function showPopup(popupId) {
+    document.getElementById(popupId).style.display = 'flex';
 }
 
 // Close the popup when clicking outside the content
 window.onclick = function(event) {
-    const popup = document.getElementById('popup');
-    if (event.target === popup) {
-        hidePopup();
+    var popups = document.getElementsByClassName('popup'); // 'popup' is the generic class for all popups
+    for (let i = 0; i < popups.length; i++){
+        if (event.target === popups[i]) {
+            hidePopup(popups[i].id);
+        }
     }
 };
 
@@ -95,5 +104,20 @@ function showHideCalendarView(){
     }
     else {
         calendar.style.display = 'none';
+    }
+}
+
+function initSignup(){
+    const form = document.getElementById('signup-form');
+    form.addEventListener('submit', (event) => {
+        const password = event.target.password.value;
+        if (!isValidPassword(password)) {
+            alert('Password does not meet security criteria.');
+            event.preventDefault();
+        }
+    });
+    function isValidPassword(password) {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return regex.test(password);
     }
 }
