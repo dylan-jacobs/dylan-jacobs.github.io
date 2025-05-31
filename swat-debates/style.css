@@ -1,0 +1,212 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
+}
+.row{
+    display: flex;
+}
+.column-container{
+    flex: 50%;
+    height: flex;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    overflow: hidden;
+}
+.column-container.primary{
+    flex: 66%;
+}
+.column-container.secondary{
+    flex: 33%;
+}
+.debate-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    height: auto;
+    border-radius: 10px;
+}
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+/* Popup container (hidden by default) */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Popup content */
+.popup-content {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 66%;
+    height: 66%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;   
+    gap: 10px; 
+}
+
+/* Buttons */
+button {
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #3b668a;
+}
+
+/* Close button */
+.close-button {
+    background: red;
+}
+
+.close-button:hover {
+    background-color:darkred;
+}
+button:hover{
+    background-color: #21394d;
+}
+
+.icon-button {
+    position: absolute; /* Position relative to the page */
+    top: 10px;          /* Distance from the top */
+    right: 10px;        /* Distance from the right */
+    background-color: #8f8f8f;
+    border-radius: 50%; /* Circular button */
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+
+  .icon-button i {
+    font-size: 20px; /* Adjust the icon size */
+  }
+
+  .icon-button:hover {
+    background-color: #616161; /* Darker grey on hover */
+  }
+
+.clickable {
+    cursor: pointer; /* Changes cursor to a hand icon */
+}
+
+.clickable:hover {
+    background-color: rgba(164, 193, 255, 0.319); /* Change color on hover for better feedback */
+}
+
+/* Switches */
+.switch {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: 60px;
+    aspect-ratio: 60/34;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    align-items: center;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: auto;
+    width: 26px;
+    aspect-ratio: 1;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 26px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+.switch-container {
+    display: flex;
+    margin-left: auto;
+    align-items: center; /* Align the switch and text vertically */
+    gap: 0.5rem; /* Space between the switch and the text */
+}
+.background-overlay {
+    height: 50vh; /* Full viewport height */
+    width: 100%; /* Full width */
+    background-position: center; /* Center cropped portion */
+    background-repeat:repeat-x; 
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Text color */
+    font-size: xxx-large;
+}
+
+
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
