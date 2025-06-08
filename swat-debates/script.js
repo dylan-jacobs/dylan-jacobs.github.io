@@ -1,16 +1,23 @@
 import { initLogin, initSignup } from './modules/firebase.js';
 
 //const url = 'https://swat-debates.onrender.com'; // prod
-const url = 'http://localhost:5500'; // dev
+ const url = 'http://localhost:5500'; // dev
 
-document.addEventListener('DOMContentLoaded', () => {
+var user = null; // global user variable
+
+document.addEventListener('DOMContentLoaded', () => { // init website
+
+    document.getElementById('debates-scheduler-container').style.display = 'none'; // hide until login
+    document.getElementById('profile-btn').style.display = 'none'; // hide until login
+    document.getElementById('login-btn').style.display = 'block'; // show login button
+
     fetchDebates();
     window.showPopup = showPopup;
     window.hidePopup = hidePopup;
     window.showHideCalendarView = showHideCalendarView;
 
-    initLogin();
-    initSignup();
+    initLogin(onLoginSuccess());
+    initSignup(onLoginSuccess());
 });
 
 async function fetchDebates() {
@@ -72,11 +79,26 @@ function showDebatePopup(debate) {
     const debateTopic = document.getElementById('debate-topic');
     const debateTime = document.getElementById('debate-time');
     const debateLocation = document.getElementById('debate-location');
+    const registerButton = document.getElementById('debate-register-button');
+    const registerButtonText = document.getElementById('debate-register-button-text');
 
     debateTitle.innerHTML = debate.topic;
     debateTopic.innerHTML = `Debate topic: ${debate.topic} hosted by ${debate.host}`;
     debateTime.innerHTML = `When: <time datetime=YYYY-MM-DDThh:mm>${formatDateTime(debate.when)}</time>`
     debateLocation.innerHTML = debate.where;
+
+    if (user) { // user logged in --> can register
+        registerButtonText.display.style = 'none';
+        registerButton.style.display = 'flex';
+        registerButton.onclick = registerForDebate(debate);  
+    }  
+    else { // not logged in --> prevent registration
+        registerButtonText.display.style = 'flex';
+        registerButton.style.display = 'none';
+    }
+
+
+    // finally, show debate popup
     document.getElementById('debate-popup').style.display = 'flex';
 
 }
@@ -89,6 +111,11 @@ function hidePopup(popupId) {
 // login popup
 function showPopup(popupId) {
     document.getElementById(popupId).style.display = 'flex';
+}
+
+// register the user for this debate
+function registerForDebate(debate) {
+    
 }
 
 // Close the popup when clicking outside the content
@@ -110,4 +137,21 @@ function showHideCalendarView(){
     else {
         calendar.style.display = 'none';
     }
+}
+
+export function onLoginSuccess(user) {
+    user = user;
+    hidePopup('login-popup');
+    document.getElementById('debates-scheduler-container').style.display = 'block';
+    document.getElementById('profile-btn').style.display = 'block';
+    document.getElementById('login-btn').style.display = 'none';
+    console.log('User logged in:', user);
+}
+
+export function onLoginFailure() {
+    user = null;
+    document.getElementById('debates-scheduler-container').style.display = 'none';
+    document.getElementById('login-btn').style.display = 'block';
+    document.getElementById('profile-btn').style.display = 'none';
+    console.log('User not logged in or login failed');
 }

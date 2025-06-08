@@ -2,20 +2,20 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+import { onLoginSuccess, onLoginFailure } from "../script.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
 const firebaseConfig = {
-apiKey: "AIzaSyCMmG0vA65h5V7bvdTvfmYRhIuLgr81u8M",
+apiKey: 'AIzaSyCMmG0vA65h5V7bvdTvfmYRhIuLgr81u8M',
 authDomain: "swat-debates.firebaseapp.com",
 projectId: "swat-debates",
 storageBucket: "swat-debates.firebasestorage.app",
-messagingSenderId: "522185643387",
-appId: "1:522185643387:web:d7b8b16fa215497a7a59de",
-measurementId: "G-Q8597M568L"
+messagingSenderId: '522185643387',
+appId: '1:522185643387:web:d7b8b16fa215497a7a59de',
+measurementId: 'G-Q8597M568L'
 };
 
 // Initialize Firebase
@@ -23,11 +23,13 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
-auth.onAuthStateChanged((user) => {
+onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log("User is signed in:", user);
+        onLoginSuccess(user);
     } else {
         console.log("No user is signed in.");
+        onLoginFailure(user);
     }
 });
 
@@ -46,7 +48,9 @@ async function login(email, password) {
     try {
         const auth = getAuth(app);
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        console.log("User logged in:", userCredential.user);
         return userCredential.user;
+        
     } catch (error) {
         console.error("Login failed:", error);
         throw error;
@@ -64,7 +68,7 @@ async function logout() {
     }
 }
 
-export function initSignup(){
+export function initSignup(onLoginSuccess){
     const form = document.getElementById('signup-form');
     const errorElement = document.getElementById('signup-error');
 
@@ -93,7 +97,8 @@ export function initSignup(){
         }
       
         signUp(email, password)
-          .then((user) => login(email, password))
+          .then((user) => login(email, password)
+            .then(() => {onLoginSuccess(user);}))
           .catch((err) => {
             if (err.code === 'auth/email-already-in-use') {
                 showError('Email already in use. Please try another email or if this is you, login instead.');
@@ -126,21 +131,24 @@ export function initSignup(){
     }
 }
 
-export function initLogin() {
+export function initLogin(onLoginSuccess) {
     const form = document.getElementById('login-form');
     const errorElement = document.getElementById('login-error');
-    errorElement.style.display = 'none'; 
 
     form.addEventListener('submit', (event) => {
         event.preventDefault(); // Prevent form submission
+        errorElement.style.display = 'none'; 
+        
         const formData = new FormData(event.target);
         const email = formData.get('email');
         const password = formData.get('psw');
-        login(email, password).then((user) => {
-            console.log("User logged in:", user);
-        }).catch((error) => {
-            showError('Login failed. Please check your email and password.');
-        });
+        login(email, password)
+        .then((user) => {
+            onLoginSuccess(user);
+        })
+        .catch((error) => {
+                showError('Login failed. Please check your email and password.');
+            });
     });
     function showError(message) {
         errorElement.textContent = message;

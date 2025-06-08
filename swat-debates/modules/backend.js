@@ -1,9 +1,13 @@
+import {initMongoDB} from './mongodb.js';
+
 const express = require('express');
 const cors = require('cors');
 const Airtable = require('airtable');
 try{
-require('dotenv').config();
-} catch (error) {console.log('Not applicable: ', error);}
+    require('dotenv').config();
+} catch (error) {
+    console.log('Not applicable: ', error);
+}
 const app = express();
 const airtableAPIKey = process.env.AIRTABLE_API;
 const airtableBaseID = process.env.AIRTABLE_BASE_ID;
@@ -52,6 +56,8 @@ app.get(`/api/debates`, async (req, res) => {
         res.status(500).send('Server error');
     }
 });
+
+initMongoDB();
 
 const port = process.env.PORT || 5500;
 app.listen(port, () => console.log(`Server running at ${port}`));

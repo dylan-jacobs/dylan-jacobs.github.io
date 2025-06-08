@@ -12,8 +12,11 @@
     <!-- Background image -->
     <div class="background-overlay" style="background-image: url('images/swarthmore-background.png');">
       <h1>Swat Debates</h1>
-      <button class="icon-button" onclick="showPopup('login-popup')">
+      <button id='login-btn' class="icon-button" onclick="showPopup('login-popup')">
         <i class="fas fa-sign-in-alt"></i> <!-- Login icon -->
+      </button>
+      <button id='profile-btn' class="icon-button" onclick="">
+        <i class="fas fa-user"></i> <!-- Profile icon -->
       </button>
     </div>
 
@@ -46,6 +49,10 @@
           <p id="debate-time">Debate time</p>
           <p id="debate-location">Debate location</p>
           <button class="close-button" onclick="hidePopup('debate-popup')">Close</button>
+          <div class="column-container secondary">
+            <p id="debate-register-button-text">Log in to register for debates!</p>
+            <button class="debate-register-button">Register</button>
+          </div>
       </div>
     </div>
 
@@ -88,15 +95,13 @@
           <input type="password" placeholder="Re-enter password" name="re-psw" required>
           <div id="signup-error" class="error-message" style="color: red; display: none;"></div>
           <button id="signup-submit-btn" type="submit">Create account</button>
-        </form>k
+        </form>
         <button class="close-button" onclick="hidePopup('signup-popup')">Close</button>
       </div>
     </div>
 
-    <div class="row">
-    </div>
-
-    <script type="module" src="firebase.js"></script>
+    <script type="module" src="modules/firebase.js"></script>
+    <script type="module" src="modules/mongodb.js"></script>
     <script type="module" src="script.js"></script>
   </body>
 </html>
