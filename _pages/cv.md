@@ -28,11 +28,11 @@ Education
     * Kinetic modeling and computational fluid dynamics (Swarthmore College & University of Delaware - Fall 2024)
     * Numerical methods for differential equations (Swarthmore College - Spring 2024)
   
-  GPA: 3.95/4.00
+  GPA: 3.97/4.00
 
 Work & research experience
 ======
-* May 2025-present: Research Intern at the Naval Research Laboratory (Washington DC)
+* May 2025-present: Research Intern at the Naval Research Laboratory (Washington, DC)
 * January 2024—present: Applied Mathematics Research Assistant                                                                
   * Utilizing principles of **computational fluid dynamics and numerical methods** to research high-order 
   accurate methods for time-dependent partial differential equations (PDEs), **plasma/kinetic models.** 
