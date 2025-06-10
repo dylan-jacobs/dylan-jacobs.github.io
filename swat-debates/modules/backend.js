@@ -1,5 +1,4 @@
-import {initMongoDB} from './mongodb.js';
-
+const mongodb = require('./mongodb.js');
 const express = require('express');
 const cors = require('cors');
 const Airtable = require('airtable');
@@ -57,7 +56,7 @@ app.get(`/api/debates`, async (req, res) => {
     }
 });
 
-initMongoDB();
+mongodb.initMongoDB();
 
 const port = process.env.PORT || 5500;
 app.listen(port, () => console.log(`Server running at ${port}`));
