@@ -1,5 +1,5 @@
 import { MatchRequest } from './Classes/matchRequest.js';
-import { writeMatchRequest, initLogin, initSignup } from './firebase.js';
+import { writeMatchRequest, initLogin, initSignup, signout } from './firebase.js';
 
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
@@ -67,12 +67,12 @@ const traitPairs = [
     ["Wise", "Unaware"]
   ];
 
-var user = "dylan"; // Placeholder for user object, to be set on login
+var user = null; // Placeholder for user object, to be set on login
 
 document.addEventListener('DOMContentLoaded', () => {
     window.showPopup = showPopup;
     window.hidePopup = hidePopup;
-
+    window.logout = logout;
     initLogin(onLoginSuccess, onLoginFailure);
     initSignup(onLoginSuccess, onLoginFailure);
     createMatchRequestForm();
@@ -159,12 +159,23 @@ function hidePopup(popupId) {
     }
 }
 
+function logout() {
+    signout().then(() => window.location.reload());
+}
+
 function onLoginSuccess(u) {
     user = u;
     hidePopup('login-popup');
-    document.getElementById('profile-btn').style.display = 'block';
+    const profileButton = document.getElementById('profile-btn');
+    profileButton.style.display = 'block';
+    // profileButton.textContent = `${user.displayName[0].toUpperCase()}${user.displayName.split(" ")[1][0].toUpperCase()}`;
+    const profileButtonImg = document.getElementById('profile-btn-img');
+    profileButtonImg.src = user.photoURL
+    console.log(profileButton.firstChild);
+
+
     document.getElementById('login-btn').style.display = 'none';
-    console.log('User logged in:', user);
+    console.log('User logged in.');
 }
 
 function onLoginFailure() {

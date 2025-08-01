@@ -139,6 +139,11 @@ button:hover{
     background-color: #616161; /* Darker grey on hover */
   }
 
+  .icon-button img {
+    top: 0;
+    left: 0;
+  }
+
 .clickable {
     cursor: pointer; /* Changes cursor to a hand icon */
 }

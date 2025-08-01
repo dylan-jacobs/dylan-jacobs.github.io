@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
-import { collection, addDoc, getDoc, getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { collection, addDoc, getDoc, getFirestore, doc, setDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { MatchRequest, MatchRequestConverter } from "./Classes/matchRequest.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -62,9 +62,9 @@ function withTimeout(promise, ms) {
         , ms);
     })])
 }
-async function logout() {
+
+export async function signout() {
     try {
-        const auth = getAuth(app);
         await signOut(auth);
         console.log("User signed out successfully.");
     } catch (error) {
@@ -81,10 +81,16 @@ export function initSignup(onSignupSuccessCallback, onSignupFailureCallback) {
         event.preventDefault();
       
         const formData = new FormData(event.target);
+        const name = formData.get('name');
         const email = formData.get('email');
         const password = formData.get('psw');
 
         errorElement.style.display = 'none';
+
+        if (!name.includes(' ')) {
+            showError('Please provide your full name.');
+            return;
+        }
       
         if (!isValidEmail(email)) {
           showError('Please provide a valid email.');
@@ -107,12 +113,18 @@ export function initSignup(onSignupSuccessCallback, onSignupFailureCallback) {
         }
       
         signUp(email, password)
-          .then((user) => login(email, password)
-            .then(() => {
-                if (typeof onLoginSuccessCallback == 'function'){
-                    onLoginSuccessCallback(user);
-                }
-            }))
+          .then(async (user) => {
+            await updateProfile(user, {
+                displayName: name,
+                photoURL: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random&size=128`
+            });
+            login(email, password)
+                .then(() => {
+                    if (typeof onLoginSuccessCallback == 'function'){
+                        onLoginSuccessCallback(user);
+                    }
+                })
+            })
           .catch((err) => {
             if (err.code === 'auth/email-already-in-use') {
                 showError('Email already in use. Please try another email or if this is you, login instead.');
@@ -151,7 +163,7 @@ export function initLogin(onLoginSuccessCallback, onLoginFailureCallback) {
         if (user) {
             onLoginSuccessCallback(user);
         } else {
-            onLoginFailureCallback(user);
+            onLoginFailureCallback();
         }
     });
 
