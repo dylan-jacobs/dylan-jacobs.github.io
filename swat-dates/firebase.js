@@ -54,6 +54,15 @@ export async function writeMatchRequest(matchRequest, timeout=5000) {
     await withTimeout(setDoc(ref, matchRequest, { merge: true }), timeout);
   }
 
+export async function getMatchRequest(user, timeout=5000) {
+    const ref = doc(db, "matchRequests", user.uid).withConverter(MatchRequestConverter);
+    await withTimeout(getDoc(ref), timeout);
+}
+
+export async function getAllMatchRequests(user, timeout=20000) {
+
+}
+
 function withTimeout(promise, ms) {
     return Promise.race([promise, new Promise((_, reject) => {
         setTimeout(() => {
@@ -191,4 +200,12 @@ export function initLogin(onLoginSuccessCallback, onLoginFailureCallback) {
         errorElement.textContent = message;
         errorElement.style.display = 'block';
     }
+}
+
+function matchUsers() {
+    const user = auth.userCredential.user;
+    getMatchRequest(user).then((matchRequest) => {
+        const traitsMap = matchRequest.traits;
+        const traitsVector = traitsMap.values; // get values from Map
+    });
 }

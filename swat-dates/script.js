@@ -73,9 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.showPopup = showPopup;
     window.hidePopup = hidePopup;
     window.logout = logout;
+
     initLogin(onLoginSuccess, onLoginFailure);
     initSignup(onLoginSuccess, onLoginFailure);
     createMatchRequestForm();
+    getTimeUntilNextDate();
 });
 
 
@@ -92,7 +94,7 @@ window.onclick = function(event) {
 function createMatchRequestForm() {
     const matchForm = document.getElementById('match-form');
     traitPairs.forEach(pair => {
-        const inputRangeStep = 0.142857;
+        const inputRangeStep = 0.142857; // 7 steps
         const container = document.createElement('div');
         container.className = 'form-element-container';
 
@@ -134,7 +136,6 @@ function createMatchRequestForm() {
                 traitsMap.set(`${pair[0]}-${pair[1]}`, parseFloat(input.value, 10));
             }
         });
-        user="dylan";
         var matchRequest = new MatchRequest(user, traitsMap);
         writeMatchRequest(matchRequest).then(() => {
             console.log("Match request submitted successfully.");
@@ -168,20 +169,60 @@ function onLoginSuccess(u) {
     hidePopup('login-popup');
     const profileButton = document.getElementById('profile-btn');
     profileButton.style.display = 'block';
-    // profileButton.textContent = `${user.displayName[0].toUpperCase()}${user.displayName.split(" ")[1][0].toUpperCase()}`;
     const profileButtonImg = document.getElementById('profile-btn-img');
     profileButtonImg.src = user.photoURL
-    console.log(profileButton.firstChild);
 
-
+    // show/hide stuff
+    document.getElementById('please-login-container').style.display = 'none';
+    document.getElementById('match-request-form-container').style.display = 'block';
+    document.getElementById('matches-container').style.display = 'block';
     document.getElementById('login-btn').style.display = 'none';
     console.log('User logged in.');
 }
 
 function onLoginFailure() {
     user = null;
+
+    // show/hide stuff
     document.getElementById('login-btn').style.display = 'block';
     document.getElementById('profile-btn').style.display = 'none';
+    document.getElementById('please-login-container').style.display = 'flex';
+    document.getElementById('match-request-form-container').style.display = 'none';
+    document.getElementById('matches-container').style.display = 'none';
     console.log('User not logged in or login failed');
 }
 
+
+function getTimeUntilNextDate() {
+    const time = new Date();
+    const nextSunday = new Date(time);
+    const day = time.getDay();
+
+    let daysUntilNextSunday = (7 - day) % 7;
+
+    if (day === 0 && time.getHours() < 8) {
+        daysUntilNextSunday = 0;
+    }
+
+    nextSunday.setDate(time.getDate() + daysUntilNextSunday);
+    nextSunday.setHours(8, 0, 0, 0); // Set to next Sunday at 8:00 AM
+    const countdownElement = document.getElementById('new-dates-timer');
+
+    const interval = setInterval(() => {
+        const now = new Date();
+        const timeDifferenceMs = nextSunday - now;
+        if (timeDifferenceMs <= 0) {
+            clearInterval(interval);
+            countdownElement.textContent = "New dates released!!";
+            document.location.reload(); // Reload the page to fetch new dates
+            return;
+        }
+        const seconds = Math.floor(timeDifferenceMs / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const pad = (n) => n.toString().padStart(2, '0');
+        countdownElement.textContent = `New dates released in ${(days)} days, ${(hours % 24)} hours, ${(minutes % 60)} minutes, and ${(seconds % 60)} seconds, but who's counting?!`;
+    }
+    , 1000);
+}

@@ -3,6 +3,10 @@ export class MatchRequest {
         this.user = user;
         this.traits = traits;
     }
+
+    getTraitsVector() {
+      return this.traits
+    }
 }
 
 export const MatchRequestConverter = { // to convert to firestore datatype

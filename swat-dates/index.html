@@ -11,7 +11,10 @@
 
         <!-- Background image -->
         <div class="background-overlay" style="background-image: url('images/swarthmore-background.png');">
-            <h1>Swat Dates</h1>
+            <div class="title-container">
+                <h1>Swat Dates</h1>
+                <h6 id="new-dates-timer">New dates released in 99:99:99</h6>
+            </div>
             <button id='login-btn' class="icon-button" onclick="showPopup('login-popup')">
                 <i class="fas fa-sign-in-alt"></i> <!-- Login icon -->
             </button>
@@ -20,13 +23,29 @@
             </button>
         </div>
 
-        <!-- Match form -->
-        <div class="column-container secondary">
-            <h2>Match for a blind date</h2>
-            <h3>Personality traits</h3>
-            <form id="match-form">
-            </form>
-            <button id="submit-btn">Submit</button>
+        <!-- Main row container holding primary columns-->
+        <div class="row">
+            <!-- Match form -->
+            <div id="match-request-form-container" class="column-container secondary">
+                <h2>Match for a blind date</h2>
+                <h3>Personality traits</h3>
+                <form id="match-form"></form>
+                <button id="submit-btn">Submit</button>
+            </div>
+
+            <!-- Matches -->
+            <div id="matches-container" class="column-container secondary">
+                <h2>Your weekly match</h2>
+                <div id="match-row" class="row-item">
+                    <h3 id="weekly-match-name">John Doe</h3>
+                    <div style="width: 10%;"></div>
+                    <h3 id="weekly-match-email">jdoe@swarthmore.edu</h3>
+                </div>
+            </div>
+            <div id="please-login-container" class="row-container">
+                <h1>Please log in with your Swarthmore email to participate!</h1>
+                <button id="login-btn-secondary" onclick="showPopup('login-popup')">Log in</button>
+            </div>
         </div>
 
         <div class="popup" id="login-popup">
@@ -48,7 +67,7 @@
                 <button class="close-button" onclick="hidePopup('login-popup')">Close</button>
             </div>
         </div>
-      
+    
         <div class="popup" id="signup-popup">
             <div class="popup-content">
                 <form id="signup-form" class="form-container">
@@ -77,12 +96,12 @@
             <button class="close-button" onclick="hidePopup('profile-popup')">Close</button>
             <button onclick="logout();">Log out</button>
         </div>
-      
 
         <div id="loader-popup" class="loader-overlay", style="display: none;">    
             <div class="loader"></div>
         </div>
     </body>
+
     <script type="module" src="firebase.js"></script>
     <script type="module" src="script.js"></script>
 </html>
