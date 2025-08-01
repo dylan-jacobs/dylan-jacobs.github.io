@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Swat Dates</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+        <!-- Background image -->
+        <div class="background-overlay" style="background-image: url('images/swarthmore-background.png');">
+            <h1>Swat Dates</h1>
+            <button id='login-btn' class="icon-button" onclick="showPopup('login-popup')">
+                <i class="fas fa-sign-in-alt"></i> <!-- Login icon -->
+            </button>
+            <button id='profile-btn' class="icon-button" onclick="">
+                <i class="fas fa-user"></i> <!-- Profile icon -->
+            </button>
+        </div>
+
+        <!-- Match form -->
+        <div class="column-container secondary">
+            <h2>Match for a blind date</h2>
+            <h3>Personality traits</h3>
+            <form id="match-form">
+            </form>
+            <button id="submit-btn">Submit</button>
+        </div>
+
+        <div class="popup" id="login-popup">
+            <div class="popup-content">
+                <form id="login-form" class="form-container">
+                <h1>Login</h1>
+            
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" autocomplete="email" required>
+            
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" autocomplete="current-password" required>
+                <div id="login-error" class="error-message" style="color: red; display: none;"></div>
+        
+                <button id="login-submit-btn" type="submit">Login</button>
+                </form>
+                <h2>Need account?</h2>
+                <button onclick="hidePopup('login-popup'); showPopup('signup-popup')">Sign up</button>
+                <button class="close-button" onclick="hidePopup('login-popup')">Close</button>
+            </div>
+        </div>
+      
+        <div class="popup" id="signup-popup">
+            <div class="popup-content">
+                <form id="signup-form" class="form-container">
+                <h1>Create account</h1>
+        
+                <label for="name"><b>Name</b></label>
+                <input type="text" placeholder="First and last name" name="name" autocomplete="name" required>
+            
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter email" name="email" autocomplete="email" required>
+                <label for="re-email"><b>Re-enter email</b></label>
+                <input type="text" placeholder="Re-enter email" name="re-email" autocomplete="email" required>
+            
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" autocomplete="new-password" required>
+                <label for="re-psw"><b>Re-enter password</b></label>
+                <input type="password" placeholder="Re-enter password" name="re-psw" autocomplete="new-password" required>
+                <div id="signup-error" class="error-message" style="color: red; display: none;"></div>
+                <button id="signup-submit-btn" type="submit">Create account</button>
+                </form>
+                <button class="close-button" onclick="hidePopup('signup-popup')">Close</button>
+            </div>
+        </div>
+      
+
+        <div id="loader-popup" class="loader-overlay", style="display: none;">    
+            <div class="loader"></div>
+        </div>
+    </body>
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="script.js"></script>
+</html>
+
+
