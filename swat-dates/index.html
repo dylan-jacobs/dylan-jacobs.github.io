@@ -77,23 +77,31 @@
         <div class="popup" id="signup-popup">
             <div class="popup-content">
                 <form id="signup-form" class="form-container">
-                <h1>Create account</h1>
-        
-                <label for="name"><b>Name</b></label>
-                <input type="text" placeholder="First and last name" name="name" autocomplete="name" required>
-            
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter email" name="email" autocomplete="email" required>
-                <label for="re-email"><b>Re-enter email</b></label>
-                <input type="text" placeholder="Re-enter email" name="re-email" autocomplete="email" required>
-            
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" autocomplete="new-password" required>
-                <label for="re-psw"><b>Re-enter password</b></label>
-                <input type="password" placeholder="Re-enter password" name="re-psw" autocomplete="new-password" required>
-                <div id="signup-error" class="error-message" style="color: red; display: none;"></div>
-                <button id="signup-submit-btn" type="submit">Create account</button>
+                    <h1>Create account</h1>
+                    <br>
+                    <label for="name"><b>Name</b></label>
+                    <input type="text" placeholder="First and last name" name="name" autocomplete="name" required>
+                
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" placeholder="Enter email" name="email" autocomplete="email" required>
+                    <label for="re-email"><b>Re-enter email</b></label>
+                    <input type="text" placeholder="Re-enter email" name="re-email" autocomplete="email" required>
+                
+                    <br>
+                    <div style="height: 10%;"></div>
+                    
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" autocomplete="new-password" required>
+                    <label for="re-psw"><b>Re-enter password</b></label>
+                    <input type="password" placeholder="Re-enter password" name="re-psw" autocomplete="new-password" required>
+                    <div id="signup-error" class="error-message" style="color: red; display: none;"></div>
+
+                    <br>
+                    <div style="height: 10%;"></div>
+
+                    <button id="signup-submit-btn" type="submit">Create account</button>
                 </form>
+                <br>
                 <button class="close-button" onclick="hidePopup('signup-popup')">Close</button>
             </div>
         </div>
