@@ -1,5 +1,5 @@
 import { MatchRequest } from './Classes/matchRequest.js';
-import { writeMatchRequest, initLogin, initSignup, signout } from './firebase.js';
+import { writeMatchRequest, initLogin, initSignup, signout, getMatchRequest, matchUsers } from './firebase.js';
 
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
@@ -136,7 +136,7 @@ function createMatchRequestForm() {
                 traitsMap.set(`${pair[0]}-${pair[1]}`, parseFloat(input.value, 10));
             }
         });
-        var matchRequest = new MatchRequest(user, traitsMap);
+        var matchRequest = new MatchRequest(user.uid, traitsMap);
         writeMatchRequest(matchRequest).then(() => {
             console.log("Match request submitted successfully.");
             hidePopup('loader-popup');
@@ -153,6 +153,7 @@ function showPopup(popupId) {
         popup.style.display = 'flex';
     }
 }
+
 function hidePopup(popupId) {
     const popup = document.getElementById(popupId);
     if (popup) {
@@ -166,7 +167,10 @@ function logout() {
 
 function onLoginSuccess(u) {
     user = u;
+    matchUsers(user);
+
     hidePopup('login-popup');
+    hidePopup('signup-popup');
     const profileButton = document.getElementById('profile-btn');
     profileButton.style.display = 'block';
     const profileButtonImg = document.getElementById('profile-btn-img');
@@ -191,7 +195,6 @@ function onLoginFailure() {
     document.getElementById('matches-container').style.display = 'none';
     console.log('User not logged in or login failed');
 }
-
 
 function getTimeUntilNextDate() {
     const time = new Date();
@@ -225,4 +228,23 @@ function getTimeUntilNextDate() {
         countdownElement.textContent = `New dates released in ${(days)} days, ${(hours % 24)} hours, ${(minutes % 60)} minutes, and ${(seconds % 60)} seconds, but who's counting?!`;
     }
     , 1000);
+}
+
+function getMostRecentMatchRequest() {
+    getMatchRequest(user).then((matchRequest) => {
+        if (matchRequest) {
+            console.log("Match request found:", matchRequest);
+            const matchesContainer = document.getElementById('most-recent-match-request');
+            matchesContainer.style.display = 'block';
+            const matchList = document.getElementById('match-list');
+            matchList.innerHTML = ''; // Clear previous matches
+            matchRequest.traits.forEach((value, key) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${key}: ${value}`;
+                matchList.appendChild(listItem);
+            });
+        } else {
+            console.log("No match request found for the user.");
+        }
+    });
 }

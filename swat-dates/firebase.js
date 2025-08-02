@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
-import { collection, addDoc, getDoc, getFirestore, doc, setDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { collection, addDoc, getDoc, getFirestore, doc, setDoc, getDocs} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { MatchRequest, MatchRequestConverter } from "./Classes/matchRequest.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -50,17 +50,24 @@ async function login(email, password) {
 }
 
 export async function writeMatchRequest(matchRequest, timeout=5000) {
-    const ref = doc(db, "matchRequests", matchRequest.user).withConverter(MatchRequestConverter);
+    const ref = doc(db, "matchRequests", matchRequest.userUID).withConverter(MatchRequestConverter);
     await withTimeout(setDoc(ref, matchRequest, { merge: true }), timeout);
   }
 
 export async function getMatchRequest(user, timeout=5000) {
     const ref = doc(db, "matchRequests", user.uid).withConverter(MatchRequestConverter);
-    await withTimeout(getDoc(ref), timeout);
+    const snapshot = await withTimeout(getDoc(ref), timeout);
+    return snapshot.exists() ? snapshot.data() : null;
 }
 
 export async function getAllMatchRequests(user, timeout=20000) {
-
+    const snapshot = await withTimeout(getDocs(collection(db, "matchRequests").withConverter(MatchRequestConverter)), timeout);
+    
+    const requests = [];
+    snapshot.forEach((doc) => {
+        requests.push(doc.data());
+    });
+    return requests;
 }
 
 function withTimeout(promise, ms) {
@@ -116,10 +123,10 @@ export function initSignup(onSignupSuccessCallback, onSignupFailureCallback) {
             return;
         }
 
-        if (!email.endsWith('@swarthmore.edu')) {
+        /*if (!email.endsWith('@swarthmore.edu')) {
             showError('Please use your Swarthmore email address.');
             return;
-        }
+        }*/
       
         signUp(email, password)
           .then(async (user) => {
@@ -202,10 +209,29 @@ export function initLogin(onLoginSuccessCallback, onLoginFailureCallback) {
     }
 }
 
-function matchUsers() {
-    const user = auth.userCredential.user;
-    getMatchRequest(user).then((matchRequest) => {
-        const traitsMap = matchRequest.traits;
-        const traitsVector = traitsMap.values; // get values from Map
-    });
+export function matchUsers(user) {
+    getMatchRequest(user)
+        .then(async (matchRequest) => {
+            if (!matchRequest) {
+                console.log("No match request found for user:", user.uid);
+                return;
+            }
+            const traits = Array.from(matchRequest.traits.values());
+
+            getAllMatchRequests(user).then((allMatchRequests) => {
+                allMatchRequests.forEach((request) => {
+                    console.log(request);
+                    const otherTraits = Array.from(request.traits.values());
+                    const similarity = dotProduct(traits, otherTraits);
+                    console.log(`Similarity with ${request.userUID}:`, similarity);
+                });
+            });
+        });
+}
+
+function dotProduct(a, b){
+    const magA = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
+    const magB = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
+    const dotProduct = a.reduce((sum, val, i) => sum + val * b[i], 0);
+    return dotProduct / (magA*magB);
 }

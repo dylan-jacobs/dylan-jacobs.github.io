@@ -42,6 +42,12 @@
                     <h3 id="weekly-match-email">jdoe@swarthmore.edu</h3>
                 </div>
             </div>
+
+            <div id="matches-list-container" class="column-container secondary" style="display: none;">
+                <h2>Your matches</h2>
+                <div id="matches-list"></div>
+            </div>
+
             <div id="please-login-container" class="row-container">
                 <h1>Please log in with your Swarthmore email to participate!</h1>
                 <button id="login-btn-secondary" onclick="showPopup('login-popup')">Log in</button>
@@ -92,9 +98,11 @@
             </div>
         </div>
 
-        <div class="popup" id="profile-popup" style="display: none;">
-            <button class="close-button" onclick="hidePopup('profile-popup')">Close</button>
-            <button onclick="logout();">Log out</button>
+        <div class="popup profile" id="profile-popup" style="display: none;">
+            <div class="popup-content profile"> 
+                <h1 id="profile-popup-name">Dylan Jacobs</h1>
+                <button class="close-button" onclick="logout();">Log out</button>
+            </div>
         </div>
 
         <div id="loader-popup" class="loader-overlay", style="display: none;">    

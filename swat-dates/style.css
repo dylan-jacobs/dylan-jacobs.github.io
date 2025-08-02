@@ -102,6 +102,11 @@
     z-index: 1000;
 }
 
+.popup.profile {
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
 /* Popup content */
 .popup-content {
     background: white;
@@ -115,6 +120,14 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;   
     gap: 10px; 
+}
+
+.popup-content.profile {
+    width:fit-content; 
+    height: fit-content;
+    top: 65px;
+    right: 10px;
+    position: absolute;
 }
 
 /* Buttons */
