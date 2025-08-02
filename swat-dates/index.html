@@ -28,9 +28,27 @@
             <!-- Match form -->
             <div id="match-request-form-container" class="column-container secondary">
                 <h2>Match for a blind date</h2>
-                <h3>Personality traits</h3>
-                <form id="match-form"></form>
-                <button id="submit-btn">Submit</button>
+                <form id="match-form-1" class="form-step">
+                    <button type="button" id="next-btn-1" class="match-form-next-btn">Next</button>
+                </form>
+                <form id="match-form-2" class="form-step">
+                    <label for="top-date-choice">Unique date idea</label>
+                    <input type="text" id="top-date-choice" placeholder="Unique date idea" required>
+                    
+                    <label for="second-date-choice">Risky date idea</label>
+                    <input type="text" id="second-date-choice" placeholder="Risky date idea" required>
+                    
+                    <label for="third-date-choice">Creative date idea</label>
+                    <input type="text" id="third-date-choice" placeholder="Creative date idea" required>
+                    
+                    <label for="best-joke">Best joke or pun :)</label>
+                    <input type="text" id="best-joke" placeholder="Best joke or pun :)" required>
+                    
+                    <br><br>
+                    <button type="button" id="prev-btn-1" class="match-form-prev-btn">Previous</button>
+                </form>
+                <br>
+                <button id="submit-btn" class="fill">Submit!</button>
             </div>
 
             <!-- Matches -->

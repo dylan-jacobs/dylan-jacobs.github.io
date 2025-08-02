@@ -3,68 +3,108 @@ import { writeMatchRequest, initLogin, initSignup, signout, getMatchRequest, get
 
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-const traitPairs = [
-    ["Adaptable", "Rigid"],
-    ["Affectionate", "Withdrawn"],
-    ["Alert", "Oblivious"],
-    ["Ambitious", "Unmotivated"],
-    ["Appreciative", "Ungrateful"],
-    ["Bold", "Timid"],
+const largeListOfTraitPairs = [
+    ["Adaptable", "Structured"],
+    ["Affectionate", "Reserved"],
+    ["Alert", "Calm"],
+    ["Ambitious", "Content"],
+    ["Appreciative", "Objective"],
+    ["Bold", "Cautious"],
     ["Calm", "Energetic"],
-    ["Cautious", "Reckless"],
-    ["Centered", "Scatterbrained"],
-    ["Charming", "Antisocial"],
+    ["Cautious", "Daring"],
+    ["Centered", "Dynamic"],
+    ["Charming", "Sincere"],
     ["Cooperative", "Independent"],
-    ["Creative", "Unimaginative"],
-    ["Curious", "Indifferent"],
-    ["Decisive", "Indecisive"],
-    ["Diplomatic", "Rude"],
-    ["Discreet", "Inattentive"],
-    ["Easygoing", "Strict"],
-    ["Efficient", "Sluggish"],
-    ["Empathetic", "Callous"],
+    ["Creative", "Practical"],
+    ["Curious", "Grounded"],
+    ["Decisive", "Deliberative"],
+    ["Diplomatic", "Direct"],
+    ["Discreet", "Expressive"],
+    ["Easygoing", "Principled"],
+    ["Efficient", "Process-focused"],
+    ["Empathetic", "Analytical"],
     ["Extroverted", "Introverted"],
     ["Flirtatious", "Modest"],
-    ["Friendly", "Antisocial"],
+    ["Friendly", "Self-contained"],
     ["Funny", "Serious"],
-    ["Generous", "Stingy"],
-    ["Gentle", "Rough"],
-    ["Honest", "Dishonest"],
-    ["Honorable", "Cowardly"],
-    ["Humble", "Proud"],
+    ["Generous", "Self-preserving"],
+    ["Gentle", "Tough"],
+    ["Honest", "Tactful"],
+    ["Honorable", "Pragmatic"],
+    ["Humble", "Confident"],
     ["Idealistic", "Realistic"],
-    ["Industrious", "Lazy"],
-    ["Innocent", "Dirty-minded"],
-    ["Just", "Partial"],
-    ["Kind", "Cold"],
-    ["Loyal", "Unreliable"],
-    ["Mature", "Immature"],
-    ["Meticulous", "Careless"],
-    ["Obedient", "Rebellious"],
-    ["Optimistic", "Pessimistic"],
-    ["Organized", "Messy"],
-    ["Passionate", "Indifferent"],
-    ["Perceptive", "Ignorant"],
-    ["Philosophical", "Shallow"],
-    ["Private", "Sociable"],
-    ["Proactive", "Stagnant"],
-    ["Professional", "Inept"],
-    ["Protective", "Negligent"],
-    ["Quirky", "Conventional"],
-    ["Responsible", "Irresponsible"],
-    ["Sensible", "Foolish"],
+    ["Industrious", "Relaxed"],
+    ["Innocent", "Worldly"],
+    ["Just", "Flexible"],
+    ["Kind", "Blunt"],
+    ["Loyal", "Independent-minded"],
+    ["Mature", "Playful"],
+    ["Meticulous", "Big-picture-focused"],
+    ["Obedient", "Autonomous"],
+    ["Optimistic", "Cautious"],
+    ["Organized", "Flexible"],
+    ["Passionate", "Even-tempered"],
+    ["Perceptive", "Unshaken"],
+    ["Philosophical", "Practical"],
+    ["Private", "Open"],
+    ["Proactive", "Reflective"],
+    ["Professional", "Easygoing"],
+    ["Protective", "Trusting"],
+    ["Quirky", "Traditional"],
+    ["Responsible", "Adventurous"],
+    ["Sensible", "Imaginative"],
     ["Sentimental", "Pragmatic"],
-    ["Sophisticated", "Unrefined"],
-    ["Spiritual", "Irreverent"],
+    ["Sophisticated", "Down-to-earth"],
+    ["Spiritual", "Rational"],
     ["Spontaneous", "Deliberate"],
-    ["Spunky", "Apathetic"],
-    ["Thrifty", "Extravagant"],
+    ["Spunky", "Serene"],
+    ["Thrifty", "Generous"],
     ["Traditional", "Modern"],
-    ["Trusting", "Wary"],
-    ["Uninhibited", "Careful"],
-    ["Whimsical", "Serious"],
-    ["Wholesome", "Indecent"],
-    ["Wise", "Unaware"]
+    ["Trusting", "Skeptical"],
+    ["Uninhibited", "Measured"],
+    ["Whimsical", "Grounded"],
+    ["Wholesome", "Edgy"],
+    ["Wise", "Curious"],
+    ["Reflective", "Action-oriented"],
+    ["Consistent", "Adaptive"],
+    ["Emotion-guided", "Logic-guided"],
+    ["Competitive", "Cooperative"],
+    ["Risk-tolerant", "Risk-averse"],
+    ["Idealistic", "Pragmatic"],
+    ["Big-picture-focused", "Detail-focused"]
+  ]; // save for later
+
+const traitPairs = [
+    ["Adaptable", "Structured"],
+    ["Affectionate", "Reserved"],
+    ["Ambitious", "Content"],
+    ["Bold", "Cautious"],
+    ["Calm", "Energetic"],
+    ["Charming", "Sincere"],
+    ["Creative", "Practical"],
+    ["Curious", "Grounded"],
+    ["Decisive", "Deliberative"],
+    ["Diplomatic", "Direct"],
+    ["Empathetic", "Analytical"],
+    ["Extroverted", "Introverted"],
+    ["Friendly", "Self-contained"],
+    ["Funny", "Serious"],
+    ["Generous", "Self-preserving"],
+    ["Gentle", "Tough"],
+    ["Honest", "Tactful"],
+    ["Humble", "Confident"],
+    ["Idealistic", "Realistic"],
+    ["Industrious", "Relaxed"],
+    ["Loyal", "Independent-minded"],
+    ["Meticulous", "Big-picture-focused"],
+    ["Optimistic", "Cautious"],
+    ["Organized", "Flexible"],
+    ["Passionate", "Even-tempered"],
+    ["Private", "Open"],
+    ["Quirky", "Traditional"],
+    ["Responsible", "Adventurous"],
+    ["Sensible", "Imaginative"],
+    ["Spontaneous", "Deliberate"]
   ];
 
 var user = null; // Placeholder for user object, to be set on login
@@ -92,7 +132,7 @@ window.onclick = function(event) {
 };
   
 function createMatchRequestForm() {
-    const matchForm = document.getElementById('match-form');
+    const matchForm = document.getElementById('match-form-1');
     traitPairs.forEach(pair => {
         const inputRangeStep = 0.285714; // 7 steps
         const container = document.createElement('div');
@@ -119,7 +159,7 @@ function createMatchRequestForm() {
         input.max = '1';
         input.value = `${Math.floor((input.max - input.min)/(2*inputRangeStep)) * inputRangeStep - input.max}`; // Default to the middle value
         
-        matchForm.appendChild(container);
+        matchForm.insertBefore(container, matchForm.firstChild);
         container.appendChild(label);
         container.appendChild(sliderRow);
         sliderRow.appendChild(leftLabel);
@@ -145,6 +185,41 @@ function createMatchRequestForm() {
             hidePopup('loader-popup');
         });
     });
+
+    // toggle pages
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.form-step');
+    const prevButtons = document.querySelectorAll('.match-form-prev-btn');
+    const nextButtons = document.querySelectorAll('.match-form-next-btn');
+
+    prevButtons.forEach(button => {
+        button.addEventListener('click', prevPage);
+    });
+    nextButtons.forEach(button => {
+        button.addEventListener('click', nextPage);
+    });
+
+    function showPage(index) {
+        pages.forEach((page, i) => {
+            page.style.display = (i === index) ? 'block' : 'none';
+        });
+        submitButton.style.display = (currentPage === pages.length - 1) ? 'block' : 'none';
+    }
+
+    function prevPage(){
+        if (currentPage > 0) {
+            currentPage--;
+            showPage(currentPage);
+        }
+    }
+
+    function nextPage() {
+        if (currentPage < pages.length - 1) {
+            currentPage++;
+            showPage(currentPage);
+        }
+    }
+    showPage(currentPage); // Show the first page initially
 }
 
 function showPopup(popupId) {
@@ -167,7 +242,7 @@ function logout() {
 
 function onLoginSuccess(u) {
     user = u;
-    matchUsers(user);
+    displayMatchedUsers(user);
 
     hidePopup('login-popup');
     hidePopup('signup-popup');
@@ -175,6 +250,7 @@ function onLoginSuccess(u) {
     profileButton.style.display = 'block';
     const profileButtonImg = document.getElementById('profile-btn-img');
     profileButtonImg.src = user.photoURL
+    document.getElementById('profile-popup-name').textContent = user.displayName;
 
     // show/hide stuff
     document.getElementById('please-login-container').style.display = 'none';
@@ -249,7 +325,7 @@ function getMostRecentMatchRequest() {
     });
 }
 
-function matchUsers(user) {
+function displayMatchedUsers(user) {
     getMatchRequest(user)
         .then(async (matchRequest) => {
             if (!matchRequest) {
@@ -274,10 +350,14 @@ function matchUsers(user) {
                     similarityText.textContent = `Similarity: ${similarity.toFixed(2)}`;
                     const email = document.createElement('p');
                     email.textContent = request.email;
+
+                    const matchButton = document.createElement('button');
+                    matchButton.textContent = "I'm down!";
                     
                     matchItem.appendChild(matchName);
                     matchItem.appendChild(similarityText);
                     matchItem.appendChild(email);
+                    matchItem.appendChild(matchButton);
                     matchesContainer.appendChild(matchItem);
                 });
             });
