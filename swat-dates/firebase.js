@@ -208,30 +208,3 @@ export function initLogin(onLoginSuccessCallback, onLoginFailureCallback) {
         errorElement.style.display = 'block';
     }
 }
-
-export function matchUsers(user) {
-    getMatchRequest(user)
-        .then(async (matchRequest) => {
-            if (!matchRequest) {
-                console.log("No match request found for user:", user.uid);
-                return;
-            }
-            const traits = Array.from(matchRequest.traits.values());
-
-            getAllMatchRequests(user).then((allMatchRequests) => {
-                allMatchRequests.forEach((request) => {
-                    console.log(request);
-                    const otherTraits = Array.from(request.traits.values());
-                    const similarity = dotProduct(traits, otherTraits);
-                    console.log(`Similarity with ${request.userUID}:`, similarity);
-                });
-            });
-        });
-}
-
-function dotProduct(a, b){
-    const magA = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
-    const magB = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
-    const dotProduct = a.reduce((sum, val, i) => sum + val * b[i], 0);
-    return dotProduct / (magA*magB);
-}

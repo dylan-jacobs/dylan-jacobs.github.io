@@ -1,5 +1,5 @@
 import { MatchRequest } from './Classes/matchRequest.js';
-import { writeMatchRequest, initLogin, initSignup, signout, getMatchRequest, matchUsers } from './firebase.js';
+import { writeMatchRequest, initLogin, initSignup, signout, getMatchRequest, getAllMatchRequests } from './firebase.js';
 
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
@@ -94,7 +94,7 @@ window.onclick = function(event) {
 function createMatchRequestForm() {
     const matchForm = document.getElementById('match-form');
     traitPairs.forEach(pair => {
-        const inputRangeStep = 0.142857; // 7 steps
+        const inputRangeStep = 0.285714; // 7 steps
         const container = document.createElement('div');
         container.className = 'form-element-container';
 
@@ -114,10 +114,10 @@ function createMatchRequestForm() {
         input.className = 'range'
         input.id = `slider-${pair[0]}-${pair[1]}`
         input.type = 'range';
-        input.min = '0';
+        input.min = '-1';
         input.step = `${inputRangeStep}`;
         input.max = '1';
-        input.value = `${Math.floor(input.max/(2*inputRangeStep)) * inputRangeStep}`; // Default to the middle value
+        input.value = `${Math.floor((input.max - input.min)/(2*inputRangeStep)) * inputRangeStep - input.max}`; // Default to the middle value
         
         matchForm.appendChild(container);
         container.appendChild(label);
@@ -136,7 +136,7 @@ function createMatchRequestForm() {
                 traitsMap.set(`${pair[0]}-${pair[1]}`, parseFloat(input.value, 10));
             }
         });
-        var matchRequest = new MatchRequest(user.uid, traitsMap);
+        var matchRequest = new MatchRequest(user.uid, user.displayName, user.email, traitsMap);
         writeMatchRequest(matchRequest).then(() => {
             console.log("Match request submitted successfully.");
             hidePopup('loader-popup');
@@ -247,4 +247,48 @@ function getMostRecentMatchRequest() {
             console.log("No match request found for the user.");
         }
     });
+}
+
+function matchUsers(user) {
+    getMatchRequest(user)
+        .then(async (matchRequest) => {
+            if (!matchRequest) {
+                console.log("No match request found for user:", user.uid);
+                return;
+            }
+            const traits = Array.from(matchRequest.traits.values());
+
+            getAllMatchRequests(user).then((allMatchRequests) => {
+                const matchesContainer = document.getElementById('matches-container');
+                allMatchRequests.forEach((request) => {
+                    const otherTraits = Array.from(request.traits.values());
+                    const similarity = dotProduct(traits, otherTraits);
+                    console.log(`Similarity with ${request.displayName}:`, similarity);
+
+                    // add to matches container
+                    const matchItem = document.createElement('div');
+                    matchItem.className = 'row-item';
+                    const matchName = document.createElement('h3');
+                    matchName.textContent = request.displayName;
+                    const similarityText = document.createElement('h3');
+                    similarityText.textContent = `Similarity: ${similarity.toFixed(2)}`;
+                    const email = document.createElement('p');
+                    email.textContent = request.email;
+                    
+                    matchItem.appendChild(matchName);
+                    matchItem.appendChild(similarityText);
+                    matchItem.appendChild(email);
+                    matchesContainer.appendChild(matchItem);
+                });
+            });
+        });
+}
+
+function dotProduct(a, b){
+    const magA = Math.sqrt(a.reduce((sum, val) => sum + (val * val), 0));
+    const magB = Math.sqrt(b.reduce((sum, val) => sum + (val * val), 0));
+    const dotProduct = a.reduce((sum, val, i) => sum + (val * b[i]), 0);
+    if (magA === 0 || magB === 0) return 0; // Avoid division by zero
+    if (magA === 0 && magB === 0) return 1; // Both vectors are zero, return 1 for similarity
+    return dotProduct / (magA*magB);
 }

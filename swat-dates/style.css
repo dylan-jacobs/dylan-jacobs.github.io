@@ -64,7 +64,8 @@
   border-radius: 10px;
   display: flex;
   flex-direction: row;
-
+  gap: 15%;
+  row-gap: 10px;
 }
 
 .loader-overlay {
