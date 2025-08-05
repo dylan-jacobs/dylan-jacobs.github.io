@@ -18,6 +18,10 @@
     --color-warning:       #fbc02d;
 }
 
+p{
+  white-space: pre-line;;
+}
+
 .row {
     display: flex;
 }
@@ -64,8 +68,14 @@
   border-radius: 10px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.break {
+  flex-basis: 100%; /* Forces a line break */
+  height: 0;
 }
 
 .loader-overlay {

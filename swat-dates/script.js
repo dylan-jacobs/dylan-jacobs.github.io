@@ -132,7 +132,13 @@ window.onclick = function(event) {
 };
   
 function createMatchRequestForm() {
-    const matchForm = document.getElementById('match-form-1');
+    const matchForm = document.getElementById('match-form');
+    // toggle pages
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.form-step');
+    const prevButtons = document.querySelectorAll('.match-form-prev-btn');
+    const nextButtons = document.querySelectorAll('.match-form-next-btn');
+
     traitPairs.forEach(pair => {
         const inputRangeStep = 0.285714; // 7 steps
         const container = document.createElement('div');
@@ -159,16 +165,20 @@ function createMatchRequestForm() {
         input.max = '1';
         input.value = `${Math.floor((input.max - input.min)/(2*inputRangeStep)) * inputRangeStep - input.max}`; // Default to the middle value
         
-        matchForm.insertBefore(container, matchForm.firstChild);
+        pages[0].insertBefore(container, pages[0].firstChild);
         container.appendChild(label);
         container.appendChild(sliderRow);
         sliderRow.appendChild(leftLabel);
         sliderRow.appendChild(input);
         sliderRow.appendChild(rightLabel);
     });
-    const submitButton = document.getElementById('submit-btn');
-    submitButton.addEventListener('click', async () => {
+    
+    matchForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
         showPopup('loader-popup');
+
+        // get traits
         var traitsMap = new Map();
         traitPairs.forEach(pair => {
             const input = document.getElementById(`slider-${pair[0]}-${pair[1]}`);
@@ -176,7 +186,16 @@ function createMatchRequestForm() {
                 traitsMap.set(`${pair[0]}-${pair[1]}`, parseFloat(input.value, 10));
             }
         });
-        var matchRequest = new MatchRequest(user.uid, user.displayName, user.email, traitsMap);
+
+        // get text inputs
+        const formData = new FormData(event.target);
+        const date1 = formData.get("date1");
+        const date2 =  formData.get("date2");
+        const date3 = formData.get("date3");
+        const joke = formData.get("joke");
+
+        var matchRequest = new MatchRequest(user.uid, user.displayName, user.email, traitsMap, [date1, date2, date3], joke);
+
         writeMatchRequest(matchRequest).then(() => {
             console.log("Match request submitted successfully.");
             hidePopup('loader-popup');
@@ -185,12 +204,6 @@ function createMatchRequestForm() {
             hidePopup('loader-popup');
         });
     });
-
-    // toggle pages
-    let currentPage = 0;
-    const pages = document.querySelectorAll('.form-step');
-    const prevButtons = document.querySelectorAll('.match-form-prev-btn');
-    const nextButtons = document.querySelectorAll('.match-form-next-btn');
 
     prevButtons.forEach(button => {
         button.addEventListener('click', prevPage);
@@ -203,7 +216,7 @@ function createMatchRequestForm() {
         pages.forEach((page, i) => {
             page.style.display = (i === index) ? 'block' : 'none';
         });
-        submitButton.style.display = (currentPage === pages.length - 1) ? 'block' : 'none';
+        document.getElementById("submit-btn").style.display = (currentPage === pages.length - 1) ? 'block' : 'none';
     }
 
     function prevPage(){
@@ -337,6 +350,9 @@ function displayMatchedUsers(user) {
             getAllMatchRequests(user).then((allMatchRequests) => {
                 const matchesContainer = document.getElementById('matches-container');
                 allMatchRequests.forEach((request) => {
+                    if (request.userUID == user.uid) {
+                        return;
+                    }
                     const otherTraits = Array.from(request.traits.values());
                     const similarity = dotProduct(traits, otherTraits);
                     console.log(`Similarity with ${request.displayName}:`, similarity);
@@ -347,21 +363,41 @@ function displayMatchedUsers(user) {
                     const matchName = document.createElement('h3');
                     matchName.textContent = request.displayName;
                     const similarityText = document.createElement('h3');
-                    similarityText.textContent = `Similarity: ${similarity.toFixed(2)}`;
+                    similarityText.textContent = `Similarity: ${similarity.toFixed(2)*100}%`;
                     const email = document.createElement('p');
                     email.textContent = request.email;
 
                     const matchButton = document.createElement('button');
-                    matchButton.textContent = "I'm down!";
+                    matchButton.textContent = "I'm down";
+
+                    const linebreak = document.createElement('div');
+                    linebreak.className = 'break';
+
+                    const datesText = document.createElement('p');
+                    if (request.dateIdeas && request.dateIdeas.length == 3) {
+                        datesText.innerHTML = `<b>Date ideas:</b> \n • ${request.dateIdeas[0]} \n • ${request.dateIdeas[1]} \n • ${request.dateIdeas[2]}`;
+                    }
+
+                    const jokeText = document.createElement('p');
+                    if (request.joke) {
+                        jokeText.innerHTML = `<b>Joke:</b> \n ${request.joke}`;
+                    }
                     
                     matchItem.appendChild(matchName);
                     matchItem.appendChild(similarityText);
                     matchItem.appendChild(email);
                     matchItem.appendChild(matchButton);
+                    matchItem.appendChild(linebreak);
+                    matchItem.appendChild(datesText);
+                    matchItem.appendChild(jokeText);
                     matchesContainer.appendChild(matchItem);
                 });
             });
         });
+}
+
+function displayDateConfirmationPopup(request) {
+
 }
 
 function dotProduct(a, b){
