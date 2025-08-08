@@ -16,6 +16,8 @@
     --color-error:         #d32f2f;
     --color-success:       #388e3c;
     --color-warning:       #fbc02d;
+    --color-button:        #3b668a; /* Button color */
+    --color-button-hover:  #21394d; /* Button hover color */
 }
 
 p{
@@ -148,7 +150,7 @@ button {
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #3b668a;
+    background-color: var(--color-button);
 }
 
 .fill {
@@ -164,7 +166,7 @@ button {
     background-color:darkred;
 }
 button:hover{
-    background-color: #21394d;
+    background-color: var(--color-button-hover);
 }
 
 .icon-button {
@@ -336,6 +338,8 @@ input[type="range"] {
   width: 100%;
   padding: 0%;
   box-sizing: border-box;
+  color: var(--color-secondary);
+  accent-color: var(--color-secondary); /* Change the color of the range input thumb */
 }
 
 .slider-row {
@@ -353,6 +357,41 @@ input[type="range"] {
 
 .form-step.active {
   display: block; /* Show the active step */
+}
+
+
+
+
+.radio-group {
+  margin: 10px 0;
+  display: flex; /* horizontal layout */
+  gap: 8px;      /* spacing between buttons */
+}
+
+.radio-group input[type="radio"] {
+  display: none; /* hide default radio circles */
+}
+
+.radio-group label {
+  padding: 10px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  background-color: var(--color-surface);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* When the radio is checked, style the label */
+.radio-group input[type="radio"]:checked + label {
+  background-color: var(--color-secondary);
+  color: var(--color-background);
+  border-color: none;
+}
+
+/* Optional hover effect */
+.radio-group label:hover {
+  background-color: #ddd;
 }
 
 

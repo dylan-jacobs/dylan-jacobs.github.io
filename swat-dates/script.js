@@ -379,7 +379,7 @@ function displayMatchedUsers(user) {
                     if (request.userUID == user.uid) { // skip yourself
                         return;
                     }
-                    
+
                     const otherTraits = traitPairs.map(pair => request.traits.get(matchRequestPairKeyFn(pair)) ?? 0);
                     const similarity = (dotProduct(traits, otherTraits) + 1) / 2; // normalize to [0, 1]
 
