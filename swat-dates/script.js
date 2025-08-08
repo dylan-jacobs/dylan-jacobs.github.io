@@ -106,6 +106,7 @@ const traitPairs = [
     ["Sensible", "Imaginative"],
     ["Spontaneous", "Deliberate"]
   ];
+const matchRequestPairKeyFn = pair => `${pair[0]}-${pair[1]}`;
 
 var user = null; // Placeholder for user object, to be set on login
 
@@ -120,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
     getTimeUntilNextDate();
 });
 
-
 // Close the popup when clicking outside the content
 window.onclick = function(event) {
     var popups = document.getElementsByClassName('popup'); // 'popup' is the generic class for all popups
@@ -130,6 +130,51 @@ window.onclick = function(event) {
         }
     }
 };
+
+function createInputSlider(pair) {
+    const numSteps = 6;
+    const min = -1; 
+    const max = 1;
+    const inputRangeStep = (max - min) / (numSteps - 1); 
+    const label = document.createElement('label');
+    label.className = 'label form-label';
+    label.textContent = `${pair[0]} vs ${pair[1]}`;
+
+    const sliderRow = document.createElement('div');
+    sliderRow.className = 'row slider-row';
+
+    const leftLabel = document.createElement('span');
+    leftLabel.textContent = pair[0];
+    const rightLabel = document.createElement('span');
+    rightLabel.textContent = pair[1];
+    
+    const input = document.createElement('input');
+    input.className = 'range'
+    input.id = `slider-${pair[0]}-${pair[1]}`
+    input.type = 'range';
+    input.min = `${min}`;
+    input.step = `${inputRangeStep}`;
+    input.max = `${max}`;
+    input.value = `0`; // Default to the middle value
+    input.setAttribute("list", "tickmarks");
+
+    // add tickmarks
+    const datalist = document.createElement("datalist");
+    datalist.id = "tickmarks";
+    for (var i = 0; i <= numSteps; i++) {
+        const option = document.createElement("option");
+        option.value = `${min + i * inputRangeStep}`;
+        datalist.appendChild(option);
+    }
+
+    // append children elements
+    sliderRow.appendChild(datalist);
+    sliderRow.appendChild(leftLabel);
+    sliderRow.appendChild(input);
+    sliderRow.appendChild(rightLabel);
+
+    return {sliderRow, label};
+}
   
 function createMatchRequestForm() {
     const matchForm = document.getElementById('match-form');
@@ -140,37 +185,13 @@ function createMatchRequestForm() {
     const nextButtons = document.querySelectorAll('.match-form-next-btn');
 
     traitPairs.forEach(pair => {
-        const inputRangeStep = 0.285714; // 7 steps
         const container = document.createElement('div');
-        container.className = 'form-element-container';
-
-        const label = document.createElement('label');
-        label.className = 'label form-label';
-        label.textContent = `${pair[0]} vs ${pair[1]}`;
-
-        const sliderRow = document.createElement('div');
-        sliderRow.className = 'row slider-row';
-
-        const leftLabel = document.createElement('span');
-        leftLabel.textContent = pair[0];
-        const rightLabel = document.createElement('span');
-        rightLabel.textContent = pair[1];
-        
-        const input = document.createElement('input');
-        input.className = 'range'
-        input.id = `slider-${pair[0]}-${pair[1]}`
-        input.type = 'range';
-        input.min = '-1';
-        input.step = `${inputRangeStep}`;
-        input.max = '1';
-        input.value = `${Math.floor((input.max - input.min)/(2*inputRangeStep)) * inputRangeStep - input.max}`; // Default to the middle value
-        
+        container.className = 'match-request-form-element-container';
         pages[0].insertBefore(container, pages[0].firstChild);
+
+        const {sliderRow, label} = createInputSlider(pair);
         container.appendChild(label);
         container.appendChild(sliderRow);
-        sliderRow.appendChild(leftLabel);
-        sliderRow.appendChild(input);
-        sliderRow.appendChild(rightLabel);
     });
     
     matchForm.addEventListener('submit', async (event) => {
@@ -179,13 +200,13 @@ function createMatchRequestForm() {
         showPopup('loader-popup');
 
         // get traits
-        var traitsMap = new Map();
-        traitPairs.forEach(pair => {
+        const entries = traitPairs.map(pair => {
             const input = document.getElementById(`slider-${pair[0]}-${pair[1]}`);
             if (input) {
-                traitsMap.set(`${pair[0]}-${pair[1]}`, parseFloat(input.value, 10));
+                return [matchRequestPairKeyFn(pair), parseFloat(input.value, 10)];
             }
         });
+        var traitsMap = new Map(entries);
 
         // get text inputs
         const formData = new FormData(event.target);
@@ -345,25 +366,32 @@ function displayMatchedUsers(user) {
                 console.log("No match request found for user:", user.uid);
                 return;
             }
-            const traits = Array.from(matchRequest.traits.values());
+            // const traits = Array.from(matchRequest.traits.values());
+            const traits = traitPairs.map(pair => matchRequest.traits.get(matchRequestPairKeyFn(pair)) ?? 0);
 
             getAllMatchRequests(user).then((allMatchRequests) => {
                 const matchesContainer = document.getElementById('matches-container');
+                matchesContainer.innerHTML = ''; // Clear previous matches
+                const heading = document.createElement('h2');
+                heading.textContent = 'Your weekly matches';
                 allMatchRequests.forEach((request) => {
-                    if (request.userUID == user.uid) {
+
+                    if (request.userUID == user.uid) { // skip yourself
                         return;
                     }
-                    const otherTraits = Array.from(request.traits.values());
-                    const similarity = dotProduct(traits, otherTraits);
-                    console.log(`Similarity with ${request.displayName}:`, similarity);
+                    
+                    const otherTraits = traitPairs.map(pair => request.traits.get(matchRequestPairKeyFn(pair)) ?? 0);
+                    const similarity = (dotProduct(traits, otherTraits) + 1) / 2; // normalize to [0, 1]
 
+                    console.log(traits);
+                    console.log(otherTraits);
                     // add to matches container
                     const matchItem = document.createElement('div');
                     matchItem.className = 'row-item';
                     const matchName = document.createElement('h3');
                     matchName.textContent = request.displayName;
                     const similarityText = document.createElement('h3');
-                    similarityText.textContent = `Similarity: ${similarity.toFixed(2)*100}%`;
+                    similarityText.textContent = `Similarity: ${(similarity*100).toFixed(2)}%`;
                     const email = document.createElement('p');
                     email.textContent = request.email;
 
@@ -401,10 +429,13 @@ function displayDateConfirmationPopup(request) {
 }
 
 function dotProduct(a, b){
+    if (a.length !== b.length) {
+        return -1;
+    }
     const magA = Math.sqrt(a.reduce((sum, val) => sum + (val * val), 0));
     const magB = Math.sqrt(b.reduce((sum, val) => sum + (val * val), 0));
     const dotProduct = a.reduce((sum, val, i) => sum + (val * b[i]), 0);
-    if (magA === 0 || magB === 0) return 0; // Avoid division by zero
     if (magA === 0 && magB === 0) return 1; // Both vectors are zero, return 1 for similarity
+    if (magA === 0 || magB === 0) return 0; // Avoid division by zero
     return dotProduct / (magA*magB);
 }

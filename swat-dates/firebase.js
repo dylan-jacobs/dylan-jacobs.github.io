@@ -51,7 +51,7 @@ async function login(email, password) {
 
 export async function writeMatchRequest(matchRequest, timeout=5000) {
     const ref = doc(db, "matchRequests", matchRequest.userUID).withConverter(MatchRequestConverter);
-    await withTimeout(setDoc(ref, matchRequest, { merge: true }), timeout);
+    await withTimeout(setDoc(ref, matchRequest), timeout);
   }
 
 export async function getMatchRequest(user, timeout=5000) {
