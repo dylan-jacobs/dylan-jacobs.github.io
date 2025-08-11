@@ -105,8 +105,46 @@ const traitPairs = [
     ["Responsible", "Adventurous"],
     ["Sensible", "Imaginative"],
     ["Spontaneous", "Deliberate"]
-  ];
+];
+
 const matchRequestPairKeyFn = pair => `${pair[0]}-${pair[1]}`;
+
+const frequencyResponseList = ["Never", "Rarely", "Socially", "Weekly", "Daily"];
+const comfortResponseList = ["Very Comfortable", "Somewhat Comfortable", "Neutral", "Somewhat Uncomfortable", "Very Uncomfortable"];
+const importanceResponseList = ["Very Important", "Somewhat Important", "Neutral", "Somewhat Unimportant", "Very Unimportant"];
+const preferenceResponseList = ["Strongly prefer", "Prefer", "Neutral", "Prefer not to", "Strongly prefer not to"];
+const exlusivityVsPolyResponseList = ["Strongly prefer monogamy", "Prefer monogamy", "Prefer polyamory", "Strongly prefer polyamory"];
+const freakyResponseList = ["Very vanilla", "Somewhat vanilla", "Neutral", "Somewhat freaky", "Freak-a-LICCIOUS"];
+
+
+const substanceQuestions = {
+    // Alcohol
+    "How often do you drink alcohol?": frequencyResponseList,
+    "Comfort around people who drink": comfortResponseList,
+    "Importance of similar drinking habits": importanceResponseList,
+  
+    // Cannabis
+    "Cannabis use frequency": frequencyResponseList,
+    "Comfort with cannabis use around you": comfortResponseList,
+    "Importance of cannabis compatibility": importanceResponseList,
+  
+    // Other Drugs
+    "How often do you try substances other than alcohol/cannabis": frequencyResponseList,
+    "Are you ok with partner experimenting with drugs stronger than alcohol/cannabis/nicotine?": comfortResponseList,
+  
+    // Lifestyle & Boundaries
+    "Prefer substance-free environments": preferenceResponseList,
+    "How comfortable are you around alcohol/drugs?": comfortResponseList,
+    "Importance of sobriety day-to-day": importanceResponseList
+};
+
+const sexualityQuestions = {
+    "How often do you engage in sexual activity?": frequencyResponseList,
+    "How important is sex in your relationships?": importanceResponseList,
+    "How freaky are you?": freakyResponseList,
+    "Monogomy vs polyamory?": exlusivityVsPolyResponseList,
+    "How important is relationship exclusivity?": importanceResponseList
+};
 
 var user = null; // Placeholder for user object, to be set on login
 
@@ -175,6 +213,33 @@ function createInputSlider(pair) {
 
     return {sliderRow, label};
 }
+
+function createRadioGroup(question, options) {
+    const container = document.createElement('div');
+    container.className = 'match-request-form-element-container';
+    const label = document.createElement('label');
+    label.className = 'label form-label';
+    label.textContent = question;
+    container.appendChild(label);
+    options.forEach(option => {
+        const radioContainer = document.createElement('div');
+        radioContainer.className = 'radio-container';
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = question; // Group by question
+        input.value = option;
+        input.id = `${question}-${option}`;
+        
+        const label = document.createElement('label');
+        label.htmlFor = input.id;
+        label.textContent = option;
+
+        radioContainer.appendChild(input);
+        radioContainer.appendChild(label);
+        container.appendChild(radioContainer);
+    });
+    return container;
+}
   
 function createMatchRequestForm() {
     const matchForm = document.getElementById('match-form');
@@ -184,6 +249,7 @@ function createMatchRequestForm() {
     const prevButtons = document.querySelectorAll('.match-form-prev-btn');
     const nextButtons = document.querySelectorAll('.match-form-next-btn');
 
+    // page 1 (personality)
     traitPairs.forEach(pair => {
         const container = document.createElement('div');
         container.className = 'match-request-form-element-container';
@@ -193,7 +259,20 @@ function createMatchRequestForm() {
         container.appendChild(label);
         container.appendChild(sliderRow);
     });
+
+    // page 2 (sex/drugs)
+    for (const question in substanceQuestions) {
+        const options = substanceQuestions[question];
+        const container = createRadioGroup(question, options);
+        pages[1].insertBefore(container, pages[1].firstChild);
+    }
+    for (const question in sexualityQuestions) {
+        const options = sexualityQuestions[question];
+        const container = createRadioGroup(question, options);
+        pages[1].insertBefore(container, pages[1].firstChild);
+    }
     
+    // submit
     matchForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -232,27 +311,25 @@ function createMatchRequestForm() {
     nextButtons.forEach(button => {
         button.addEventListener('click', nextPage);
     });
-
     function showPage(index) {
         pages.forEach((page, i) => {
             page.style.display = (i === index) ? 'block' : 'none';
         });
         document.getElementById("submit-btn").style.display = (currentPage === pages.length - 1) ? 'block' : 'none';
     }
-
     function prevPage(){
         if (currentPage > 0) {
             currentPage--;
             showPage(currentPage);
         }
     }
-
     function nextPage() {
         if (currentPage < pages.length - 1) {
             currentPage++;
             showPage(currentPage);
         }
     }
+
     showPage(currentPage); // Show the first page initially
 }
 
