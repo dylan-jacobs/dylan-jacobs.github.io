@@ -110,8 +110,8 @@ const traitPairs = [
 const matchRequestPairKeyFn = pair => `${pair[0]}-${pair[1]}`;
 
 const frequencyResponseList = ["Never", "Rarely", "Socially", "Weekly", "Daily"];
-const comfortResponseList = ["Very Comfortable", "Somewhat Comfortable", "Neutral", "Somewhat Uncomfortable", "Very Uncomfortable"];
-const importanceResponseList = ["Very Important", "Somewhat Important", "Neutral", "Somewhat Unimportant", "Very Unimportant"];
+const comfortResponseList = ["Very comfy", "Somewhat comfy", "Neutral", "Somewhat uncomfy", "Very uncomfy"];
+const importanceResponseList = ["Very important", "Somewhat important", "Neutral", "Somewhat unimportant", "Very unimportant"];
 const preferenceResponseList = ["Strongly prefer", "Prefer", "Neutral", "Prefer not to", "Strongly prefer not to"];
 const exlusivityVsPolyResponseList = ["Strongly prefer monogamy", "Prefer monogamy", "Prefer polyamory", "Strongly prefer polyamory"];
 const freakyResponseList = ["Very vanilla", "Somewhat vanilla", "Neutral", "Somewhat freaky", "Freak-a-LICCIOUS"];
@@ -217,13 +217,20 @@ function createInputSlider(pair) {
 function createRadioGroup(question, options) {
     const container = document.createElement('div');
     container.className = 'match-request-form-element-container';
+
+    // add question label
     const label = document.createElement('label');
     label.className = 'label form-label';
     label.textContent = question;
     container.appendChild(label);
+
+    // add radio buttons
+    const radioGroup = document.createElement('div');
+    radioGroup.className = 'radio-group';
+    container.appendChild(radioGroup);
+
     options.forEach(option => {
         const radioContainer = document.createElement('div');
-        radioContainer.className = 'radio-container';
         const input = document.createElement('input');
         input.type = 'radio';
         input.name = question; // Group by question
@@ -236,7 +243,7 @@ function createRadioGroup(question, options) {
 
         radioContainer.appendChild(input);
         radioContainer.appendChild(label);
-        container.appendChild(radioContainer);
+        radioGroup.appendChild(radioContainer);
     });
     return container;
 }
@@ -261,16 +268,19 @@ function createMatchRequestForm() {
     });
 
     // page 2 (sex/drugs)
-    for (const question in substanceQuestions) {
-        const options = substanceQuestions[question];
-        const container = createRadioGroup(question, options);
-        pages[1].insertBefore(container, pages[1].firstChild);
-    }
     for (const question in sexualityQuestions) {
         const options = sexualityQuestions[question];
         const container = createRadioGroup(question, options);
         pages[1].insertBefore(container, pages[1].firstChild);
     }
+    for (const question in substanceQuestions) {
+        const options = substanceQuestions[question];
+        const container = createRadioGroup(question, options);
+        pages[1].insertBefore(container, pages[1].firstChild);
+    }
+    const page1Title = document.createElement('h2');
+    page1Title.textContent = "Now for the juicy stuff...";
+    pages[1].insertBefore(page1Title, pages[1].firstChild);
     
     // submit
     matchForm.addEventListener('submit', async (event) => {

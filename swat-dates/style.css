@@ -306,6 +306,10 @@ button:hover{
     background-color: white;
 }
 
+h1{
+  text-align: center;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -363,6 +367,7 @@ input[type="range"] {
 .radio-group {
   margin: 10px 0;
   display: flex; /* horizontal layout */
+  flex-direction: row;
   gap: 8px;      /* spacing between buttons */
 }
 
@@ -371,7 +376,7 @@ input[type="range"] {
 }
 
 .radio-group label {
-  padding: 10px 20px;
+  padding: 10px 10px;
   border: 1px solid var(--color-border);
   border-radius: 6px;
   cursor: pointer;
