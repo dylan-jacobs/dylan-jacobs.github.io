@@ -72,7 +72,7 @@ const largeListOfTraitPairs = [
     ["Risk-tolerant", "Risk-averse"],
     ["Idealistic", "Pragmatic"],
     ["Big-picture-focused", "Detail-focused"]
-  ]; // save for later
+]; // save for later
 
 const traitPairs = [
     ["Adaptable", "Structured"],
@@ -110,9 +110,9 @@ const traitPairs = [
 const matchRequestPairKeyFn = pair => `${pair[0]}-${pair[1]}`;
 
 const frequencyResponseList = ["Never", "Rarely", "Socially", "Weekly", "Daily"];
-const comfortResponseList = ["Very comfy", "Somewhat comfy", "Neutral", "Somewhat uncomfy", "Very uncomfy"];
-const importanceResponseList = ["Very important", "Somewhat important", "Neutral", "Somewhat unimportant", "Very unimportant"];
-const preferenceResponseList = ["Strongly prefer", "Prefer", "Neutral", "Prefer not to", "Strongly prefer not to"];
+const comfortResponseList = ["Very uncomfy", "Somewhat uncomfy", "Neutral", "Somewhat comfy", "Very comfy"];
+const importanceResponseList = ["Very unimportant", "Somewhat unimportant", "Neutral", "Somewhat important", "Very important"];
+const preferenceResponseList = ["Strongly prefer not to", "Prefer not to", "Neutral", "Prefer", "Strongly prefer"];
 const exlusivityVsPolyResponseList = ["Strongly prefer monogamy", "Prefer monogamy", "Prefer polyamory", "Strongly prefer polyamory"];
 const freakyResponseList = ["Very vanilla", "Somewhat vanilla", "Neutral", "Somewhat freaky", "Freak-a-LICCIOUS"];
 
@@ -127,6 +127,10 @@ const substanceQuestions = {
     "Cannabis use frequency": frequencyResponseList,
     "Comfort with cannabis use around you": comfortResponseList,
     "Importance of cannabis compatibility": importanceResponseList,
+
+    "Tobacco/Nicotine use frequency": frequencyResponseList,
+    "Comfort with tobacco/nicotine use around you": comfortResponseList,
+    "Importance of tobacco/nicotine compatibility": importanceResponseList,
   
     // Other Drugs
     "How often do you try substances other than alcohol/cannabis": frequencyResponseList,
@@ -145,6 +149,7 @@ const sexualityQuestions = {
     "Monogomy vs polyamory?": exlusivityVsPolyResponseList,
     "How important is relationship exclusivity?": importanceResponseList
 };
+const radioButtonKeyFn = (question) => `radio-input-${question.replaceAll(' ', '-').replace(/[^a-zA-Z0-9-_]/g, "").toLowerCase()}`;
 
 var user = null; // Placeholder for user object, to be set on login
 
@@ -227,15 +232,17 @@ function createRadioGroup(question, options) {
     // add radio buttons
     const radioGroup = document.createElement('div');
     radioGroup.className = 'radio-group';
+    radioGroup.id = radioButtonKeyFn(question); // Set ID for the group
     container.appendChild(radioGroup);
 
     options.forEach(option => {
         const radioContainer = document.createElement('div');
+        
         const input = document.createElement('input');
+        input.id = `${radioButtonKeyFn(question)}-${radioButtonKeyFn(option)}`;
         input.type = 'radio';
         input.name = question; // Group by question
         input.value = option;
-        input.id = `${question}-${option}`;
         
         const label = document.createElement('label');
         label.htmlFor = input.id;
@@ -288,7 +295,7 @@ function createMatchRequestForm() {
 
         showPopup('loader-popup');
 
-        // get traits
+        // get page 1 traits
         const entries = traitPairs.map(pair => {
             const input = document.getElementById(`slider-${pair[0]}-${pair[1]}`);
             if (input) {
@@ -297,7 +304,17 @@ function createMatchRequestForm() {
         });
         var traitsMap = new Map(entries);
 
-        // get text inputs
+        // get page 2 radio inputs
+        const sexRadioInputs = new Map();
+        Object.keys(sexualityQuestions).forEach(question => {
+            const radioGroup = document.getElementById(radioButtonKeyFn(question));
+            const radioInput = radioGroup.querySelector('input[type="radio"]:checked'); // get checked input
+            sexRadioInputs.set(question, radioInput ? radioInput.value : null);
+        });
+        console.log(sexRadioInputs);
+        
+
+        // get page 3 text inputs
         const formData = new FormData(event.target);
         const date1 = formData.get("date1");
         const date2 =  formData.get("date2");
@@ -459,8 +476,10 @@ function displayMatchedUsers(user) {
             getAllMatchRequests(user).then((allMatchRequests) => {
                 const matchesContainer = document.getElementById('matches-container');
                 matchesContainer.innerHTML = ''; // Clear previous matches
-                const heading = document.createElement('h2');
+                const heading = document.createElement('h1');
                 heading.textContent = 'Your weekly matches';
+                matchesContainer.appendChild(heading);
+                matchesContainer.appendChild(document.createElement('br'));
                 allMatchRequests.forEach((request) => {
 
                     if (request.userUID == user.uid) { // skip yourself
@@ -470,8 +489,6 @@ function displayMatchedUsers(user) {
                     const otherTraits = traitPairs.map(pair => request.traits.get(matchRequestPairKeyFn(pair)) ?? 0);
                     const similarity = (dotProduct(traits, otherTraits) + 1) / 2; // normalize to [0, 1]
 
-                    console.log(traits);
-                    console.log(otherTraits);
                     // add to matches container
                     const matchItem = document.createElement('div');
                     matchItem.className = 'row-item';
@@ -512,7 +529,7 @@ function displayMatchedUsers(user) {
 }
 
 function displayDateConfirmationPopup(request) {
-
+    //TODO
 }
 
 function dotProduct(a, b){
@@ -525,4 +542,8 @@ function dotProduct(a, b){
     if (magA === 0 && magB === 0) return 1; // Both vectors are zero, return 1 for similarity
     if (magA === 0 || magB === 0) return 0; // Avoid division by zero
     return dotProduct / (magA*magB);
+}
+
+function mapRange(value, inMin, inMax, outMin, outMax) {
+    return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
