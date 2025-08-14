@@ -157,6 +157,12 @@ button {
     width: 100%;
 }
 
+.button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 /* Close button */
 .close-button {
     background: red;
@@ -365,14 +371,16 @@ input[type="range"] {
 
 
 .radio-group {
-  margin: 10px 0;
+  margin: 0 0;
   display: flex; /* horizontal layout */
   flex-direction: row;
   gap: 8px;      /* spacing between buttons */
 }
 
 .radio-group input[type="radio"] {
-  display: none; /* hide default radio circles */
+  opacity: 0; /* make the radio input invisible */
+  pointer-events: none;
+  position: absolute; /* Hide the radio input */
 }
 
 .radio-group label {

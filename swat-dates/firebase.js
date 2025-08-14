@@ -4,6 +4,7 @@ import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWith
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
 import { collection, addDoc, getDoc, getFirestore, doc, setDoc, getDocs} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { MatchRequest, MatchRequestConverter } from "./Classes/matchRequest.js";
+import { User, UserConverter } from "./Classes/user.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,10 +27,12 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-async function signUp(email, password) {
+async function signUp(email, password, displayName) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        return userCredential.user;
+        const user = new User(userCredential.user.uid, displayName, userCredential.user.email, `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&size=128`, [], ""); // add new user to db (just to store extra info like jokes and date ideas)
+        writeUser(user);
+        return user;
     } catch (error) {
         console.error("Signup failed:", error);
         throw error;
@@ -40,8 +43,7 @@ async function login(email, password) {
     try {
         const auth = getAuth(app);
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log("User logged in:", userCredential.user);
-        return userCredential.user;
+        console.log("User logged in successfully:", userCredential.user.uid);
         
     } catch (error) {
         console.error("Login failed:", error);
@@ -54,13 +56,13 @@ export async function writeMatchRequest(matchRequest, timeout=5000) {
     await withTimeout(setDoc(ref, matchRequest), timeout);
   }
 
-export async function getMatchRequest(user, timeout=5000) {
-    const ref = doc(db, "matchRequests", user.uid).withConverter(MatchRequestConverter);
+export async function getMatchRequest(userUID, timeout=5000) {
+    const ref = doc(db, "matchRequests", userUID).withConverter(MatchRequestConverter);
     const snapshot = await withTimeout(getDoc(ref), timeout);
     return snapshot.exists() ? snapshot.data() : null;
 }
 
-export async function getAllMatchRequests(user, timeout=20000) {
+export async function getAllMatchRequests(timeout=20000) {
     const snapshot = await withTimeout(getDocs(collection(db, "matchRequests").withConverter(MatchRequestConverter)), timeout);
     
     const requests = [];
@@ -128,19 +130,10 @@ export function initSignup(onSignupSuccessCallback, onSignupFailureCallback) {
             return;
         }*/
       
-        signUp(email, password)
+        signUp(email, password, name)
           .then(async (user) => {
-            await updateProfile(user, {
-                displayName: name,
-                photoURL: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random&size=128`
-            });
-            login(email, password)
-                .then(() => {
-                    if (typeof onLoginSuccessCallback == 'function'){
-                        onLoginSuccessCallback(user);
-                    }
-                })
-            })
+            login(email, password);
+        })
           .catch((err) => {
             if (err.code === 'auth/email-already-in-use') {
                 showError('Email already in use. Please try another email or if this is you, login instead.');
@@ -175,9 +168,12 @@ export function initSignup(onSignupSuccessCallback, onSignupFailureCallback) {
 
 export function initLogin(onLoginSuccessCallback, onLoginFailureCallback) {
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            onLoginSuccessCallback(user);
+    onAuthStateChanged(auth, (u) => {
+        console.log("Auth state changed:", u);
+        if (u) {
+            getUser(u.uid).then((user) => {;
+                onLoginSuccessCallback(user)
+            });
         } else {
             onLoginFailureCallback();
         }
@@ -194,11 +190,6 @@ export function initLogin(onLoginSuccessCallback, onLoginFailureCallback) {
         const email = formData.get('email');
         const password = formData.get('psw');
         login(email, password)
-        .then((user) => {
-            if (typeof onLoginSuccessCallback == 'function'){
-                onLoginSuccessCallback(user);
-            }
-        })
         .catch((error) => {
                 showError('Login failed. Please check your email and password.');
             });
@@ -207,4 +198,15 @@ export function initLogin(onLoginSuccessCallback, onLoginFailureCallback) {
         errorElement.textContent = message;
         errorElement.style.display = 'block';
     }
+}
+
+export async function writeUser(user, timeout=5000) {
+    const ref = doc(db, "users", user.userUID).withConverter(UserConverter);
+    return withTimeout(setDoc(ref, user), timeout);
+}
+
+export async function getUser(userUID, timeout=5000) {
+    const ref = doc(db, "users", userUID).withConverter(UserConverter);
+    const snapshot = await withTimeout(getDoc(ref), timeout);
+    return snapshot.exists() ? snapshot.data() : null;
 }

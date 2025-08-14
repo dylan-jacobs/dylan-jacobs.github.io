@@ -109,7 +109,7 @@ const traitPairs = [
 
 const matchRequestPairKeyFn = pair => `${pair[0]}-${pair[1]}`;
 
-const frequencyResponseList = ["Never", "Rarely", "Socially", "Weekly", "Daily"];
+const frequencyResponseList = ["Never", "Rarely", "Monthly", "Weekly", "Daily"];
 const comfortResponseList = ["Very uncomfy", "Somewhat uncomfy", "Neutral", "Somewhat comfy", "Very comfy"];
 const importanceResponseList = ["Very unimportant", "Somewhat unimportant", "Neutral", "Somewhat important", "Very important"];
 const preferenceResponseList = ["Strongly prefer not to", "Prefer not to", "Neutral", "Prefer", "Strongly prefer"];
@@ -119,35 +119,35 @@ const freakyResponseList = ["Very vanilla", "Somewhat vanilla", "Neutral", "Some
 
 const substanceQuestions = {
     // Alcohol
-    "How often do you drink alcohol?": frequencyResponseList,
-    "Comfort around people who drink": comfortResponseList,
-    "Importance of similar drinking habits": importanceResponseList,
+    "How often do you drink alcohol?": listToScaledMap(frequencyResponseList),
+    "Comfort around people who drink": listToScaledMap(comfortResponseList),
+    "Importance of similar drinking habits": listToScaledMap(importanceResponseList),
   
     // Cannabis
-    "Cannabis use frequency": frequencyResponseList,
-    "Comfort with cannabis use around you": comfortResponseList,
-    "Importance of cannabis compatibility": importanceResponseList,
+    "Cannabis use frequency": listToScaledMap(frequencyResponseList),
+    "Comfort with cannabis use around you": listToScaledMap(comfortResponseList),
+    "Importance of cannabis compatibility": listToScaledMap(importanceResponseList),
 
-    "Tobacco/Nicotine use frequency": frequencyResponseList,
-    "Comfort with tobacco/nicotine use around you": comfortResponseList,
-    "Importance of tobacco/nicotine compatibility": importanceResponseList,
+    "Tobacco/Nicotine use frequency": listToScaledMap(frequencyResponseList),
+    "Comfort with tobacco/nicotine use around you": listToScaledMap(comfortResponseList),
+    "Importance of tobacco/nicotine compatibility": listToScaledMap(importanceResponseList),
   
     // Other Drugs
-    "How often do you try substances other than alcohol/cannabis": frequencyResponseList,
-    "Are you ok with partner experimenting with drugs stronger than alcohol/cannabis/nicotine?": comfortResponseList,
+    "How often do you try substances other than alcohol/cannabis": listToScaledMap(frequencyResponseList),
+    "Are you ok with partner experimenting with drugs stronger than alcohol/cannabis/nicotine?": listToScaledMap(comfortResponseList),
   
     // Lifestyle & Boundaries
-    "Prefer substance-free environments": preferenceResponseList,
-    "How comfortable are you around alcohol/drugs?": comfortResponseList,
-    "Importance of sobriety day-to-day": importanceResponseList
+    "Prefer substance-free environments": listToScaledMap(preferenceResponseList),
+    "How comfortable are you around alcohol/drugs?": listToScaledMap(comfortResponseList),
+    "Importance of sobriety day-to-day": listToScaledMap(importanceResponseList)
 };
 
 const sexualityQuestions = {
-    "How often do you engage in sexual activity?": frequencyResponseList,
-    "How important is sex in your relationships?": importanceResponseList,
-    "How freaky are you?": freakyResponseList,
-    "Monogomy vs polyamory?": exlusivityVsPolyResponseList,
-    "How important is relationship exclusivity?": importanceResponseList
+    "How often do you engage in sexual activity?": listToScaledMap(frequencyResponseList),
+    "How important is sex in your relationships?": listToScaledMap(importanceResponseList),
+    "How freaky are you?": listToScaledMap(freakyResponseList),
+    "Monogomy vs polyamory?": listToScaledMap(exlusivityVsPolyResponseList),
+    "How important is relationship exclusivity?": listToScaledMap(importanceResponseList)
 };
 const radioButtonKeyFn = (question) => `radio-input-${question.replaceAll(' ', '-').replace(/[^a-zA-Z0-9-_]/g, "").toLowerCase()}`;
 
@@ -235,14 +235,18 @@ function createRadioGroup(question, options) {
     radioGroup.id = radioButtonKeyFn(question); // Set ID for the group
     container.appendChild(radioGroup);
 
-    options.forEach(option => {
+    Object.keys(options).forEach(option => {
+        const mappedValue = options[option]; // Get the mapped value for the option
         const radioContainer = document.createElement('div');
         
         const input = document.createElement('input');
-        input.id = `${radioButtonKeyFn(question)}-${radioButtonKeyFn(option)}`;
+        input.id = `${radioButtonKeyFn(question)}-${mappedValue}`; // create unique ids for each option
         input.type = 'radio';
         input.name = question; // Group by question
-        input.value = option;
+        input.value = mappedValue;
+        if (mappedValue === 0) {
+            input.setAttribute('required', "");
+        }
         
         const label = document.createElement('label');
         label.htmlFor = input.id;
@@ -260,36 +264,46 @@ function createMatchRequestForm() {
     // toggle pages
     let currentPage = 0;
     const pages = document.querySelectorAll('.form-step');
-    const prevButtons = document.querySelectorAll('.match-form-prev-btn');
-    const nextButtons = document.querySelectorAll('.match-form-next-btn');
 
     // page 1 (personality)
     traitPairs.forEach(pair => {
         const container = document.createElement('div');
         container.className = 'match-request-form-element-container';
-        pages[0].insertBefore(container, pages[0].firstChild);
+        pages[0].append(container);
 
         const {sliderRow, label} = createInputSlider(pair);
-        container.appendChild(label);
-        container.appendChild(sliderRow);
+        container.append(label);
+        container.append(sliderRow);
     });
+    addNextButton(pages[0], 1); // Add next button to page 1
 
     // page 2 (sex/drugs)
-    for (const question in sexualityQuestions) {
-        const options = sexualityQuestions[question];
-        const container = createRadioGroup(question, options);
-        pages[1].insertBefore(container, pages[1].firstChild);
-    }
+    const page2Title = document.createElement('h2');
+    page2Title.textContent = "Now for the juicy stuff...";
+    pages[1].appendChild(page2Title);
+
     for (const question in substanceQuestions) {
         const options = substanceQuestions[question];
         const container = createRadioGroup(question, options);
-        pages[1].insertBefore(container, pages[1].firstChild);
+        pages[1].appendChild(container);
     }
-    const page1Title = document.createElement('h2');
-    page1Title.textContent = "Now for the juicy stuff...";
-    pages[1].insertBefore(page1Title, pages[1].firstChild);
+
+    for (const question in sexualityQuestions) {
+        const options = sexualityQuestions[question];
+        const container = createRadioGroup(question, options);
+        pages[1].appendChild(container);
+    }
     
+    // append prev/next buttons to page 2
+    const buttonGroup = document.createElement('div');
+    buttonGroup.className = 'button-group';
+    pages[1].appendChild(buttonGroup);
+    addPrevButton(buttonGroup, 2); // Add previous button to page 2
+    addNextButton(buttonGroup, 2); // Add next button to page 2
+
     // submit
+    const prevButtons = document.querySelectorAll('.match-form-prev-btn');
+    const nextButtons = document.querySelectorAll('.match-form-next-btn');
     matchForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -309,10 +323,10 @@ function createMatchRequestForm() {
         Object.keys(sexualityQuestions).forEach(question => {
             const radioGroup = document.getElementById(radioButtonKeyFn(question));
             const radioInput = radioGroup.querySelector('input[type="radio"]:checked'); // get checked input
-            sexRadioInputs.set(question, radioInput ? radioInput.value : null);
+            sexRadioInputs.set(question, radioInput ? parseFloat(radioInput.value) : null);
         });
         console.log(sexRadioInputs);
-        
+
 
         // get page 3 text inputs
         const formData = new FormData(event.target);
@@ -321,7 +335,7 @@ function createMatchRequestForm() {
         const date3 = formData.get("date3");
         const joke = formData.get("joke");
 
-        var matchRequest = new MatchRequest(user.uid, user.displayName, user.email, traitsMap, [date1, date2, date3], joke);
+        var matchRequest = new MatchRequest(user.userUID, user.displayName, user.email, traitsMap, [date1, date2, date3], joke);
 
         writeMatchRequest(matchRequest).then(() => {
             console.log("Match request submitted successfully.");
@@ -357,6 +371,24 @@ function createMatchRequestForm() {
         }
     }
 
+    function addNextButton(page, id) {
+        const nextButton = document.createElement('button');
+        nextButton.className = 'match-form-next-btn';
+        nextButton.id = `next-btn-${id}`;
+        nextButton.textContent = 'Next';
+        nextButton.type = 'button'; // Prevents form submission
+        page.appendChild(nextButton);
+    }
+
+    function addPrevButton(page, id) {
+        const prevButton = document.createElement('button');
+        prevButton.className = 'match-form-prev-btn';
+        prevButton.id = `prev-btn-${id}`;
+        prevButton.textContent = 'Previous';   
+        prevButton.type = 'button'; // Prevents form submission
+        page.appendChild(prevButton);
+    }
+
     showPage(currentPage); // Show the first page initially
 }
 
@@ -382,12 +414,14 @@ function onLoginSuccess(u) {
     user = u;
     displayMatchedUsers(user);
 
+    console.log('onLoginSuccessCallback called');
+
     hidePopup('login-popup');
     hidePopup('signup-popup');
     const profileButton = document.getElementById('profile-btn');
     profileButton.style.display = 'block';
     const profileButtonImg = document.getElementById('profile-btn-img');
-    profileButtonImg.src = user.photoURL
+    profileButtonImg.src = user.photoURL;
     document.getElementById('profile-popup-name').textContent = user.displayName;
 
     // show/hide stuff
@@ -464,16 +498,16 @@ function getMostRecentMatchRequest() {
 }
 
 function displayMatchedUsers(user) {
-    getMatchRequest(user)
+    getMatchRequest(user.userUID) // get the user's current match request to compare against all others
         .then(async (matchRequest) => {
             if (!matchRequest) {
-                console.log("No match request found for user:", user.uid);
+                console.log("No match request found for user:", user.userUID);
                 return;
             }
             // const traits = Array.from(matchRequest.traits.values());
             const traits = traitPairs.map(pair => matchRequest.traits.get(matchRequestPairKeyFn(pair)) ?? 0);
 
-            getAllMatchRequests(user).then((allMatchRequests) => {
+            getAllMatchRequests().then((allMatchRequests) => {
                 const matchesContainer = document.getElementById('matches-container');
                 matchesContainer.innerHTML = ''; // Clear previous matches
                 const heading = document.createElement('h1');
@@ -482,7 +516,7 @@ function displayMatchedUsers(user) {
                 matchesContainer.appendChild(document.createElement('br'));
                 allMatchRequests.forEach((request) => {
 
-                    if (request.userUID == user.uid) { // skip yourself
+                    if (request.userUID == user.userUID) { // skip yourself
                         return;
                     }
 
@@ -546,4 +580,11 @@ function dotProduct(a, b){
 
 function mapRange(value, inMin, inMax, outMin, outMax) {
     return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
+
+function listToScaledMap(list) {
+    const step = 2 / (list.length - 1); // scale to range [-1, 1]
+    return Object.fromEntries(
+        list.map((entry, index) => [entry, -1 + (step * index)])
+    );
 }
