@@ -91,7 +91,7 @@ export async function signout() {
     }
 }
 
-export function initSignup(onSignupSuccessCallback, onSignupFailureCallback) {
+export function initSignup() {
     const form = document.getElementById('signup-form');
     const errorElement = document.getElementById('signup-error');
 

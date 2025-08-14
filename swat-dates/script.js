@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.logout = logout;
 
     initLogin(onLoginSuccess, onLoginFailure);
-    initSignup(onLoginSuccess, onLoginFailure);
+    initSignup();
     createMatchRequestForm();
     getTimeUntilNextDate();
 });
@@ -277,10 +277,10 @@ function createMatchRequestForm() {
     });
     addNextButton(pages[0], 1); // Add next button to page 1
 
-    // page 2 (sex/drugs)
-    const page2Title = document.createElement('h2');
-    page2Title.textContent = "Now for the juicy stuff...";
-    pages[1].appendChild(page2Title);
+    // drug page
+    const drugPageTitle = document.createElement('h2');
+    drugPageTitle.textContent = "Sober thoughts become drunk actions...";
+    pages[1].appendChild(drugPageTitle);
 
     for (const question in substanceQuestions) {
         const options = substanceQuestions[question];
@@ -288,18 +288,24 @@ function createMatchRequestForm() {
         pages[1].appendChild(container);
     }
 
-    for (const question in sexualityQuestions) {
-        const options = sexualityQuestions[question];
-        const container = createRadioGroup(question, options);
-        pages[1].appendChild(container);
-    }
-    
     // append prev/next buttons to page 2
     const buttonGroup = document.createElement('div');
     buttonGroup.className = 'button-group';
     pages[1].appendChild(buttonGroup);
     addPrevButton(buttonGroup, 2); // Add previous button to page 2
     addNextButton(buttonGroup, 2); // Add next button to page 2
+
+    const sexPageTitle = document.createElement('h2');
+    sexPageTitle.textContent = "Now for the juicy stuff...";
+    pages[2].appendChild(sexPageTitle);
+
+    for (const question in sexualityQuestions) {
+        const options = sexualityQuestions[question];
+        const container = createRadioGroup(question, options);
+        pages[2].appendChild(container);
+    }
+    addPrevButton(pages[2], 3); // Add previous button to page 2
+
 
     // submit
     const prevButtons = document.querySelectorAll('.match-form-prev-btn');
@@ -363,12 +369,14 @@ function createMatchRequestForm() {
             currentPage--;
             showPage(currentPage);
         }
+        window.scrollTo(0, 0); // Scroll to top of page
     }
     function nextPage() {
         if (currentPage < pages.length - 1) {
             currentPage++;
             showPage(currentPage);
         }
+        window.scrollTo(0, 0); // Scroll to top of page
     }
 
     function addNextButton(page, id) {
