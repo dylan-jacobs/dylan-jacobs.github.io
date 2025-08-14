@@ -151,8 +151,6 @@ const sexualityQuestions = {
 };
 const radioButtonKeyFn = (question) => `radio-input-${question.replaceAll(' ', '-').replace(/[^a-zA-Z0-9-_]/g, "").toLowerCase()}`;
 
-var user = null; // Placeholder for user object, to be set on login
-
 document.addEventListener('DOMContentLoaded', () => {
     window.showPopup = showPopup;
     window.hidePopup = hidePopup;
@@ -160,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initLogin(onLoginSuccess, onLoginFailure);
     initSignup();
-    createMatchRequestForm();
+    // createMatchRequestForm(); // wait until login to create form
     getTimeUntilNextDate();
 });
 
@@ -259,7 +257,7 @@ function createRadioGroup(question, options) {
     return container;
 }
   
-function createMatchRequestForm() {
+function createMatchRequestForm(user) {
     const matchForm = document.getElementById('match-form');
     // toggle pages
     let currentPage = 0;
@@ -288,13 +286,14 @@ function createMatchRequestForm() {
         pages[1].appendChild(container);
     }
 
-    // append prev/next buttons to page 2
+    // append prev/next buttons
     const buttonGroup = document.createElement('div');
     buttonGroup.className = 'button-group';
     pages[1].appendChild(buttonGroup);
     addPrevButton(buttonGroup, 2); // Add previous button to page 2
     addNextButton(buttonGroup, 2); // Add next button to page 2
 
+    // sex page
     const sexPageTitle = document.createElement('h2');
     sexPageTitle.textContent = "Now for the juicy stuff...";
     pages[2].appendChild(sexPageTitle);
@@ -305,7 +304,6 @@ function createMatchRequestForm() {
         pages[2].appendChild(container);
     }
     addPrevButton(pages[2], 3); // Add previous button to page 2
-
 
     // submit
     const prevButtons = document.querySelectorAll('.match-form-prev-btn');
@@ -324,15 +322,23 @@ function createMatchRequestForm() {
         });
         var traitsMap = new Map(entries);
 
-        // get page 2 radio inputs
-        const sexRadioInputs = new Map();
+        // get drug radio inputs
+        const substanceMap = new Map();
+        Object.keys(substanceQuestions).forEach(question => {
+            const radioGroup = document.getElementById(radioButtonKeyFn(question));
+            if (!radioGroup) { return; }
+            const radioInput = radioGroup.querySelector('input[type="radio"]:checked'); // get checked input
+            substanceMap.set(question, radioInput ? parseFloat(radioInput.value) : null);
+        });
+
+        // get sex radio inputs
+        const sexualityMap = new Map();
         Object.keys(sexualityQuestions).forEach(question => {
             const radioGroup = document.getElementById(radioButtonKeyFn(question));
+            if (!radioGroup) { return; }
             const radioInput = radioGroup.querySelector('input[type="radio"]:checked'); // get checked input
-            sexRadioInputs.set(question, radioInput ? parseFloat(radioInput.value) : null);
+            sexualityMap.set(question, radioInput ? parseFloat(radioInput.value) : null);
         });
-        console.log(sexRadioInputs);
-
 
         // get page 3 text inputs
         const formData = new FormData(event.target);
@@ -341,7 +347,7 @@ function createMatchRequestForm() {
         const date3 = formData.get("date3");
         const joke = formData.get("joke");
 
-        var matchRequest = new MatchRequest(user.userUID, user.displayName, user.email, traitsMap, [date1, date2, date3], joke);
+        var matchRequest = new MatchRequest(user, traitsMap, substanceMap, sexualityMap);
 
         writeMatchRequest(matchRequest).then(() => {
             console.log("Match request submitted successfully.");
@@ -418,8 +424,8 @@ function logout() {
     signout().then(() => window.location.reload());
 }
 
-function onLoginSuccess(u) {
-    user = u;
+function onLoginSuccess(user) {
+    createMatchRequestForm(user);
     displayMatchedUsers(user);
 
     console.log('onLoginSuccessCallback called');
@@ -441,8 +447,6 @@ function onLoginSuccess(u) {
 }
 
 function onLoginFailure() {
-    user = null;
-
     // show/hide stuff
     document.getElementById('login-btn').style.display = 'block';
     document.getElementById('profile-btn').style.display = 'none';
@@ -486,7 +490,7 @@ function getTimeUntilNextDate() {
     , 1000);
 }
 
-function getMostRecentMatchRequest() {
+function getMostRecentMatchRequest(user) {
     getMatchRequest(user).then((matchRequest) => {
         if (matchRequest) {
             console.log("Match request found:", matchRequest);
@@ -535,11 +539,11 @@ function displayMatchedUsers(user) {
                     const matchItem = document.createElement('div');
                     matchItem.className = 'row-item';
                     const matchName = document.createElement('h3');
-                    matchName.textContent = request.displayName;
+                    matchName.textContent = request.user.displayName;
                     const similarityText = document.createElement('h3');
                     similarityText.textContent = `Similarity: ${(similarity*100).toFixed(2)}%`;
                     const email = document.createElement('p');
-                    email.textContent = request.email;
+                    email.textContent = request.user.email;
 
                     const matchButton = document.createElement('button');
                     matchButton.textContent = "I'm down";
@@ -547,6 +551,7 @@ function displayMatchedUsers(user) {
                     const linebreak = document.createElement('div');
                     linebreak.className = 'break';
 
+                    /* NEED TO REPLACE WITH PROFILE INFO
                     const datesText = document.createElement('p');
                     if (request.dateIdeas && request.dateIdeas.length == 3) {
                         datesText.innerHTML = `<b>Date ideas:</b> \n • ${request.dateIdeas[0]} \n • ${request.dateIdeas[1]} \n • ${request.dateIdeas[2]}`;
@@ -556,14 +561,15 @@ function displayMatchedUsers(user) {
                     if (request.joke) {
                         jokeText.innerHTML = `<b>Joke:</b> \n ${request.joke}`;
                     }
+                    */
                     
                     matchItem.appendChild(matchName);
                     matchItem.appendChild(similarityText);
                     matchItem.appendChild(email);
                     matchItem.appendChild(matchButton);
                     matchItem.appendChild(linebreak);
-                    matchItem.appendChild(datesText);
-                    matchItem.appendChild(jokeText);
+                    //matchItem.appendChild(datesText);
+                    //matchItem.appendChild(jokeText);
                     matchesContainer.appendChild(matchItem);
                 });
             });

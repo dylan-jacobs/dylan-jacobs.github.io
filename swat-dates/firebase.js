@@ -52,7 +52,7 @@ async function login(email, password) {
 }
 
 export async function writeMatchRequest(matchRequest, timeout=5000) {
-    const ref = doc(db, "matchRequests", matchRequest.userUID).withConverter(MatchRequestConverter);
+    const ref = doc(db, "matchRequests", matchRequest.user.userUID).withConverter(MatchRequestConverter);
     await withTimeout(setDoc(ref, matchRequest), timeout);
   }
 
