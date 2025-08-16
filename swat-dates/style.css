@@ -42,7 +42,13 @@ p{
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
+}
+
+.center-items-horizontally {
   justify-content: center;
+}
+.center-items-vertically {
+  align-items: center;
 }
 
 .column-container{
@@ -59,7 +65,6 @@ p{
 .column-container.secondary{
     margin: 2px;
     width: fit-content;
-    /*box-shadow: 0 0 15px 5px rgba(105, 30, 217, 0.5); /* blurry shadow simulates spray */
     border-radius: 10px;
 }
 .row-item {
@@ -71,8 +76,7 @@ p{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  justify-content:space-between;
 }
 
 .break {
@@ -207,6 +211,20 @@ button:hover{
     transition: background-color 0.3s ease;
   }
 
+  .icon-button.small {
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-primary);
+  }
+
+  .icon-button.small i{
+    font-size: 100%;
+  }
+
+  .icon-button.small:hover {
+    background-color: var(--color-primary-hover); /* Darker grey on hover */
+  }
+
 .clickable {
     cursor: pointer; /* Changes cursor to a hand icon */
 }
@@ -316,6 +334,10 @@ h1{
   text-align: center;
 }
 
+.center-text {
+  text-align: center;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -405,6 +427,13 @@ input[type="range"] {
   background-color: #ddd;
 }
 
+.position-inherit {
+  position:inherit;
+}
+
+.no-outline {
+  border: 0;
+}
 
 
 

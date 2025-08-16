@@ -537,7 +537,7 @@ function displayMatchedUsers(user) {
 
                     // add to matches container
                     const matchItem = document.createElement('div');
-                    matchItem.className = 'row-item';
+                    matchItem.className = 'row-item center-items-vertically';
                     const matchName = document.createElement('h3');
                     matchName.textContent = request.user.displayName;
                     const similarityText = document.createElement('h3');
