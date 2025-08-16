@@ -56,7 +56,6 @@ app.get(`/api/debates`, async (req, res) => {
     }
 });
 
-mongodb.initMongoDB();
 
 const port = process.env.PORT || 5500;
 app.listen(port, () => console.log(`Server running at ${port}`));
