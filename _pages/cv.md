@@ -32,7 +32,15 @@ Education
 
 Work & research experience
 ======
-* May 2025-present: Research Intern at the Naval Research Laboratory (Washington, DC)
+* May 2025-August 2025: Advanced Materials Intern and Research Intern at the Naval Research Laboratory (Washington, DC)
+  * Developed Arduino-controlled liquid nitrogen (LN2) dispenser comprising two thermocouples and a relay-controlled solenoid valve.
+  * Used Python to create graphical-user-interface and data-logging system that interfaces between LN2 dispenser and computer through serial communication.
+  * Facilitated laser flash analysis (LFA) measurements to measure thermal diffusivity and specific heat capacity, which we used with sample density to determine thermoelectrics’ thermal conductivity.
+  * Cut, coated, and prepared thermoelectric and semiconductor samples for LFA and Seebeck analysis.
+  * Presented research updates to NRL scientists and engineers, wrote standard operating procedures for the LN2 dispenser and LFA.
+  * I learned fundamentals of nanomaterial science, especially regarding crystal growth, chemical bonding, and electron physics.
+  * Introduced me to semiconductor and solid-state physics; relevant topics included n and p-type doping, electron bands, p/n junctions, diodes, transistors, and thermoelectrics.
+
 * January 2024—present: Applied Mathematics Research Assistant                                                                
   * Utilizing principles of **computational fluid dynamics and numerical methods** to research high-order 
   accurate methods for time-dependent partial differential equations (PDEs), **plasma/kinetic models.** 
