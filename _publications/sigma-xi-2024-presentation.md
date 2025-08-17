@@ -1,6 +1,5 @@
 ---
 title: "Sigma Xi 2024 Presentation"
-venue: Swarthmore College
 category: manuscripts
 permalink: /publication/sigma-xi-2024-presentation
 excerpt: 'Sigma Xi poster presentation about the Vlasov-Poisson plasma equation solver.'
