@@ -13,4 +13,4 @@ Thermoelectric material characterization (Naval Research Enterprise Internship P
 
 Poster:
 ------
-<embed src='/files/Sigma-Xi-Poster-2024.pdf' type='application/pdf' width='100%' height='500px'>
+<embed src='/files/NREIP-Research-Poster-2025.pdf' type='application/pdf' width='100%' height='500px'>
