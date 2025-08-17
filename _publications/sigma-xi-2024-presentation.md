@@ -1,6 +1,5 @@
 ---
 title: "Sigma Xi 2024 Presentation"
-collection: posters
 venue: Swarthmore College
 category: manuscripts
 permalink: /publication/sigma-xi-2024-presentation

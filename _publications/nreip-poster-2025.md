@@ -1,6 +1,6 @@
 ---
 title: "US Naval Research Laboratory Thermoelectric Materials Research Poster 2025"
-collection: posters
+
 category: manuscripts
 permalink: /publication/nreip-poster-2025
 excerpt: 'Poster on thermoelectric material characterization (Naval Research Enterprise Internship Program 2025).'
