@@ -26,6 +26,7 @@ p{
 
 .row {
     display: flex;
+    gap: 10px;
 }
 .title-container{
   display: flex;

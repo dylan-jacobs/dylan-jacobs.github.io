@@ -1,6 +1,6 @@
 import { MatchRequest } from './Classes/matchRequest.js';
-import { writeMatchRequest, initLogin, initSignup, signout, getMatchRequest, getAllMatchRequests } from './firebase.js';
-
+import { writeMatchRequest, login, signUp, listenForLoginChanges, signout, getMatchRequest, getAllMatchRequests } from './firebase.js';
+import { showPopup, hidePopup } from './helper_functions.js';
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 const largeListOfTraitPairs = [
@@ -116,7 +116,6 @@ const preferenceResponseList = ["Strongly prefer not to", "Prefer not to", "Neut
 const exlusivityVsPolyResponseList = ["Strongly prefer monogamy", "Prefer monogamy", "Prefer polyamory", "Strongly prefer polyamory"];
 const freakyResponseList = ["Very vanilla", "Somewhat vanilla", "Neutral", "Somewhat freaky", "Freak-a-LICCIOUS"];
 
-
 const substanceQuestions = {
     // Alcohol
     "How often do you drink alcohol?": listToScaledMap(frequencyResponseList),
@@ -149,6 +148,7 @@ const sexualityQuestions = {
     "Monogomy vs polyamory?": listToScaledMap(exlusivityVsPolyResponseList),
     "How important is relationship exclusivity?": listToScaledMap(importanceResponseList)
 };
+
 const radioButtonKeyFn = (question) => `radio-input-${question.replaceAll(' ', '-').replace(/[^a-zA-Z0-9-_]/g, "").toLowerCase()}`;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -156,9 +156,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.hidePopup = hidePopup;
     window.logout = logout;
 
-    initLogin(onLoginSuccess, onLoginFailure);
-    initSignup();
-    // createMatchRequestForm(); // wait until login to create form
+    listenForLoginChanges(onLoginSuccess, onLoginFailure);
+    initLoginPopup();
+    initSignupPopup();
+
     getTimeUntilNextDate();
 });
 
@@ -406,22 +407,104 @@ function createMatchRequestForm(user) {
     showPage(currentPage); // Show the first page initially
 }
 
-function showPopup(popupId) {
-    const popup = document.getElementById(popupId);
-    if (popup) {
-        popup.style.display = 'flex';
-    }
-}
-
-function hidePopup(popupId) {
-    const popup = document.getElementById(popupId);
-    if (popup) {
-        popup.style.display = 'none';
-    }
-}
-
 function logout() {
     signout().then(() => window.location.reload());
+}
+
+function initLoginPopup() {
+    const form = document.getElementById('login-form');
+    const errorElement = document.getElementById('login-error');
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent form submission
+        errorElement.style.display = 'none'; 
+        
+        const formData = new FormData(event.target);
+        const email = formData.get('email');
+        const password = formData.get('psw');
+        login(email, password)
+        .catch((error) => {
+                showError('Login failed. Please check your email and password.');
+            });
+    });
+    function showError(message) {
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+}
+
+function initSignupPopup() {
+    const form = document.getElementById('signup-form');
+    const errorElement = document.getElementById('signup-error');
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+      
+        const formData = new FormData(event.target);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const password = formData.get('psw');
+
+        errorElement.style.display = 'none';
+
+        if (!name.includes(' ')) {
+            showError('Please provide your full name.');
+            return;
+        }
+      
+        if (!isValidEmail(email)) {
+          showError('Please provide a valid email.');
+            return;
+        }
+
+        if (!isValidPassword(password)) {
+          showError('Password must have at least one uppercase letter, one lowercase letter, one number, and be at least 8 characters.');
+          return;
+        }
+
+        if (password !== formData.get('re-psw')) {
+            showError('Passwords do not match.');
+            return;
+        }
+
+        /*if (!email.endsWith('@swarthmore.edu')) {
+            showError('Please use your Swarthmore email address.');
+            return;
+        }*/
+      
+        signUp(email, password, name)
+          .then(async (user) => {
+            login(email, password);
+        })
+          .catch((err) => {
+            if (err.code === 'auth/email-already-in-use') {
+                showError('Email already in use. Please try another email or if this is you, login instead.');
+                return;
+            }
+            if (err.code === 'auth/invalid-email') {
+                showError('Invalid email address. Please provide a valid email.');
+                return;
+            }
+            showError('Sign-up failed');
+          });
+      });
+    function isValidPassword(password) {
+        // valid password has one uppercase letter, one lowercase letter, one digit, one special character, and is at least 8 characters long
+        // const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        // valid password has one uppercase letter, one lowercase letter, one digit, and is at least 8 characters long
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        return regex.test(password);
+    }
+    function isValidEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }  
+
+    function showError(message) {
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
 }
 
 function onLoginSuccess(user) {

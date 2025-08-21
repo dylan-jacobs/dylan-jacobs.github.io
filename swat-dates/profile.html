@@ -10,9 +10,6 @@
     <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
         <div class="column-container primary">
-            <button id='login-btn' class="icon-button" onclick="showPopup('login-popup')">
-                <i class="fas fa-sign-in-alt"></i> <!-- Login icon -->
-            </button>
             <button id="profile-btn" class="icon-button" onclick="showPopup('profile-popup')">
                 <img id="profile-btn-img" alt="Profile Icon" class="icon-button">
             </button>
@@ -24,35 +21,35 @@
             <h2>Your profile</h2>
             <a>This information will be visible to people you match with! You better make it good...</a>
             <div class="row">
-                <div id="date-ideas-container" class="row-item">
-                    <div>
+                <div class="row-item">
+                    <div id="date-ideas-container" >
                         <h3>Your very best date ideas:</h3>
                         <li>Swim in Crum Creek</li>
                         <li>Go for a run</li>
                         <li>Eat dinner at Co-op :)</li>
                     </div>
                     <button id='edit-date-ideas-btn' class="icon-button small position-inherit" onclick="">
-                        <i class="fas fa-edit"></i> <!-- Login icon -->
+                        <i class="fas fa-edit"></i>
                     </button>
                 </div>
-                <div id="joke-container" class="row-item">
-                    <div>
+                <div class="row-item">
+                    <div id="jokes-container">
                         <h3>Your funniest, most hilarious jokes:</h3>
                         <li>How do you think the unthinkable?<br>An ithe-berg</li>
                     </div>
                     <button id='edit-date-ideas-btn' class="icon-button small position-inherit" onclick="">
-                        <i class="fas fa-edit"></i> <!-- Login icon -->
+                        <i class="fas fa-edit"></i>
                     </button>
                 </div>
-                <div id="unique-traits-container" class="row-item">
-                    <div>
+                <div class="row-item">
+                    <div id="quirks-container">
                         <h3>Three of your quirks:</h3>
                         <li type="1"></li>
                         <li type="1"></li>
                         <li type="1"></li>
                     </div>
                     <button id='edit-date-ideas-btn' class="icon-button small position-inherit" onclick="">
-                        <i class="fas fa-edit"></i> <!-- Login icon -->
+                        <i class="fas fa-edit"></i>
                     </button>
                 </div>
             </div>
@@ -70,6 +67,7 @@
     </body>
 
     <script type="module" src="firebase.js"></script>
+    <script type="module" src="profile.js"></script>
 </html>
 
 

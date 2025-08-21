@@ -27,10 +27,10 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-async function signUp(email, password, displayName) {
+export async function signUp(email, password, displayName) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = new User(userCredential.user.uid, displayName, userCredential.user.email, `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&size=128`, [], ""); // add new user to db (just to store extra info like jokes and date ideas)
+        const user = new User(userCredential.user.uid, displayName, userCredential.user.email, `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&size=128`, [], [], []); // add new user to db (just to store extra info like jokes and date ideas)
         writeUser(user);
         return user;
     } catch (error) {
@@ -39,7 +39,7 @@ async function signUp(email, password, displayName) {
     }
 }
 
-async function login(email, password) {
+export async function login(email, password) {
     try {
         const auth = getAuth(app);
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -91,83 +91,7 @@ export async function signout() {
     }
 }
 
-export function initSignup() {
-    const form = document.getElementById('signup-form');
-    const errorElement = document.getElementById('signup-error');
-
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-      
-        const formData = new FormData(event.target);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const password = formData.get('psw');
-
-        errorElement.style.display = 'none';
-
-        if (!name.includes(' ')) {
-            showError('Please provide your full name.');
-            return;
-        }
-      
-        if (!isValidEmail(email)) {
-          showError('Please provide a valid email.');
-            return;
-        }
-
-        if (!isValidPassword(password)) {
-          showError('Password must have at least one uppercase letter, one lowercase letter, one number, and be at least 8 characters.');
-          return;
-        }
-
-        if (password !== formData.get('re-psw')) {
-            showError('Passwords do not match.');
-            return;
-        }
-
-        /*if (!email.endsWith('@swarthmore.edu')) {
-            showError('Please use your Swarthmore email address.');
-            return;
-        }*/
-      
-        signUp(email, password, name)
-          .then(async (user) => {
-            login(email, password);
-        })
-          .catch((err) => {
-            if (err.code === 'auth/email-already-in-use') {
-                showError('Email already in use. Please try another email or if this is you, login instead.');
-                return;
-            }
-            if (err.code === 'auth/invalid-email') {
-                showError('Invalid email address. Please provide a valid email.');
-                return;
-            }
-            showError('Sign-up failed');
-          });
-      });
-    function isValidPassword(password) {
-        // valid password has one uppercase letter, one lowercase letter, one digit, one special character, and is at least 8 characters long
-        // const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-        // valid password has one uppercase letter, one lowercase letter, one digit, and is at least 8 characters long
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        return regex.test(password);
-    }
-    function isValidEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    }
-      
-
-    function showError(message) {
-        errorElement.textContent = message;
-        errorElement.style.display = 'block';
-    }
-}
-
-export function initLogin(onLoginSuccessCallback, onLoginFailureCallback) {
-
+export function listenForLoginChanges(onLoginSuccessCallback, onLoginFailureCallback) {
     onAuthStateChanged(auth, (u) => {
         console.log("Auth state changed:", u);
         if (u) {
@@ -178,26 +102,6 @@ export function initLogin(onLoginSuccessCallback, onLoginFailureCallback) {
             onLoginFailureCallback();
         }
     });
-
-    const form = document.getElementById('login-form');
-    const errorElement = document.getElementById('login-error');
-
-    form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Prevent form submission
-        errorElement.style.display = 'none'; 
-        
-        const formData = new FormData(event.target);
-        const email = formData.get('email');
-        const password = formData.get('psw');
-        login(email, password)
-        .catch((error) => {
-                showError('Login failed. Please check your email and password.');
-            });
-    });
-    function showError(message) {
-        errorElement.textContent = message;
-        errorElement.style.display = 'block';
-    }
 }
 
 export async function writeUser(user, timeout=5000) {
