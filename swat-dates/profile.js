@@ -38,6 +38,7 @@ function updateProfileInfo(user) {
     profileButton.style.display = 'block';
     const profileButtonImg = document.getElementById('profile-btn-img');
     profileButtonImg.src = user.photoURL;
+
     document.getElementById('profile-popup-name').textContent = user.displayName;
 
     // profile date ideas/jokes, etc.
