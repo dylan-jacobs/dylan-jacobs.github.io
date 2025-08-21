@@ -341,13 +341,6 @@ function createMatchRequestForm(user) {
             sexualityMap.set(question, radioInput ? parseFloat(radioInput.value) : null);
         });
 
-        // get page 3 text inputs
-        const formData = new FormData(event.target);
-        const date1 = formData.get("date1");
-        const date2 =  formData.get("date2");
-        const date3 = formData.get("date3");
-        const joke = formData.get("joke");
-
         var matchRequest = new MatchRequest(user, traitsMap, substanceMap, sexualityMap);
 
         writeMatchRequest(matchRequest).then(() => {
@@ -593,40 +586,46 @@ function getMostRecentMatchRequest(user) {
 }
 
 function displayMatchedUsers(user) {
+    const matchesContainer = document.getElementById('matches-container');
+    matchesContainer.innerHTML = ''; // Clear previous matches
+    const heading = document.createElement('h1');
+    heading.textContent = 'Your weekly matches';
+    matchesContainer.appendChild(heading);
+    matchesContainer.appendChild(document.createElement('br'));
     getMatchRequest(user.userUID) // get the user's current match request to compare against all others
         .then(async (matchRequest) => {
             if (!matchRequest) {
                 console.log("No match request found for user:", user.userUID);
+                const consolation = document.createElement('p');
+                consolation.textContent = "You have not yet submitted a match request. Please fill out the form to find matches!";
+                matchesContainer.appendChild(consolation);
                 return;
             }
             // const traits = Array.from(matchRequest.traits.values());
             const traits = traitPairs.map(pair => matchRequest.traits.get(matchRequestPairKeyFn(pair)) ?? 0);
 
             getAllMatchRequests().then((allMatchRequests) => {
-                const matchesContainer = document.getElementById('matches-container');
-                matchesContainer.innerHTML = ''; // Clear previous matches
-                const heading = document.createElement('h1');
-                heading.textContent = 'Your weekly matches';
-                matchesContainer.appendChild(heading);
-                matchesContainer.appendChild(document.createElement('br'));
-                allMatchRequests.forEach((request) => {
+                
+                allMatchRequests.forEach((matchRequest) => {
 
-                    if (request.userUID == user.userUID) { // skip yourself
+                    const otherUser = matchRequest.user;
+
+                    if (otherUser.userUID == user.userUID) { // skip yourself
                         return;
                     }
 
-                    const otherTraits = traitPairs.map(pair => request.traits.get(matchRequestPairKeyFn(pair)) ?? 0);
+                    const otherTraits = traitPairs.map(pair => matchRequest.traits.get(matchRequestPairKeyFn(pair)) ?? 0);
                     const similarity = (dotProduct(traits, otherTraits) + 1) / 2; // normalize to [0, 1]
 
                     // add to matches container
                     const matchItem = document.createElement('div');
                     matchItem.className = 'row-item center-items-vertically';
                     const matchName = document.createElement('h3');
-                    matchName.textContent = request.user.displayName;
+                    matchName.textContent = matchRequest.user.displayName;
                     const similarityText = document.createElement('h3');
                     similarityText.textContent = `Similarity: ${(similarity*100).toFixed(2)}%`;
                     const email = document.createElement('p');
-                    email.textContent = request.user.email;
+                    email.textContent = matchRequest.user.email;
 
                     const matchButton = document.createElement('button');
                     matchButton.textContent = "I'm down";
@@ -634,25 +633,24 @@ function displayMatchedUsers(user) {
                     const linebreak = document.createElement('div');
                     linebreak.className = 'break';
 
-                    /* NEED TO REPLACE WITH PROFILE INFO
                     const datesText = document.createElement('p');
-                    if (request.dateIdeas && request.dateIdeas.length == 3) {
-                        datesText.innerHTML = `<b>Date ideas:</b> \n • ${request.dateIdeas[0]} \n • ${request.dateIdeas[1]} \n • ${request.dateIdeas[2]}`;
+                    datesText.innerHTML = '<b>Date ideas:</b>';
+                    for (const dateIdea in user.dateIdeas) {
+                        datesText.innerHTML += `\n • ${dateIdea}`;
                     }
 
                     const jokeText = document.createElement('p');
-                    if (request.joke) {
-                        jokeText.innerHTML = `<b>Joke:</b> \n ${request.joke}`;
+                    for (const joke in user.jokes) {
+                        jokeText.innerHTML += `\n • ${joke}`;
                     }
-                    */
                     
                     matchItem.appendChild(matchName);
                     matchItem.appendChild(similarityText);
                     matchItem.appendChild(email);
                     matchItem.appendChild(matchButton);
                     matchItem.appendChild(linebreak);
-                    //matchItem.appendChild(datesText);
-                    //matchItem.appendChild(jokeText);
+                    matchItem.appendChild(datesText);
+                    matchItem.appendChild(jokeText);
                     matchesContainer.appendChild(matchItem);
                 });
             });

@@ -141,6 +141,10 @@ p{
     gap: 10px; 
 }
 
+.popup-content.medium {
+    width: 33%;
+}
+
 .popup-content.profile {
     width:fit-content; 
     height: fit-content;

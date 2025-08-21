@@ -9,7 +9,11 @@
     </head>
     <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
+        <!-- Background image -->
         <div class="column-container primary">
+            <button id='home-btn' class="icon-button" onclick="window.location.href='index.html'" style="left: 10px;">
+                <i class="fas fa-home"></i> <!-- Home button -->
+            </button>
             <button id="profile-btn" class="icon-button" onclick="showPopup('profile-popup')">
                 <img id="profile-btn-img" alt="Profile Icon" class="icon-button">
             </button>
@@ -22,33 +26,26 @@
             <a>This information will be visible to people you match with! You better make it good...</a>
             <div class="row">
                 <div class="row-item">
-                    <div id="date-ideas-container" >
+                    <div id="dateIdeas-container" >
                         <h3>Your very best date ideas:</h3>
-                        <li>Swim in Crum Creek</li>
-                        <li>Go for a run</li>
-                        <li>Eat dinner at Co-op :)</li>
                     </div>
-                    <button id='edit-date-ideas-btn' class="icon-button small position-inherit" onclick="">
+                    <button id='dateIdeas-edit-btn' class="icon-button small position-inherit" onclick="">
                         <i class="fas fa-edit"></i>
                     </button>
                 </div>
                 <div class="row-item">
                     <div id="jokes-container">
                         <h3>Your funniest, most hilarious jokes:</h3>
-                        <li>How do you think the unthinkable?<br>An ithe-berg</li>
                     </div>
-                    <button id='edit-date-ideas-btn' class="icon-button small position-inherit" onclick="">
+                    <button id='jokes-edit-btn' class="icon-button small position-inherit" onclick="">
                         <i class="fas fa-edit"></i>
                     </button>
                 </div>
                 <div class="row-item">
                     <div id="quirks-container">
-                        <h3>Three of your quirks:</h3>
-                        <li type="1"></li>
-                        <li type="1"></li>
-                        <li type="1"></li>
+                        <h3>A few of your quirks:</h3>
                     </div>
-                    <button id='edit-date-ideas-btn' class="icon-button small position-inherit" onclick="">
+                    <button id='quirks-edit-btn' class="icon-button small position-inherit" onclick="">
                         <i class="fas fa-edit"></i>
                     </button>
                 </div>
@@ -58,6 +55,11 @@
             <div class="popup-content profile"> 
                 <h1 id="profile-popup-name">Dylan Jacobs</h1>
                 <button class="close-button" onclick="logout();">Log out</button>
+            </div>
+        </div>
+
+        <div id="edit-profile-popup" class="popup">
+            <div id="form-container" class="popup-content medium">
             </div>
         </div>
 
