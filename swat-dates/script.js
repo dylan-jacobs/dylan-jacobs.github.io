@@ -1,5 +1,5 @@
 import { MatchRequest } from './Classes/matchRequest.js';
-import { writeMatchRequest, login, signUp, listenForLoginChanges, signout, getMatchRequest, getAllMatchRequests } from './firebase.js';
+import { writeMatchRequest, login, signUp, listenForLoginChanges, signout, getUser, getMatchRequest, getAllMatchRequests } from './firebase.js';
 import { showPopup, hidePopup } from './helper_functions.js';
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
@@ -501,11 +501,6 @@ function initSignupPopup() {
 }
 
 function onLoginSuccess(user) {
-    createMatchRequestForm(user);
-    displayMatchedUsers(user);
-
-    console.log('onLoginSuccessCallback called');
-
     hidePopup('login-popup');
     hidePopup('signup-popup');
     const profileButton = document.getElementById('profile-btn');
@@ -520,6 +515,9 @@ function onLoginSuccess(user) {
     document.getElementById('matches-container').style.display = 'block';
     document.getElementById('login-btn').style.display = 'none';
     console.log('User logged in.');
+
+    createMatchRequestForm(user);
+    displayMatchedUsers(user);
 }
 
 function onLoginFailure() {
@@ -593,7 +591,7 @@ function displayMatchedUsers(user) {
     matchesContainer.appendChild(heading);
     matchesContainer.appendChild(document.createElement('br'));
     getMatchRequest(user.userUID) // get the user's current match request to compare against all others
-        .then(async (matchRequest) => {
+        .then((matchRequest) => {
             if (!matchRequest) {
                 console.log("No match request found for user:", user.userUID);
                 const consolation = document.createElement('p');
@@ -607,51 +605,55 @@ function displayMatchedUsers(user) {
             getAllMatchRequests().then((allMatchRequests) => {
                 
                 allMatchRequests.forEach((matchRequest) => {
+                    getUser(matchRequest.userUID).then((otherUser) => {
+                        if (!otherUser) {
+                            console.warn(`No user found for UID: ${matchRequest.userUID}`);
+                            return;
+                        }
+                        if (otherUser.userUID == user.userUID) { // skip yourself
+                            return;
+                        }
 
-                    const otherUser = matchRequest.user;
+                        const otherTraits = traitPairs.map(pair => matchRequest.traits.get(matchRequestPairKeyFn(pair)) ?? 0);
+                        const similarity = (dotProduct(traits, otherTraits) + 1) / 2; // normalize to [0, 1]
 
-                    if (otherUser.userUID == user.userUID) { // skip yourself
-                        return;
-                    }
+                        // add to matches container
+                        const matchItem = document.createElement('div');
+                        matchItem.className = 'row-item center-items-vertically';
+                        const matchName = document.createElement('h3');
+                        matchName.textContent = otherUser.displayName;
+                        const similarityText = document.createElement('h3');
+                        similarityText.textContent = `Similarity: ${(similarity*100).toFixed(2)}%`;
+                        const email = document.createElement('p');
+                        email.textContent = otherUser.email;
 
-                    const otherTraits = traitPairs.map(pair => matchRequest.traits.get(matchRequestPairKeyFn(pair)) ?? 0);
-                    const similarity = (dotProduct(traits, otherTraits) + 1) / 2; // normalize to [0, 1]
+                        const matchButton = document.createElement('button');
+                        matchButton.textContent = "I'm down";
 
-                    // add to matches container
-                    const matchItem = document.createElement('div');
-                    matchItem.className = 'row-item center-items-vertically';
-                    const matchName = document.createElement('h3');
-                    matchName.textContent = matchRequest.user.displayName;
-                    const similarityText = document.createElement('h3');
-                    similarityText.textContent = `Similarity: ${(similarity*100).toFixed(2)}%`;
-                    const email = document.createElement('p');
-                    email.textContent = matchRequest.user.email;
+                        const linebreak = document.createElement('div');
+                        linebreak.className = 'break';
 
-                    const matchButton = document.createElement('button');
-                    matchButton.textContent = "I'm down";
+                        const datesText = document.createElement('p');
+                        datesText.innerHTML = '<b>Date ideas:</b>';
+                        for (const index in otherUser.dateIdeas) {
+                            datesText.innerHTML += `\n • ${otherUser.dateIdeas[index]}`;
+                        }
 
-                    const linebreak = document.createElement('div');
-                    linebreak.className = 'break';
-
-                    const datesText = document.createElement('p');
-                    datesText.innerHTML = '<b>Date ideas:</b>';
-                    for (const dateIdea in user.dateIdeas) {
-                        datesText.innerHTML += `\n • ${dateIdea}`;
-                    }
-
-                    const jokeText = document.createElement('p');
-                    for (const joke in user.jokes) {
-                        jokeText.innerHTML += `\n • ${joke}`;
-                    }
-                    
-                    matchItem.appendChild(matchName);
-                    matchItem.appendChild(similarityText);
-                    matchItem.appendChild(email);
-                    matchItem.appendChild(matchButton);
-                    matchItem.appendChild(linebreak);
-                    matchItem.appendChild(datesText);
-                    matchItem.appendChild(jokeText);
-                    matchesContainer.appendChild(matchItem);
+                        const jokeText = document.createElement('p');
+                        jokeText.innerHTML = '<b>Funniest jokes:</b>'
+                        for (const index in otherUser.jokes) {
+                            jokeText.innerHTML += `\n • ${otherUser.jokes[index]}`;
+                        }
+                        
+                        matchItem.appendChild(matchName);
+                        matchItem.appendChild(similarityText);
+                        matchItem.appendChild(email);
+                        matchItem.appendChild(matchButton);
+                        matchItem.appendChild(linebreak);
+                        matchItem.appendChild(datesText);
+                        matchItem.appendChild(jokeText);
+                        matchesContainer.appendChild(matchItem);
+                    });
                 });
             });
         });

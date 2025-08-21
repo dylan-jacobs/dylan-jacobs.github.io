@@ -73,13 +73,20 @@ p{
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px 0;
-  width: 33%;
   height: auto;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content:space-between;
+}
+
+.fill-width {
+  width: 100%;
+}
+
+.partial-width {
+  width: 33%;
 }
 
 .break {
