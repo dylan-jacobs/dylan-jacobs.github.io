@@ -159,9 +159,11 @@ document.addEventListener('DOMContentLoaded', () => {
     listenForLoginChanges(onLoginSuccess, onLoginFailure);
     initLoginPopup();
     initSignupPopup();
+    showPopup("date-confirmation-popup")
 
     getTimeUntilNextDate();
 });
+
 
 // Close the popup when clicking outside the content
 window.onclick = function(event) {
@@ -463,7 +465,7 @@ function initSignupPopup() {
         /*if (!email.endsWith('@swarthmore.edu')) {
             showError('Please use your Swarthmore email address.');
             return;
-        }*/
+        } */
       
         signUp(email, password, name)
           .then(async (user) => {
@@ -540,6 +542,9 @@ function getTimeUntilNextDate() {
     if (day === 0 && time.getHours() < 8) {
         daysUntilNextSunday = 0;
     }
+    else if (day === 0 && time.getHours() >= 8) {
+        daysUntilNextSunday = 7;
+    }
 
     nextSunday.setDate(time.getDate() + daysUntilNextSunday);
     nextSunday.setHours(8, 0, 0, 0); // Set to next Sunday at 8:00 AM
@@ -562,25 +567,6 @@ function getTimeUntilNextDate() {
         countdownElement.textContent = `New dates released in ${(days)} days, ${(hours % 24)} hours, ${(minutes % 60)} minutes, and ${(seconds % 60)} seconds, but who's counting?!`;
     }
     , 1000);
-}
-
-function getMostRecentMatchRequest(user) {
-    getMatchRequest(user).then((matchRequest) => {
-        if (matchRequest) {
-            console.log("Match request found:", matchRequest);
-            const matchesContainer = document.getElementById('most-recent-match-request');
-            matchesContainer.style.display = 'block';
-            const matchList = document.getElementById('match-list');
-            matchList.innerHTML = ''; // Clear previous matches
-            matchRequest.traits.forEach((value, key) => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${key}: ${value}`;
-                matchList.appendChild(listItem);
-            });
-        } else {
-            console.log("No match request found for the user.");
-        }
-    });
 }
 
 function displayMatchedUsers(user) {
@@ -629,6 +615,9 @@ function displayMatchedUsers(user) {
 
                         const matchButton = document.createElement('button');
                         matchButton.textContent = "I'm down";
+                        matchButton.addEventListener("click", () => {
+                            showPopup("date-confirmation-popup");
+                        })
 
                         const linebreak = document.createElement('div');
                         linebreak.className = 'break';
@@ -644,6 +633,12 @@ function displayMatchedUsers(user) {
                         for (const index in otherUser.jokes) {
                             jokeText.innerHTML += `\n • ${otherUser.jokes[index]}`;
                         }
+
+                        const quirksText = document.createElement('p');
+                        quirksText.innerHTML = '<b>Quirkiest quirks:</b>';
+                        for (const index in otherUser.quirks) {
+                            quirksText.innerHTML += `\n • ${otherUser.quirks[index]}`;
+                        }
                         
                         matchItem.appendChild(matchName);
                         matchItem.appendChild(similarityText);
@@ -652,6 +647,7 @@ function displayMatchedUsers(user) {
                         matchItem.appendChild(linebreak);
                         matchItem.appendChild(datesText);
                         matchItem.appendChild(jokeText);
+                        matchItem.appendChild(quirksText);
                         matchesContainer.appendChild(matchItem);
                     });
                 });

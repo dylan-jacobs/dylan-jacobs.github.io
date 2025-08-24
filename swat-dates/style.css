@@ -56,10 +56,11 @@ p{
 .column-container{
   border: 1px solid #ccc;
   flex: 1;
-  padding: 20px;
+  padding: 10px;
   background-color: rgb(255, 255, 255);
   color: var(--color-text);
   position: relative;
+  border-radius: 10px;
 }
 .column-container.primary{
     flex: 2;
@@ -67,7 +68,6 @@ p{
 .column-container.secondary{
     margin: 2px;
     width: fit-content;
-    border-radius: 10px;
 }
 .row-item {
   border: 1px solid #ccc;
@@ -79,6 +79,12 @@ p{
   flex-direction: row;
   flex-wrap: wrap;
   justify-content:space-between;
+}
+
+
+
+.no-border {
+  border: 0;
 }
 
 .fill-width {
@@ -390,6 +396,10 @@ input[type="range"] {
 
 .slider-row {
   gap: 20px; /* Space between items in the row */
+}
+
+.align-left {
+  text-align: left;
 }
 
 .label.form-label {

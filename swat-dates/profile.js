@@ -75,6 +75,7 @@ function createEditProfileTraitsPopup(user, traitTypeMap) {
 
     const popup = document.getElementById('edit-profile-popup');
     const traitsContainer = document.getElementById('form-container');
+    traitsContainer.style.position = 'relative';
     traitsContainer.innerHTML = ''; // clear existing traits
     popup.appendChild(traitsContainer);
 
@@ -96,11 +97,18 @@ function createEditProfileTraitsPopup(user, traitTypeMap) {
 
     // Add a button to add new items
     const addButton = document.createElement('button');
-    addButton.textContent = `Add new ${trait.slice(0, -1)}`;
+    addButton.className = 'icon-button';
+    //addButton.textContent = `Add new ${trait.slice(0, -1)}`;
+    const addIcon = document.createElement('i');
+    addIcon.className = 'fas fa-plus';
+    addButton.appendChild(addIcon);
     addButton.onclick = () => {
+        if (document.querySelectorAll(`input[id^="${traitID}"]`).length > 5){
+            return;
+        }
         const newInput = document.createElement('input');
         newInput.type = 'text';
-        newInput.placeholder = `Enter a new ${trait.slice(0, -1)}`;
+        newInput.placeholder = `Enter a new ${trait.slice(0, -1).toLowerCase()}`;
         newInput.id = `${traitID}-${user[traitID].length}`;
         form.appendChild(newInput);
         newInput.focus();

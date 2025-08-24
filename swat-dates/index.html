@@ -2,13 +2,19 @@
 <html lang="en">
     <head>
         <title>Swat Dates</title>
+
+        <!-- Fonts -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+        <!-- Flatpickr datetime library -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="style.css">
     </head>
     <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-
         <!-- Background image -->
         <div class="background-overlay" style="background-image: url('images/swarthmore-background.png');">
             <div class="title-container">
@@ -16,13 +22,13 @@
                 <h6 id="new-dates-timer">New dates released in 99:99:99</h6>
             </div>
             <button id='login-btn' class="icon-button" onclick="showPopup('login-popup')">
-                <i class="fas fa-sign-in-alt"></i> <!-- Login icon -->
+                <i class="fas fa-sign-in-alt"></i> 
             </button>
             <button id="profile-btn" class="icon-button" onclick="showPopup('profile-popup')">
                 <img id="profile-btn-img" alt="Profile Icon" class="icon-button">
             </button>
         </div>
-
+    
         <!-- Main row container holding primary columns-->
         <div class="row">
             <!-- Match form -->
@@ -106,6 +112,56 @@
                 <h1 id="profile-popup-name">Dylan Jacobs</h1>
                 <button id="profile-button" onclick="window.location.href='profile.html';">Profile</button>
                 <button class="close-button" onclick="logout();">Log out</button>
+            </div>
+        </div>
+
+        <div class="popup" id="date-confirmation-popup">
+            <div class="popup-content">
+                <h1>Confirm date!</h1>
+                <p>If you both confirm you are down for the blind date, you will be notified when and where to meet!</p>
+                <div class="row">
+                    <div id="date-confirmation-profile-info-card" class="column-container align-left">
+                        <h2>Dylan Jacobs</h2>
+                        <div class="row">
+                            <p id="date-confirmation-email">djacobs2@swarthmore.edu</p>
+                            <p id="date-confirmation-age">20</p>
+                        </div>
+                        <br>
+                        <button id="profile-btn" class="icon-button">
+                            <img id="profile-btn-img" alt="Profile Icon" class="icon-button">
+                        </button>
+                        <div class="row">
+                            <div class="column-container secondary">
+                                <h3>Jokes:</h3>
+                                <p id="date-confirmation-jokes-text">How do you skin a chicken?</p>
+                                <br>
+                                <h3>Quirks:</h3>
+                                <p id="date-confirmation-quirks-text">I like feet.</p>
+                            </div>
+                            <div class="column-container secondary">
+                                <h3>Date ideas:</h3>
+                                <p id="date-confirmation-date-ideas-text">Eat food</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-container">
+                        <h2>Pick a date</h2>
+                        <label for="datetime">Pick a date and time that works well for you:</label>
+                        <br>
+                        <input type="text" id="date-confirmation-datetime" placeholder="Select date & time">
+                        <script>
+                            const now = new Date();
+                            flatpickr("#date-confirmation-datetime", {
+                              enableTime: true,          // show time picker
+                              dateFormat: "Y-m-d H:i",   // format
+                              time_24hr: false,           // 12h clock, set true for 24h
+                              minuteIncrement: 15,       // snap to 15-min intervals
+                              minDate: now               // prevent past dates
+                            });
+                        </script>
+                    </div>
+                </div>
+                <button id="date-confirmation-confirm-button">I'm down!</button>
             </div>
         </div>
 

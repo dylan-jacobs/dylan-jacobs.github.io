@@ -10,20 +10,20 @@
     <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
         <!-- Background image -->
-        <div id="profile-background-overlay" class="column-container primary" style="background-color: var(--color-surface-colored);">
+        <div id="profile-background-overlay" class="column-container primary">
             <button id='home-btn' class="icon-button" onclick="window.location.href='index.html'" style="left: 10px;">
                 <i class="fas fa-home"></i> <!-- Home button -->
             </button>
             <button id="profile-btn" class="icon-button" onclick="showPopup('profile-popup')">
                 <img id="profile-btn-img" alt="Profile Icon" class="icon-button">
             </button>
-            <h1 id="profile-header-text">Hello, Joe Jacobs!</h1>
-            <p id="profile-header-email" class="center-text">djacobs2@swarthmore.edu</p>
+            <h1 id="profile-header-text"></h1>
+            <p id="profile-header-email" class="center-text"></p>
         </div>
 
         <div id="profile-main-column-container" class="column-container">
             <h2>Your profile</h2>
-            <a>This information will be visible to people you match with! You better make it good...</a>
+            <p>This information will be visible to people you match with! You better make it good...</p>
             <div class="row">
                 <div class="row-item fill-width">
                     <div id="dateIdeas-container" >
@@ -53,7 +53,7 @@
         </div>
         <div class="popup profile" id="profile-popup" style="display: none;">
             <div class="popup-content profile"> 
-                <h1 id="profile-popup-name">Dylan Jacobs</h1>
+                <h1 id="profile-popup-name"></h1>
                 <button class="close-button" onclick="logout();">Log out</button>
             </div>
         </div>
