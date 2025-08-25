@@ -569,11 +569,36 @@ function getTimeUntilNextDate() {
     , 1000);
 }
 
+function showDateConfirmationDetails(user) {
+    showPopup("date-confirmation-popup");
+    const name = document.getElementById("date-confirmation-name");
+    const email = document.getElementById("date-confirmation-email");
+    const age = document.getElementById("date-confirmation-age");
+    name.innerHTML = user.displayName;
+    email.innerHTML = user.email;
+    //age.innerHTML = `Age: ${user.age}`; // TODO add later!
+
+    const profileImg = document.getElementById("date-confirmation-profile-btn-img");
+    profileImg.src = user.photoURL;
+
+    const jokes = document.getElementById("date-confirmation-jokes-text");
+    const quirks = document.getElementById("date-confirmation-quirks-text");
+    const dateIdeas = document.getElementById("date-confirmation-date-ideas-text");
+
+    jokes.innerHTML = ''; // clear 
+    user.jokes.forEach((joke) => {jokes.innerHTML += ` • ${joke} \n`});
+    quirks.innerHTML = ''; // clear 
+    user.quirks.forEach((quirk) => {quirks.innerHTML += ` • ${quirk} \n`});
+    dateIdeas.innerHTML = ''; // clear 
+    user.dateIdeas.forEach((idea) => {dateIdeas.innerHTML += ` • ${idea} \n`});
+
+}
+
 function displayMatchedUsers(user) {
     const matchesContainer = document.getElementById('matches-container');
     matchesContainer.innerHTML = ''; // Clear previous matches
     const heading = document.createElement('h1');
-    heading.textContent = 'Your weekly matches';
+    heading.textContent = 'Your weekly match';
     matchesContainer.appendChild(heading);
     matchesContainer.appendChild(document.createElement('br'));
     getMatchRequest(user.userUID) // get the user's current match request to compare against all others
@@ -614,9 +639,9 @@ function displayMatchedUsers(user) {
                         email.textContent = otherUser.email;
 
                         const matchButton = document.createElement('button');
-                        matchButton.textContent = "I'm down";
+                        matchButton.textContent = "See details";
                         matchButton.addEventListener("click", () => {
-                            showPopup("date-confirmation-popup");
+                            showDateConfirmationDetails(otherUser);
                         })
 
                         const linebreak = document.createElement('div');

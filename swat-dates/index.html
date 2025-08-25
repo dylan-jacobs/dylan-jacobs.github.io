@@ -117,18 +117,18 @@
 
         <div class="popup" id="date-confirmation-popup">
             <div class="popup-content">
-                <h1>Confirm date!</h1>
+                <h1>Confirm date</h1>
                 <p>If you both confirm you are down for the blind date, you will be notified when and where to meet!</p>
                 <div class="row">
                     <div id="date-confirmation-profile-info-card" class="column-container align-left">
-                        <h2>Dylan Jacobs</h2>
+                        <h2 id="date-confirmation-name">Dylan Jacobs</h2>
                         <div class="row">
                             <p id="date-confirmation-email">djacobs2@swarthmore.edu</p>
-                            <p id="date-confirmation-age">20</p>
+                            <p id="date-confirmation-age">Age: 20</p>
                         </div>
                         <br>
                         <button id="profile-btn" class="icon-button">
-                            <img id="profile-btn-img" alt="Profile Icon" class="icon-button">
+                            <img id="date-confirmation-profile-btn-img" alt="Profile Icon" class="icon-button">
                         </button>
                         <div class="row">
                             <div class="column-container secondary">
@@ -161,7 +161,10 @@
                         </script>
                     </div>
                 </div>
-                <button id="date-confirmation-confirm-button">I'm down!</button>
+                <div class="row">
+                    <button id="date-confirmation-decline-button" class="close-button" onclick="hidePopup('date-confirmation-popup')">Decline</button>
+                    <button id="date-confirmation-confirm-button" class="fill-width">I'm down!</button>
+                </div>
             </div>
         </div>
 
