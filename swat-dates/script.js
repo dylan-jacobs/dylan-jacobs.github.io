@@ -159,8 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     listenForLoginChanges(onLoginSuccess, onLoginFailure);
     initLoginPopup();
     initSignupPopup();
-    showPopup("date-confirmation-popup")
-
+    
     getTimeUntilNextDate();
 });
 
