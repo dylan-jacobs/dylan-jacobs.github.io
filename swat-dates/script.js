@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     listenForLoginChanges(onLoginSuccess, onLoginFailure);
     initLoginPopup();
     initSignupPopup();
-    
+
     getTimeUntilNextDate();
 });
 
@@ -568,6 +568,65 @@ function getTimeUntilNextDate() {
     , 1000);
 }
 
+function createTimeAvailabilityGrid() {
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    const headers = ["Mon", "Tues", "Weds", "Thur", "Fri", "Sat", "Sun"];
+    const headerElements = [];
+    const headerElement = document.createElement("div");
+    headerElement.className = "header";
+    headerElement.innerHTML = header;
+    grid.appendChild(headerElement);
+    headers.forEach((header, index) => {
+        const headerElement = document.createElement("div");
+        headerElement.className = "header";
+        headerElement.innerHTML = header;
+        headerElements.push(headerElement);
+        grid.appendChild(headerElement);
+    });
+    const times = createTimesArray(30); // 30 min interval
+    const timeElements = [];
+    const cellElements = [];
+    times.forEach((time, row) => {
+        const timeElement = document.createElement("div");
+        timeElement.className = "time";
+        timeElement.innerHTML = time;
+        timeElements.push(timeElement);
+        grid.appendChild(timeElement);
+
+        // create cells for each day column
+        headers.forEach((day, col) => {
+            const cellElement = document.createElement("div");
+            cellElement.className = "cell";
+            cellElement.setAttribute("data-day", day);
+            cellElement.setAttribute("data-time", time);
+            cellElements.push(cellElement);
+            grid.appendChild(cellElement);
+        });
+    });
+    
+    
+    function createTimesArray(interval) {
+        // get list of 30 min intervals between 8 am and 10 pm
+        const times = [];
+        const startTime = new Date();
+        startTime.setHours(8, 0, 0, 0); // start time 8 am
+
+        for (var i = 0; i <= (4 * 60) / interval; i++) {
+            const nextDate = new Date(startTime.getTime() + (i * interval * 60 * 1000));
+            const hours = nextDate.getHours();
+            const minutes = nextDate.getMinutes();
+            const ampm = hours >= 12 ? "PM" : "AM";
+            const displayHours = hours % 12 === 0 ? 12 : hours % 12; // if midnight --> display 12
+            const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+            times.push(`${displayHours}:${displayMinutes} ${ampm}`);
+        }
+        return times;
+    }
+
+    return grid;
+}
+
 function showDateConfirmationDetails(user) {
     showPopup("date-confirmation-popup");
     const name = document.getElementById("date-confirmation-name");
@@ -591,6 +650,9 @@ function showDateConfirmationDetails(user) {
     dateIdeas.innerHTML = ''; // clear 
     user.dateIdeas.forEach((idea) => {dateIdeas.innerHTML += ` • ${idea} \n`});
 
+    const availabilityContainer = document.getElementById("date-confirmation-availability-container");
+    const timeAvailabilityGrid = createTimeAvailabilityGrid();
+    availabilityContainer.appendChild(timeAvailabilityGrid);
 }
 
 function displayMatchedUsers(user) {

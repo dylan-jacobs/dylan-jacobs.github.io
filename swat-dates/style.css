@@ -460,6 +460,33 @@ input[type="range"] {
 }
 
 
+/* Availability cells */
+.grid {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+  border: 1px solid #ccc;
+}
+.header, .time, .cell {
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 5px;
+  width: 60px;
+  height: 20px;
+  font-size: x-small;
+}
+.time {
+  padding: 5px;
+  white-space: nowrap;
+  grid-column: 1;
+}
+
+.cell {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.cell.available {
+  background: rgba(0, 200, 100, 0.5);
+}
 
 
 
