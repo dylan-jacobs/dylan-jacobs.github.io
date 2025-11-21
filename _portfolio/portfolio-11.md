@@ -12,9 +12,7 @@ collection: portfolio
 Create a multi-band audio equalizer that lets a user play beautiful music through a speaker and adjust the gain of each band independently and collectively.
 
 ## End Result:
-<video width="600" controls>
-  <source src="/files/videos/audio_equalizer_demo1.mov" type="video/quicktime">
-</video>
+![Watch on YouTube](https://youtube.com/shorts/_nG_17PPMlQ?feature=share)
 <video width="600" controls>
   <source src="/files/videos/audio_equalizer_demo2.mov" type="video/quicktime">
 </video>
