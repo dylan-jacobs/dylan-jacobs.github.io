@@ -1,6 +1,6 @@
 ---
 title: "Temperature-Controlled Fan"
-date: October 2025
+date: October 4 2025
 excerpt: "A battery-powered, Arduino-integrated PCB that adjusts a fan's speed depending on the environment's ambient temperature, measured by a thermistor.<br/><img src='/images/project_icons/ENGR-072/fan-PCB.png' width='500'>"
 collection: portfolio
 ---
@@ -144,7 +144,7 @@ The fan is mounted to the board, above a hole drilled into the PCB to facilitate
 <iframe 
   width="560" 
   height="315" 
-  src="https://www.youtube.com/embed/X93x_hCMS-"
+  src="https://www.youtube.com/embed/X93x_hCMS-c"
   frameborder="0" 
   allowfullscreen>
 </iframe>

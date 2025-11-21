@@ -1,12 +1,12 @@
 ---
 title: "Light-Controlled Solar Panel"
-date: October 2025
+date: October 25 2025
 excerpt: "An analog PCB that uses two phototransistors situated on either side of a solar panel to control a motor that rotates the solar panel toward the light to optimize its power output..<br/><img src='/images/project_icons/ENGR-072/solar-pcb.png' width='500'>"
 collection: portfolio
 ---
 
 # Light-controlled solar panel
-> Aaron Dubois & Dylan Jacobs
+> Dylan Jacobs and Aaron Dubois
 
 ## Project goal:
 Develop an analog circuit that uses two phototransistors situated on either side of a solar panel to control a motor that rotates the solar panel toward the light to optimize its power output.
@@ -14,7 +14,7 @@ Develop an analog circuit that uses two phototransistors situated on either side
 ## Circuit schematic
 <figure>
   <img src="/images/project_icons/ENGR-072/solar-schematic.png" width="300">
-  <figcaption>Schematic in Fusion360.</a></figcaption>
+  <figcaption>Schematic in Fusion360.</figcaption>
 </figure>
 
 Each phototransistor’s resistance decreases as it is increasingly exposed to light. We can this integrate these phototransistors into voltage dividers and compare their output voltages against each other using comparators. We use Schmidt triggers to prevent jerky, unsteady rotation when the phototransistor output voltages are similar. This is shown in the diagram below:
