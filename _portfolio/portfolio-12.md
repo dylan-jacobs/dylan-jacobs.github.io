@@ -1,22 +1,23 @@
 ---
-title: "Audio Equalizer PCB"
-date: November 2025
-excerpt: "Audio equalizer printed circuit board (PCB) built using 3rd-order active Butterworth filters to independently adjust bass, mid, and treble frequency ranges of songs.<br/><img src='/images/project_icons/ENGR-072/audio-eq-PCB.png' width='500'>"
+title: "Temperature-Controlled Fan"
+date: October 2025
+excerpt: "Audio equalizer printed circuit board (PCB) built using 3rd-order active Butterworth filters to independently adjust bass, mid, and treble frequency ranges of songs.<br/><img src='/images/project_icons/VFP/solution_time_200.jpg' width='500'>"
 collection: portfolio
 ---
 
 # Audio Equalizer
 > Dylan Jacobs & Aaron Dubois  
+> November 2025
 
 ## Project Goal:
 Create a multi-band audio equalizer that lets a user play beautiful music through a speaker and adjust the gain of each band independently and collectively.
 
 ## End Result:
 <video width="600" controls>
-  <source src="/files/videos/audio_equalizer_demo1.mov" type="video/quicktime">
+  <source src="/files/videos/audio_equalizer_demo1.mov" type="video/mov">
 </video>
 <video width="600" controls>
-  <source src="/files/videos/audio_equalizer_demo2.mov" type="video/quicktime">
+  <source src="/files/videos/audio_equalizer_demo2.mov" type="video/mov">
 </video>
 
 ### Circuit Design:
