@@ -12,7 +12,10 @@ collection: portfolio
 Create a battery-powered, Arduino-integrated PCB that adjusts a fan’s speed depending on the environment’s ambient temperature, measured by a thermistor. The PCB should display both the recorded temperature and fan speed on an LCD screen.
 
 ## Circuit schematic
-![Circuit schematic in Fusion360](\images\project_icons\ENGR-072\fan-schematic.png)
+<figure>
+  <img src="/images/project_icons/ENGR-072/fan-schematic.png" width="300">
+  <figcaption>Circuit schematic in Fusion360.</figcaption>
+</figure>
 
 The circuit is powered by 2 LiPo batteries in series, each with a nominal voltage of 3.7V. The thermistor is part of a voltage divider whose output is measured by Arduino pin A0.
 
@@ -132,8 +135,16 @@ float interpolate_temperature(float R) {
 
 ## PCB
 The fan is mounted to the board, above a hole drilled into the PCB to facilitate airflow from the region we are interested in cooling. The LiPo batteries plug into ports J1 and J2 and the LCD screen and fan are wired to the header pins below the LiPo sockets.
-![PCB designed in Fusion360](\images\project_icons\ENGR-072\fan-PCB.png)
 
-<video width="600" controls>
-  <source src="/files/videos/fan_demo.mp4" type="video/mp4">
-</video>
+<figure>
+  <img src="\images\project_icons\ENGR-072\fan-PCB.png" width="300">
+  <figcaption>PCB designed in Fusion360.</figcaption>
+</figure>
+
+<iframe 
+  width="560" 
+  height="315" 
+  src="https://www.youtube.com/embed/X93x_hCMS-"
+  frameborder="0" 
+  allowfullscreen>
+</iframe>

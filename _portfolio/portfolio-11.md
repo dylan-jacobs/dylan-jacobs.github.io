@@ -20,9 +20,13 @@ Create a multi-band audio equalizer that lets a user play beautiful music throug
   allowfullscreen>
 </iframe>
 
-<video width="600" controls>
-  <source src="/files/videos/audio_equalizer_demo2.mov" type="video/quicktime">
-</video>
+<iframe 
+  width="560" 
+  height="315" 
+  src="https://www.youtube.com/embed/Cxqtp9boAoE"
+  frameborder="0" 
+  allowfullscreen>
+</iframe>
 
 ### Circuit Design:
 We used third order Butterworth filters to create Low Pass (Bass), Band Pass (Mid), and High Pass (Treble) “bands” whose gain could be separately adjusted. We implemented the filters with LT1057’s. Note: our band pass filter consisted of sequential low pass and high pass third order Butterworth filters. Below is the circuit schematic for our low pass filter.
