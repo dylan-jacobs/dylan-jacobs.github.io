@@ -6,15 +6,13 @@ collection: portfolio
 ---
 
 # Light-controlled solar panel
-? Aaron Dubois & Dylan Jacobs
+> Aaron Dubois & Dylan Jacobs
 
 ## Project goal:
 Develop an analog circuit that uses two photoresistors situated on either side of a solar panel to control a motor that rotates the solar panel toward the light to optimize its power output.
 
 ## Circuit schematic
-<p float="left">
-  <img src="images/project_icons/ENGR-072/solar-schematic.png" width="100%" />
-</p>
+![Schematic in Fusion360](images/project_icons/ENGR-072/solar-schematic.png)
 
 Each phototransistor’s resistance decreases as it is increasingly exposed to light. We can this integrate these phototransistors into voltage dividers and compare their output voltages against each other using comparators. We use Schmidt triggers to prevent jerky, unsteady rotation when the phototransistor output voltages are similar. This is shown in the diagram below:
 
