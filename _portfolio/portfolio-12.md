@@ -126,8 +126,8 @@ float interpolate_temperature(float R) {
 
 ## Breadboard prototyping
 <p float="left">
-  <img src="images/project_icons/ENGR-072/fan-breadboard1.jpg" width="45%" />
-  <img src="images/project_icons/ENGR-072/fan-breadboard2.jpg" width="45%" />
+  <img src="/images/project_icons/ENGR-072/fan-breadboard1.jpg" width="45%" />
+  <img src="/images/project_icons/ENGR-072/fan-breadboard2.jpg" width="45%" />
 </p>
 
 ## PCB
