@@ -144,7 +144,7 @@ The fan is mounted to the board, above a hole drilled into the PCB to facilitate
 <iframe 
   width="560" 
   height="315" 
-  src="https://www.youtube.com/embed/X93x_hCMS-c"
+  src="https://www.youtube.com/embed/tiCuP0Q2ydc"
   frameborder="0" 
   allowfullscreen>
 </iframe>
