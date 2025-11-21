@@ -125,8 +125,10 @@ float interpolate_temperature(float R) {
 ```
 
 ## Breadboard prototyping
-![](\images\project_icons\ENGR-072\fan-breadboard1.jpg)
-![](\images\project_icons\ENGR-072\fan-breadboard2.jpg)
+<p float="left">
+  <img src="images/project_icons/ENGR-072/fan-breadboard1.jpg" width="45%" />
+  <img src="images/project_icons/ENGR-072/fan-breadboard2.jpg" width="45%" />
+</p>
 
 ## PCB
 The fan is mounted to the board, above a hole drilled into the PCB to facilitate airflow from the region we are interested in cooling. The LiPo batteries plug into ports J1 and J2 and the LCD screen and fan are wired to the header pins below the LiPo sockets.
