@@ -16,6 +16,9 @@ $$
 
 To avoid the curse of dimensionality, i.e. prohibitively large storage complexity due our equation's high-dimensionality, we use a low-rank framework to numerically solve the time-dependent partial differential equation.
 
+## Numerical Tests
+We test our solver on a standing shock problem, where the solution is initialized as a Maxwellian moments (mass, momentum, energy) at each spatial node are initialized as hyperbolic tanget equations in space
+ 
 Numerical solution at time t=200:
 ------
 <img src="https://github.com/dylan-jacobs/computational-fluid-dynamics/blob/main/Vlasov-Fokker-Planck-Solver/Plots/solution_time_200.jpg?raw=true" width="400">
