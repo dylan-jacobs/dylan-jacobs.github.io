@@ -6,11 +6,9 @@ math: true
 redirect_from: 
 ---
 
-My Research
-------
+# Computational Fluid Dynamics and Numerical Methods Research
 [comment]: <> (I am driven to utilize engineering and mathematics to solve pressing societal problems. Growing up in Portland, Oregon, witnessing the devastating climate-change-induced wildfires on Pacific Northwest forests impressed upon me the necessity of mitigating global warming. Studying engineering and applied mathematics has motivated me to use my STEM background to slow climate change by researching renewable energy sources. )
 
-### Computational fluid dynamics and numerical methods research
 Since January 2024, I have been applying my experience in MATLAB and fluid dynamics to computational mathematics research under Swarthmore professor [Dr. Joseph Nakao](https://jhknakao.github.io/). I am currently developing a novel high-accuracy, implicit, low-rank solver for the Vlasov-Dougherty-Fokker-Planck system in cylindrical coordinates, which has applications in plasma simulations. More general Vlasov-Fokker-Planck-type equations can be extended to model nuclear fusion, a research area I am especially drawn to because of its renewable energy applications. 
 
 > Plasma dynamics and fusion interaction models require systems of nonlinear PDEs. However, analytically solving nonlinear PDEs is often impossible, and experiments are resource-intensive, necessitating high-accuracy numerical solutions. Ideally, these solutions must capture sharp gradients, conserve physical structures (e.g. mass, momentum, energy), and maintain the positivity of the solution. Numerical solutions also suffer from the curse of dimensionality: increasing the numerical solution's dimensions causes exponential growth in computational cost. Plasma systems of interest are described in up to six-dimensional phase space--plus time--via probability density function $ f(x, v, t) $, which describes the likelihood particles exist at position $ \mathbf{x} \in \mathbb{R}^3 $ with velocity $ \mathbf{v} \in \mathbb{R}^3 $ at time $ t > 0 $.
@@ -151,5 +149,5 @@ The preliminary results below demonstrate preservation of mass, high-order drive
 </div>
 
 
-### Electrical engineering research - oscillatory wind-energy harvesting device
+# Electrical engineering research - oscillatory wind-energy harvesting device
 During spring 2024, I collaborated with Swarthmore professor [Dr. Emad Masroor](https://emadmasroor.github.io/) and other engineering students to develop a novel oscillatory wind-energy harvesting device. The project improved my technical skills in Arduino circuitry, CAD, and MATLAB, and advanced my experimental and theoretical knowledge of electromagnetic physics and fluid dynamics. It also motivated me to research the computational aspect of fluid dynamics and plasma physics, utilized in nuclear fusion energy generation. 
