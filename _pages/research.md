@@ -57,7 +57,7 @@ Assuming low-rank structure ($r \ll N_v$) $\to$ Storage complexity reduction: $\
 
   * Compute numerical fluxes $(\hat{f}^k_{i \pm \frac{1}{2}})$
   * Compute electric field:  
-    $E_{\parallel}^{k+1} = \frac{1}{q_{e} n_{e}^{k+1}} \frac{(n_{e} T_{e})_{i+1}^{k+1} - (n_{e} T_{e})_{i-1}^{k+1}}{2 \Delta x}$     
+    $E_{\parallel}^{k+1} = \dfrac{1}{q_{e}n_{e}^{k+1}} \dfrac{(n_{e}T_{e})_{i+1}^{k+1} - (n_eT_{e})_{i-1}^{k+1}}{2 \Delta x}$     
 
   * Compute collision operators $(C_{\alpha\alpha}^{k+1}, C_{\alpha e}^{k+1})$
   * Solve for $(f_i^{k+1})$ using low-rank projection [1]:
