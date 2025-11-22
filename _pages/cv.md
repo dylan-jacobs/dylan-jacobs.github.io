@@ -9,6 +9,8 @@ redirect_from:
 
 {% include base_path %}
 
+[View Resume as PDF](/files/Resume.pdf)
+
 Education
 ======
 * B.S. in General Engineering, B.A. in Applied Mathematics, Swarthmore College, 2027 (expected)
