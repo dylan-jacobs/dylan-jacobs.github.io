@@ -62,13 +62,13 @@ Assuming low-rank structure ($r \ll N_v$) $\to$ Storage complexity reduction: $\
   * Compute collision operators $(C_{\alpha\alpha}^{k+1}, C_{\alpha e}^{k+1})$
   * Solve for $(f_i^{k+1})$ using low-rank projection [1]:
 
-  **Basis update**  
-    $K^k = V_\perp^k S^k (V_{\parallel}^k)^T V_{\parallel,\star}^{k+1}$  
+    **Basis update**  
+      $K^k = V_\perp^k S^k (V_{\parallel}^k)^T V_{\parallel,\star}^{k+1}$  
 
-    $L^k = V_\parallel^k (S^k)^T (V_\perp^k)^T V_{\perp,\star}^{k+1}$  
+      $L^k = V_\parallel^k (S^k)^T (V_\perp^k)^T V_{\perp,\star}^{k+1}$  
   
     **Galerkin projection**  
-    $S^k = (V_{\perp,\star}^{k+1})^T V_\perp^k S^k (V_\parallel^k)^T V_{\parallel,\star}^{k+1}$  
+      $S^k = (V_{\perp,\star}^{k+1})^T V_\perp^k S^k (V_\parallel^k)^T V_{\parallel,\star}^{k+1}$  
 
   * Solve for $(K^{k+1}, L^{k+1}, S^{k+1} \mapsto V_\perp^{k+1}, V_\parallel^{k+1}, S^{k+1})$
   * Apply conservative truncation procedure [2]
