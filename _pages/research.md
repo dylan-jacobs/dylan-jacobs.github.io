@@ -89,9 +89,9 @@ Mass, momentum, and energy conservation (up to truncation tolerance):
 Mass, momentum, and energy of the system across space, evolved over time.
 ------
 <p float="left">
-  <img src="images/project_icons/VFP/moments_time_0.jpg" width="30%" />
-  <img src="images/project_icons/VFP/moments_time_50.jpg" width="30%" />
-  <img src="images/project_icons/VFP/moments_time_200.jpg" width="30%" />
+  <img src="/images/project_icons/VFP/moments_time_0.jpg" width="30%" />
+  <img src="/images/project_icons/VFP/moments_time_50.jpg" width="30%" />
+  <img src="/images/project_icons/VFP/moments_time_200.jpg" width="30%" />
 </p>
 
 
