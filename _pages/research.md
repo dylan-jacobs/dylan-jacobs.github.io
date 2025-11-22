@@ -56,17 +56,18 @@ Assuming low-rank structure ($r \ll N_v$) $\to$ Storage complexity reduction: $\
 * **At each spatial node** $(x_i)$:
 
   * Compute numerical fluxes $(\hat{f}^k_{i \pm \frac{1}{2}})$
-  * Compute electric field:
-    $E_{\parallel}^{k+1} = \frac{1}{q_e n_e^{k+1}}\frac{(n_eT_e)_{i+1}^{k+1} - (n_eT_e)_{i-1}^{k+1}}{2 \Delta x}$
+  * Compute electric field:  $E_{\parallel}^{k+1} = \frac{1}{q_e n_e^{k+1}} \frac{(n_eT_e)_{i+1}^{k+1} - (n_eT_e)_{i-1}^{k+1}}{2 \Delta x}$
+
   * Compute collision operators $(C_{\alpha\alpha}^{k+1}, C_{\alpha e}^{k+1})$
   * Solve for $(f_i^{k+1})$ using low-rank projection [1]:
 
     **Basis update**  
-    $K^k = V_\perp^k S^k (V_\parallel^k)^T V_{\parallel,*}^{k+1}$  
-    $L^k = V_\parallel^k (S^k)^T (V_\perp^k)^T V_{\perp,*}^{k+1}$
+    $K^k = V_\perp^k S^k (V_{\parallel}^k)^T V_{\parallel,*}^{k+1}$  
+
+    $L^k = V_\parallel^k (S^k)^T (V_\perp^k)^T V_{\perp,*}^{k+1}$  
  
     **Galerkin projection**  
-    $S^k = (V_{\perp,*}^{k+1})^T V_\perp^k S^k (V_\parallel^k)^T V_{\parallel,*}^{k+1}$
+    $S^k = (V_{\perp,*}^{k+1})^T V_\perp^k S^k (V_\parallel^k)^T V_{\parallel,*}^{k+1}$  
 
   * Solve for $(K^{k+1}, L^{k+1}, S^{k+1} \mapsto V_\perp^{k+1}, V_\parallel^{k+1}, S^{k+1})$
   * Apply conservative truncation procedure [2]
