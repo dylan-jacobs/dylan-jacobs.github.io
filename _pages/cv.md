@@ -14,16 +14,16 @@ Education
 * B.S. in General Engineering, B.A. in Applied Mathematics, Swarthmore College, 2027 (expected)
 
   Relevant coursework:
+  * Electrical circuit applications and analysis (ENGR 072, ENGR 011)
   * Digital Signal Processing (ENGR 071)
+  * Thermo-fluid Mechanics (ENGR 041)
+  * Real Analysis (MATH 063)
   * Electromagnetism, waves, and optics with biomedical applications (PHYS 004L)
   * Ordinary & partial differential equations (MATH 043, MATH 054)
-  * Linear physical systems (ENGR 012)
-  * Computer engineering (ENGR 021)
   * Data structures & algorithms (CPSC 035)
-  * Mechanics (ENGR 006)
-  * Electrical circuit analysis (ENGR 011)
 
   Reading groups:
+    * Mathematical Competition in Modeling (MCM) Preparation (Swarthmore College - Fall 2025)
     * Tensor decompositions (Swarthmore College - Spring 2025)
     * Kinetic modeling and computational fluid dynamics (Swarthmore College & University of Delaware - Fall 2024)
     * Numerical methods for differential equations (Swarthmore College - Spring 2024)
