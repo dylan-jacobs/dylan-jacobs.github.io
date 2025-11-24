@@ -9,7 +9,7 @@ author_profile: true
 
 Email
 ------
-djacobs2@swarthmore.edu
+djacobs2@swarthmore.edu  
 dylanwillamette@gmail.com
 
 Address
