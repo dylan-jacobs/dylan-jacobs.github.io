@@ -9,7 +9,7 @@ redirect_from:
 
 {% include base_path %}
 
-[View Resume as PDF](/files/Resume.pdf)
+[View Resume as PDF](/files/Resume.pdf)  
 [Download Transcript](/files/Dylan_Jacobs_Swarthmore_transcript.pdf)
 
 Education
