@@ -8,11 +8,11 @@ author_profile: true
 {% include base_path %}
 
 <div id="filter-btns" class="archive-filters">
-  <button class="filter-btn" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="electronics">Electronics & PCBs</button>
-  <button class="filter-btn" data-filter="cfd">Simulations & computational fluid dynamics</button>
-  <button class="filter-btn" data-filter="apps">Apps</button>
-  <button class="filter-btn" data-filter="ai">Machine learning</button>
+  <button class="chip active" data-filter="all">All</button>
+  <button class="chip" data-filter="electronics">Electronics & PCBs</button>
+  <button class="chip" data-filter="cfd">Simulations & computational fluid dynamics</button>
+  <button class="chip" data-filter="ai">Machine learning</button>
+  <button class="chip" data-filter="apps">Apps</button>
 
 </div>
 
@@ -25,11 +25,12 @@ author_profile: true
 
 
 <script>
-  const filterButtons = document.querySelectorAll('#filter-btns .filter-btn');
+  const filterButtons = document.querySelectorAll('#filter-btns .chip');
   const items = document.querySelectorAll('.portfolio-item');
 
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
+      button.classList.toggle('active');
       const filter = button.getAttribute('data-filter');
 
       items.forEach(item => {
