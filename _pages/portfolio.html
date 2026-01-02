@@ -23,10 +23,12 @@ author_profile: true
   const items = document.querySelectorAll('.list__item');
 
   filterButtons.forEach(button => {
+    console.log("Adding event listener to button:", button);
     button.addEventListener('click', () => {
       const filter = button.getAttribute('data-filter');
 
       items.forEach(item => {
+        console.log("Filtering item:", item, "with filter:", filter);
         if (filter === 'all' || item.classList.contains(filter)) {
           item.style.display = 'block';
         } else {
