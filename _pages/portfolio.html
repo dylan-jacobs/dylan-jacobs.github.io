@@ -30,6 +30,7 @@ author_profile: true
 
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
+      filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.toggle('active');
       const filter = button.getAttribute('data-filter');
 
