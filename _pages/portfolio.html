@@ -9,9 +9,7 @@ author_profile: true
 
 <div id="filter-btns" class="archive-filters">
   <button class="filter-btn" data-filter="all">All</button>
-  {% for category in site.portfolio | map: 'categories' | join: ',' | split: ',' | uniq %}
-    <button class="filter-btn" data-filter="{{ category | slugify }}">{{ category }}</button>
-  {% endfor %}
+  <button class="filter-btn" data-filter="electronics">Electronics and PCBs</button>
 </div>
 
 {% assign sorted = site.portfolio | sort: 'date' | reverse %}
