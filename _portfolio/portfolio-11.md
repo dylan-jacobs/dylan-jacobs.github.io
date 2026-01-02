@@ -3,6 +3,7 @@ title: "Audio Equalizer PCB"
 date: November 10 2025
 excerpt: "Audio equalizer printed circuit board (PCB) built using 3rd-order active Butterworth filters to independently adjust bass, mid, and treble frequency ranges of songs.<br/><img src='/images/project_icons/ENGR-072/audio-eq-PCB.png' width='500'>"
 collection: portfolio
+categories: electronics
 ---
 
 # Audio Equalizer

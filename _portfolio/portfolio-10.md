@@ -3,6 +3,7 @@ title: "Vlasov-Fokker-Planck plasma model solver"
 date: November 2025
 excerpt: "Current research project under Swarthmore Professor Joseph Nakao: solving the Vlasov-Fokker-Planck plasma model using a low-rank, structure-preserving framework in cylindrical coordinates.<br/><img src='/images/project_icons/VFP/solution_time_200.jpg' width='500'>"
 collection: portfolio
+categories: cfd
 ---
 [Github Repository](https://github.com/dylan-jacobs/computational-fluid-dynamics/tree/main/Vlasov-Fokker-Planck-Solver)
 

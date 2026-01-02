@@ -9,7 +9,11 @@ author_profile: true
 
 <div id="filter-btns" class="archive-filters">
   <button class="filter-btn" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="electronics">Electronics and PCBs</button>
+  <button class="filter-btn" data-filter="electronics">Electronics & PCBs</button>
+  <button class="filter-btn" data-filter="cfd">Simulations & computational fluid dynamics</button>
+  <button class="filter-btn" data-filter="apps">Apps</button>
+  <button class="filter-btn" data-filter="ai">Machine learning</button>
+
 </div>
 
 {% assign sorted = site.portfolio | sort: 'date' | reverse %}
@@ -25,7 +29,6 @@ author_profile: true
   const items = document.querySelectorAll('.portfolio-item');
 
   filterButtons.forEach(button => {
-    console.log("Adding event listener to button:", button);
     button.addEventListener('click', () => {
       const filter = button.getAttribute('data-filter');
 

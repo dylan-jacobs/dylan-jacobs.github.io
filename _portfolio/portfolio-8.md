@@ -3,6 +3,9 @@ title: "Computer model for the biologically constrained human thumb"
 date: December 2024
 excerpt: "An iterative, inverse-kinematics algorithm to model the optimal movement of a human thumb between two given points in 3D space.<br/><img src='/images/project_icons/thumb_movement.gif' width='500'>"
 collection: portfolio
+categories: 
+    - ai
+    - cfd
 ---
 An iterative, inverse-kinematics **Python** algorithm to model the optimal movement of a human thumb between two given points in 3D space. This numerical methods algorithm was developed as a final project for my Computer Engineering class during the Fall of 2024. 
 
