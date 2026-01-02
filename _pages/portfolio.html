@@ -7,8 +7,34 @@ author_profile: true
 
 {% include base_path %}
 
+<div id="filter-btns" class="archive-filters">
+  <button class="filter-btn" data-filter="all">All</button>
+  {% for category in site.portfolio | map: 'categories' | join: ',' | split: ',' | uniq %}
+    <button class="filter-btn" data-filter="{{ category | slugify }}">{{ category }}</button>
+  {% endfor %}
+</div>
 
-{% for post in site.portfolio reversed %}
+{% assign sorted = site.portfolio | sort: 'date' | reverse %}
+{% for post in sorted %}
   {% include archive-single.html %}
 {% endfor %}
+
+
+<script>
+  const filterButtons = document.querySelectorAll('#filter-btns .filter-btn');
+  const items = document.querySelectorAll('.archive-item');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+
+      items.forEach(item => {
+        if (filter === 'all' || item.classList.contains(filter)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
 

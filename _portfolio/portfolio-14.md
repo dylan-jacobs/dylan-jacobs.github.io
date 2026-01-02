@@ -3,6 +3,7 @@ title: "Adjustable Power Supply"
 date: December 5 2025
 excerpt: "Variable power supply comprising a buck converter, Schottky diode, and inductor.<br/><img src='/images/project_icons/ENGR-072/lp4-pcb.png' width='500'>"
 collection: portfolio
+categories: electronics
 ---
 
 # Variable power supply
