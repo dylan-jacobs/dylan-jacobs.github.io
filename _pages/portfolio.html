@@ -14,13 +14,15 @@ author_profile: true
 
 {% assign sorted = site.portfolio | sort: 'date' | reverse %}
 {% for post in sorted %}
-  {% include archive-single.html %}
+  <div class="portfolio-item" data-categories="{{ post.categories | join: ' ' }}">"
+    {% include archive-single.html %}
+  </div>
 {% endfor %}
 
 
 <script>
   const filterButtons = document.querySelectorAll('#filter-btns .filter-btn');
-  const items = document.querySelectorAll('.list__item');
+  const items = document.querySelectorAll('.portfolio-item');
 
   filterButtons.forEach(button => {
     console.log("Adding event listener to button:", button);
@@ -28,12 +30,11 @@ author_profile: true
       const filter = button.getAttribute('data-filter');
 
       items.forEach(item => {
-        console.log("Filtering item:", item, "with filter:", filter);
-        if (filter === 'all' || item.classList.contains(filter)) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
+        const tags = item.dataset.categories.split(' ');
+        item.style.display =
+          (filter === 'all' || tags.includes(filter))
+            ? 'block'
+            : 'none';
       });
     });
   });
