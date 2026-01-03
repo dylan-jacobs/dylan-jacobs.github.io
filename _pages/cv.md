@@ -31,7 +31,7 @@ Education
     * Kinetic modeling and computational fluid dynamics (Swarthmore College & University of Delaware - Fall 2024)
     * Numerical methods for differential equations (Swarthmore College - Spring 2024)
   
-  GPA: 3.97/4.00
+  GPA: 3.98/4.00
 
 Work & research experience
 ======
