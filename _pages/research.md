@@ -59,25 +59,15 @@ Assuming low-rank structure ($r \ll N_v$) $\to$ Storage complexity reduction: $\
 
 Because the stiff collision and Lorentz force operators require us to use implicit Runge-Kutta methods, we need to compute the moments $(n^{k+1}), ((nu_{\parallel})^{k+1}), (T_\alpha^{k+1}), (T_e^{k+1})$ at future time-steps. Thus, we incorporate a fluid solver that explicitly solves the VFP and fluid electron pressure equation system, analytically integrated to model the zeroth, first, and second moments. We use temporally second-order diagonally implicit Runge Kutta (DIRK2) method to compute these moments at future timesteps.
 
-$$
-\begin{array}{c|ccccc}
-\textbf{Δt} &
-\textbf{L1 (global)} &
-\textbf{Mass} &
-\textbf{Momentum} &
-\textbf{Ion Temp} &
-\textbf{Electron Temp} \\
-\hline
-0.20  & 0.148 & 0.956 & 0.128 & 0.983 & 0.563 \\
-0.10  & 0.037 & 0.240 & 0.032 & 0.245 & 0.139 \\
-0.05  & 0.009 & 0.060 & 0.008 & 0.061 & 0.034 \\
-0.025 & 0.002 & 0.015 & 0.002 & 0.015 & 0.009 \\
-\hline
-0.20\!\to\!0.10   & 2.007 & 1.992 & 2.014 & 2.003 & 2.023 \\
-0.10\!\to\!0.05   & 2.003 & 1.996 & 2.006 & 2.002 & 2.011 \\
-0.05\!\to\!0.025  & 2.001 & 1.998 & 2.003 & 2.001 & 2.005
-\end{array}
-$$
+| Quantity   | Δt    | L1 (global) | Mass   | Momentum | Ion Temp | Electron Temp |
+|-----------|-------|-------------|--------|----------|----------|---------------|
+| L1 error  | 0.20  | 0.148       | 0.956  | 0.128    | 0.983    | 0.563         |
+|           | 0.10  | 0.037       | 0.240  | 0.032    | 0.245    | 0.139         |
+|           | 0.05  | 0.009       | 0.060  | 0.008    | 0.061    | 0.034         |
+|           | 0.025 | 0.002       | 0.015  | 0.002    | 0.015    | 0.009         |
+| Order     | 0.20 → 0.10  | 2.007 | 1.992 | 2.014 | 2.003 | 2.023 |
+|           | 0.10 → 0.05  | 2.003 | 1.996 | 2.006 | 2.002 | 2.011 |
+|           | 0.05 → 0.025 | 2.001 | 1.998 | 2.003 | 2.001 | 2.005 |
 
 
 ### Timestepping procedure
