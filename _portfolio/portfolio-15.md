@@ -75,32 +75,32 @@ Our final product is currently only producing static noise whose volume is adjus
 
 ### Troubleshooting and potential problems
 
-Incoming RF signal too weak?
+* Incoming RF signal too weak?
 
-We tested outside to try to receive commercial FM signals better. We also tried on the roof of Singer Hall, where we connected to a pre-installed antenna; however, we were unsure if we had the proper configuration/if it was set up properly for our application, and the test did not improve performance.
+  * We tested outside to try to receive commercial FM signals better. We also tried on the roof of Singer Hall, where we connected to a pre-installed antenna; however, we were unsure if we had the proper configuration/if it was set up properly for our application, and the test did not improve performance.
 
-We tested next to Swarthmore's radio station to guarantee a strong signal (Parrish 4th). We observed slightly louder static, though only slightly.
+  * We tested next to Swarthmore's radio station to guarantee a strong signal (Parrish 4th). We observed slightly louder static, though only slightly.
 
-We briefly attempted to create an FM transmitter with a Raspberry Pi, but we decided that our other tests likely ruled out our main problem being a weak incoming RF signal. We thought that even if the circuit amplification were weak, we would still be able to hear something discernible when adjusting and unplugging/plugging in the antenna, which we did not observe. 
+  * We briefly attempted to create an FM transmitter with a Raspberry Pi, but we decided that our other tests likely ruled out our main problem being a weak incoming RF signal. We thought that even if the circuit amplification were weak, we would still be able to hear something discernible when adjusting and unplugging/plugging in the antenna, which we did not observe. 
 
-Local oscillator not working?
+* Local oscillator not working?
 
-Attempted oscilloscope probing at multiple locations in our circuit, but could not discern a meaningful signal from the oscilloscope, suggesting that either our local oscillator was not functioning correctly, or the oscilloscope could not operate accurately on the order of 100MHz.
+  * Attempted oscilloscope probing at multiple locations in our circuit, but could not discern a meaningful signal from the oscilloscope, suggesting that either our local oscillator was not functioning correctly, or the oscilloscope could not operate accurately on the order of 100MHz.
 
-Is the antenna too far from the resonant length?
+* Is the antenna too far from the resonant length?
 
-Incoming RF signal is ~100MHz  --> ~3m in wavelength.
+  * Incoming RF signal is ~100MHz  --> ~3m in wavelength.
 
-Ideally, we should have a 3m long antenna, but half and quarter multiples of 1.5m and 0.75m should also work.
+  * Ideally, we should have a 3m long antenna, but half and quarter multiples of 1.5m and 0.75m should also work.
 
-We tried cutting the antenna to 0.75m and 0.6m, but did not observe an improvement in signal capture nor audio output besides static.
+  * We tried cutting the antenna to 0.75m and 0.6m, but did not observe an improvement in signal capture nor audio output besides static.
 
-General troubleshooting
+* General troubleshooting
 
-We also attempted classic troubleshooting processes like checking traces, values of components, and connections. We also tried various variable capacitors, manipulated our inductor, measured the voltages on the LM386, and ensured the functionality of the speaker.
+  * We also attempted classic troubleshooting processes like checking traces, values of components, and connections. We also tried various variable capacitors, manipulated our inductor, measured the voltages on the LM386, and ensured the functionality of the speaker.
 
 References:
 
 [1] Scherz, Paul, and Simon Monk. Practical Electronics for Inventors. Available from: Swarthmore College, (4th Edition). McGraw-Hill Professional, 2016.
 
-[2] Designing FM Receiver Circuit | Complete Circuit Explanation
+[2] [Designing FM Receiver Circuit](https://www.electronicsforu.com/electronics-projects/simple-fm-receiver)
