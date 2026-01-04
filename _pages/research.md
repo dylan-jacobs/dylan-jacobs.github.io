@@ -16,7 +16,7 @@ Since January 2024, I have been applying my experience in MATLAB and fluid dynam
 ## Vlasov-Fokker-Planck Plasma System
 
 ### The model
-We are interested in solving the Vlasov-Fokker-Planck equation to model single-ion plasmas in 1 spatial and 2 velocity dimensions in cylindrical coordinates:
+We are interested in solving the Vlasov-Fokker-Planck (VFP) equation to model single-ion plasmas in 1 spatial and 2 velocity dimensions in cylindrical coordinates:
 
 $$
 
@@ -28,19 +28,24 @@ $$
 
 where the solution $f(x, v_\perp, v_\parallel, t)$ is the ion probability density function in space and velocity  
 $\mathbf{E}$ = electric field  
-$C_{\alpha \alpha}(f, f)$ = ion-ion advection-diffusion Fokker-Planck collision operator.
+$C_{\alpha \alpha}(f, f)$ = ion-ion advection-diffusion Fokker-Planck collision operator.  
 $C{\alpha e}(f, f)$ = ion-electron advection-diffusion Fokker-Planck collision operator.
-
-Coupled with fluid electron pressure equation.
 
 <img src="/images/project_icons/VFP/cylinder.png" width="300">
 
+This equation is also coupled with the fluid electron pressure equation. All systems depend on the system's zeroth, first, and second moments: mass/number density $n$, momentum $nu_{\parallel}$, and ion temperature $T_\alpha$, as well as the electron temperature $T_e$.
+
 ### Numerical discretization
+We discretize the Vlasov-Fokker-Planck equation over a spatial and velocity mesh:  
 Spatial mesh: Cells $[x_{i-\frac{1}{2}}, x_{i+\frac{1}{2}}] $  
 Velocity mesh: Cells $ [v_{\perp,  j-\frac{1}{2}}, v_{\perp, j+\frac{1}{2}}] \times [v_{\parallel,  l-\frac{1}{2}}, v_{\parallel, l+\frac{1}{2}}]$
 
 $$  f_{i}^{k+1} + \Delta t\Big(E^{k+1}_{\parallel}\frac{\partial f^{k+1}_{i}}{\partial v_{\parallel}} - C_{\alpha \alpha}^{k+1} - C_{\alpha e}^{k+1} \Big) = f_{i}^k - \frac{\Delta t}{\Delta x}v_{||}\left(\hat{f}^k_{i + \frac{1}{2}} - \hat{f}^k_{i - \frac{1}{2}}\right)
 $$
+
+where the numerical fluxes $\hat{f}^k_{i \pm \frac{1}{2}}$ are computed using a standard first-order upwinding scheme to determine the system's velocity in the $x$ dimension.  
+
+### Storage complexity and the curse of dimensionality
 
 Naively, the full-rank solution with spatial size $N_x$ and velocity size $N_v$, the storage complexity is $\mathcal{O}(N_x N_v^2)$, or $\mathcal{O}(N^3)$ if $N_x = N_v = N$.
 
@@ -49,6 +54,74 @@ To avoid the curse of dimensionality, i.e. prohibitively large storage complexit
 $$\mathbf{f}^{k}_i = \mathbf{V}_\perp^{k}\mathbf{S}^{k}(\mathbf{V}_\parallel^k)^T$$
 
 Assuming low-rank structure ($r \ll N_v$) $\to$ Storage complexity reduction: $\mathcal{O}(N_x(r^2+2N_vr))$  
+
+### Newton method and fluid solver
+
+Because the stiff collision and Lorentz force operators require us to use implicit Runge-Kutta methods, we need to compute the moments $(n^{k+1}), ((nu_{\parallel})^{k+1}), (T_\alpha^{k+1}), (T_e^{k+1})$ at future time-steps. Thus, we incorporate a fluid solver that explicitly solves the VFP and fluid electron pressure equation system, analytically integrated to model the zeroth, first, and second moments. We use temporally second-order diagonally implicit Runge Kutta (DIRK2) method to compute these moments at future timesteps.
+
+$$
+\begin{array}{l|cc}
+\hline
+\textbf{Second-order fluid solver temporal accuracy table} & \mathbf{N_x=80} & \mathbf{N_x=160} \\
+\hline
+\multicolumn{3}{l}{\textbf{L1 Error (global)}\;\;[10^{-7}]} \\
+\hline
+ & 0.1311011684 & 0.1483608747 \\
+ & 0.03253466784 & 0.03692185151 \\
+ & 0.008106658558 & 0.009212729673 \\
+ & 0.002023482305 & 0.002301090815 \\
+\hline
+\text{Order} & 2.010630813 & 2.006563872 \\
+             & 2.004798539 & 2.002774315 \\
+             & 2.002267147 & 2.001310759 \\
+\hline
+\multicolumn{3}{l}{\textbf{Mass}\;\;[10^{-6}]} \\
+\hline
+ & 0.9186843688 & 0.956125179 \\
+ & 0.2295797253 & 0.2403241311 \\
+ & 0.05738595853 & 0.06024523089 \\
+ & 0.01434519586 & 0.01508164077 \\
+\hline
+\text{Order} & 2.000574042 & 1.992217995 \\
+             & 2.00022556  & 1.996062573 \\
+             & 2.000130109 & 1.998053648 \\
+\hline
+\multicolumn{3}{l}{\textbf{Momentum}\;\;[10^{-5}]} \\
+\hline
+ & 0.118570411 & 0.1278308992 \\
+ & 0.02928921981 & 0.03164688201 \\
+ & 0.007280927389 & 0.007876534237 \\
+ & 0.001815488672 & 0.001965118314 \\
+\hline
+\text{Order} & 2.017302364 & 2.014101335 \\
+             & 2.008175637 & 2.006430493 \\
+             & 2.003764293 & 2.002944792 \\
+\hline
+\multicolumn{3}{l}{\textbf{Ion Temperature}\;\;[10^{-6}]} \\
+\hline
+ & 0.8654988314 & 0.9832669938 \\
+ & 0.2151451951 & 0.2452751231 \\
+ & 0.05364077485 & 0.06125405655 \\
+ & 0.01339247468 & 0.01530546355 \\
+\hline
+\text{Order} & 2.008221251 & 2.003182299 \\
+             & 2.003908638 & 2.001523622 \\
+             & 2.001907508 & 2.00075865 \\
+\hline
+\multicolumn{3}{l}{\textbf{Electron Temperature}\;\;[10^{-5}]} \\
+\hline
+ & 0.4996566597 & 0.5632168544 \\
+ & 0.1226520734 & 0.1385883956 \\
+ & 0.03039896513 & 0.03438320351 \\
+ & 0.007568440975 & 0.00856444867 \\
+\hline
+\text{Order} & 2.026365462 & 2.022884046 \\
+             & 2.012477506 & 2.011030588 \\
+             & 2.005954156 & 2.005271686 \\
+\hline
+\end{array}
+$$
+
 
 ### Timestepping procedure
 **At each timestep** $t^k$:  
