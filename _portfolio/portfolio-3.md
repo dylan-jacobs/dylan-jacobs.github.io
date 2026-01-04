@@ -1,6 +1,6 @@
 ---
 title: "FireSale"
-date: 'July 2020 - July 2021'
+date: 'July 2021'
 excerpt: "Food-waste reduction app built using Java in Android Studio.<br/><img src='/images/project_icons/fire_sale_icon.png' width='400'>"
 collection: portfolio
 categories: apps
