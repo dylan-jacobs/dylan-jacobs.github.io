@@ -61,29 +61,21 @@ Because the stiff collision and Lorentz force operators require us to use implic
 
 $$
 \begin{array}{c|ccccc}
-\hline
- & \multicolumn{5}{c}{\textbf{Second-order code } (N_x = 160)} \\
-\hline
-\boldsymbol{\Delta t}
- & \textbf{L1 (global)} 
- & \textbf{Mass} 
- & \textbf{Momentum} 
- & \textbf{Ion Temp} 
- & \textbf{Electron Temp} \\
-\hline
-\multicolumn{6}{l}{\textbf{L1 Errors}} \\
+\textbf{Δt} &
+\textbf{L1 (global)} &
+\textbf{Mass} &
+\textbf{Momentum} &
+\textbf{Ion Temp} &
+\textbf{Electron Temp} \\
 \hline
 0.20  & 0.148 & 0.956 & 0.128 & 0.983 & 0.563 \\
 0.10  & 0.037 & 0.240 & 0.032 & 0.245 & 0.139 \\
 0.05  & 0.009 & 0.060 & 0.008 & 0.061 & 0.034 \\
 0.025 & 0.002 & 0.015 & 0.002 & 0.015 & 0.009 \\
 \hline
-\multicolumn{6}{l}{\textbf{Observed Temporal Order}} \\
-\hline
-0.20 \rightarrow 0.10   & 2.007 & 1.992 & 2.014 & 2.003 & 2.023 \\
-0.10 \rightarrow 0.05   & 2.003 & 1.996 & 2.006 & 2.002 & 2.011 \\
-0.05 \rightarrow 0.025  & 2.001 & 1.998 & 2.003 & 2.001 & 2.005 \\
-\hline
+0.20\!\to\!0.10   & 2.007 & 1.992 & 2.014 & 2.003 & 2.023 \\
+0.10\!\to\!0.05   & 2.003 & 1.996 & 2.006 & 2.002 & 2.011 \\
+0.05\!\to\!0.025  & 2.001 & 1.998 & 2.003 & 2.001 & 2.005
 \end{array}
 $$
 
