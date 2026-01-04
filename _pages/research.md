@@ -60,64 +60,29 @@ Assuming low-rank structure ($r \ll N_v$) $\to$ Storage complexity reduction: $\
 Because the stiff collision and Lorentz force operators require us to use implicit Runge-Kutta methods, we need to compute the moments $(n^{k+1}), ((nu_{\parallel})^{k+1}), (T_\alpha^{k+1}), (T_e^{k+1})$ at future time-steps. Thus, we incorporate a fluid solver that explicitly solves the VFP and fluid electron pressure equation system, analytically integrated to model the zeroth, first, and second moments. We use temporally second-order diagonally implicit Runge Kutta (DIRK2) method to compute these moments at future timesteps.
 
 $$
-\begin{array}{l|cc}
+\begin{array}{c|ccccc}
 \hline
-\textbf{Second-order fluid solver temporal accuracy table} & \mathbf{N_x=80} & \mathbf{N_x=160} \\
+ & \multicolumn{5}{c}{\textbf{Second-order code } (N_x = 160)} \\
 \hline
-\multicolumn{3}{l}{\textbf{L1 Error (global)}\;\;[10^{-7}]} \\
+\boldsymbol{\Delta t}
+ & \textbf{L1 (global)} 
+ & \textbf{Mass} 
+ & \textbf{Momentum} 
+ & \textbf{Ion Temp} 
+ & \textbf{Electron Temp} \\
 \hline
- & 0.1311011684 & 0.1483608747 \\
- & 0.03253466784 & 0.03692185151 \\
- & 0.008106658558 & 0.009212729673 \\
- & 0.002023482305 & 0.002301090815 \\
+\multicolumn{6}{l}{\textbf{L1 Errors}} \\
 \hline
-\text{Order} & 2.010630813 & 2.006563872 \\
-             & 2.004798539 & 2.002774315 \\
-             & 2.002267147 & 2.001310759 \\
+0.20  & 0.148 & 0.956 & 0.128 & 0.983 & 0.563 \\
+0.10  & 0.037 & 0.240 & 0.032 & 0.245 & 0.139 \\
+0.05  & 0.009 & 0.060 & 0.008 & 0.061 & 0.034 \\
+0.025 & 0.002 & 0.015 & 0.002 & 0.015 & 0.009 \\
 \hline
-\multicolumn{3}{l}{\textbf{Mass}\;\;[10^{-6}]} \\
+\multicolumn{6}{l}{\textbf{Observed Temporal Order}} \\
 \hline
- & 0.9186843688 & 0.956125179 \\
- & 0.2295797253 & 0.2403241311 \\
- & 0.05738595853 & 0.06024523089 \\
- & 0.01434519586 & 0.01508164077 \\
-\hline
-\text{Order} & 2.000574042 & 1.992217995 \\
-             & 2.00022556  & 1.996062573 \\
-             & 2.000130109 & 1.998053648 \\
-\hline
-\multicolumn{3}{l}{\textbf{Momentum}\;\;[10^{-5}]} \\
-\hline
- & 0.118570411 & 0.1278308992 \\
- & 0.02928921981 & 0.03164688201 \\
- & 0.007280927389 & 0.007876534237 \\
- & 0.001815488672 & 0.001965118314 \\
-\hline
-\text{Order} & 2.017302364 & 2.014101335 \\
-             & 2.008175637 & 2.006430493 \\
-             & 2.003764293 & 2.002944792 \\
-\hline
-\multicolumn{3}{l}{\textbf{Ion Temperature}\;\;[10^{-6}]} \\
-\hline
- & 0.8654988314 & 0.9832669938 \\
- & 0.2151451951 & 0.2452751231 \\
- & 0.05364077485 & 0.06125405655 \\
- & 0.01339247468 & 0.01530546355 \\
-\hline
-\text{Order} & 2.008221251 & 2.003182299 \\
-             & 2.003908638 & 2.001523622 \\
-             & 2.001907508 & 2.00075865 \\
-\hline
-\multicolumn{3}{l}{\textbf{Electron Temperature}\;\;[10^{-5}]} \\
-\hline
- & 0.4996566597 & 0.5632168544 \\
- & 0.1226520734 & 0.1385883956 \\
- & 0.03039896513 & 0.03438320351 \\
- & 0.007568440975 & 0.00856444867 \\
-\hline
-\text{Order} & 2.026365462 & 2.022884046 \\
-             & 2.012477506 & 2.011030588 \\
-             & 2.005954156 & 2.005271686 \\
+0.20 \rightarrow 0.10   & 2.007 & 1.992 & 2.014 & 2.003 & 2.023 \\
+0.10 \rightarrow 0.05   & 2.003 & 1.996 & 2.006 & 2.002 & 2.011 \\
+0.05 \rightarrow 0.025  & 2.001 & 1.998 & 2.003 & 2.001 & 2.005 \\
 \hline
 \end{array}
 $$
