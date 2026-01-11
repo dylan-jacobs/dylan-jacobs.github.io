@@ -16,8 +16,3 @@ I am also a member of the [Swarthmore Varsity Men's Soccer Team](https://swarthm
 
 [View Resume](/files/Resume.pdf)
 
-<p float="left">
-  <img src="/images/project_icons/VFP/solution_time_200.jpg" width="30%" />
-  <img src="/images/project_icons/2D-nonsplitting-FD-WENO5-RK4-swirling-deformation2-WENO-test-wk6.jpg" width="30%" />
-  <img src="/images/project_icons/vp-solver-2-stream-instability-solution-wk7.jpg" width="30%" />
-</p>
