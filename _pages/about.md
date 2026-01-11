@@ -15,3 +15,9 @@ I am an Engineering (electrical engineering focus) and Applied Mathematics Doubl
 I am also a member of the [Swarthmore Varsity Men's Soccer Team](https://swarthmoreathletics.com/sports/mens-soccer) and the Swarthmore chapter of [Sigma Xi](https://www.swarthmore.edu/sigma-xi). I am currently researching numerical methods and kinetic models under Swarthmore Mathematics professor [Dr. Joseph Nakao](https://jhknakao.github.io/).
 
 [View Resume](/files/Resume.pdf)
+
+<p float="left">
+  <img src="/images/project_icons/VFP/solution_time_200.jpg" width="30%" />
+  <img src="/images/project_icons/2D-nonsplitting-FD-WENO5-RK4-swirling-deformation2-WENO-test-wk6.jpg" width="30%" />
+  <img src="/images/project_icons/vp-solver-2-stream-instability-solution-wk7.jpg" width="30%" />
+</p>
