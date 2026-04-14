@@ -5,7 +5,7 @@ category: manuscripts
 permalink: /publication/nreip-poster-2025
 excerpt: 'Poster on thermoelectric material characterization (Naval Research Enterprise Internship Program 2025).'
 date: August 2025
-paperurl: 'http://dylan-jacobs.github.io/files/NREIP-Research-Poster-2025.pdf'
+paperurl: 'https://dylan-jacobs.github.io/files/NREIP-Research-Poster-2025.pdf'
 citation: 
 ---
 
