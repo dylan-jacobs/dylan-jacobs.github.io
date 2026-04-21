@@ -57,7 +57,7 @@ plt.show()
 
 
     
-![png](../images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_5_0.png)
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_5_0.png)
     
 
 
@@ -91,7 +91,7 @@ plt.show()
 
 
     
-![png](../images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_7_0.png)
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_7_0.png)
     
 
 
@@ -138,7 +138,7 @@ plot_segments(z, n_rows=5)
 
 
     
-![png](../images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_10_0.png)
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_10_0.png)
     
 
 
@@ -158,7 +158,7 @@ plot_segments(x, n=800, n_rows=4, title='Noisy signal', ylabel='x[n]')
 
 
     
-![png](../images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_12_0.png)
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_12_0.png)
     
 
 
@@ -239,7 +239,7 @@ plt.show()
 
 
     
-![png](../images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_17_0.png)
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_17_0.png)
     
 
 
@@ -309,7 +309,7 @@ plt.show()
 
 
     
-![png](../images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_22_0.png)
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_22_0.png)
     
 
 
@@ -333,13 +333,13 @@ print('First 10 values of T:', T[:10])
 
 
     
-![png](../images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_24_0.png)
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_24_0.png)
     
 
 
 
     
-![png](../images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_24_1.png)
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_24_1.png)
     
 
 
@@ -416,7 +416,7 @@ plt.show()
 
 
     
-![png](../images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_29_0.png)
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_29_0.png)
     
 
 
@@ -466,7 +466,7 @@ plt.show()
 
 
     
-![png](../images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_31_0.png)
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_31_0.png)
     
 
 
