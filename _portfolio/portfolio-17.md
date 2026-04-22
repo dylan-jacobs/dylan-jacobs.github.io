@@ -1,12 +1,14 @@
 ---
 title: "Statistical Signal Processing Event Detection using Matched Filters and Improved Generative Filters"
 date: April 21 2026
-excerpt: "Waveform detection using matched filter and improved likelihood ratio tests.<br/><img src='/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_31_0.png' width='350'>"
+excerpt: "Waveform detection using matched filter and improved likelihood ratio tests.<br/><img src='/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_33_0.png' width='350'>"
 collection: portfolio-archive
 categories: 
     - ai
     - electronics
 ---
+
+> Author: Dylan Jacobs
 
 Completed to augment theory learned in Statistical Signal Processing class. Code is entirely original except for reference code from Professor Jesús Cid-Sueiro for ```matplotlib``` plotting  only.
 
@@ -28,14 +30,14 @@ Random number seed --> reproducible results
 
 
 ```python
-np.random.seed(42)
+np.random.seed(9)
 ```
 
 # 1. Signal Generation
 Generate a noisy signal to serve as the test data.
 
 # 1.1 Initialize the waveform
-We select the target waveform to be a combination of sinusoids $s[n]=\cos(\omega \pi) + \cos(2\omega \pi)$ with frequency $\omega = 0.1 \pi$. Thus, we use a temporal bin size $W=20$ to ensure the signal period exactly corresponds to $W$.
+We select the target waveform to be a combination of sinusoids $s[n]=\sin(\omega \pi) + \sin(2\omega \pi)$ with angular frequency $\omega = 0.1 \pi$. Thus, we use a temporal bin size $W=20$ to ensure the signal period exactly corresponds to $W$.
 
 
 ```python
@@ -44,7 +46,7 @@ W = 20
 omega = 0.1*pi
 nvals = np.arange(0, W)
 
-s = np.cos(omega*nvals) + np.cos(omega*nvals*4)
+s = np.sin(omega*nvals) + np.sin(omega*nvals*2)
 
 plt.figure(figsize=(4, 2))
 plt.stem(nvals, s)
@@ -150,9 +152,9 @@ We now add zero-mean random Gaussian noise $w[n]$ with variance $\sigma ^2 = 1.4
 ```python
 variance = 1.4
 sigma = np.sqrt(variance)
-w = np.random.normal(0, sigma, 40000)
+w = np.random.normal(0, sigma, L)
 
-x = np.add(z, w)
+x = z + w
 plot_segments(x, n=800, n_rows=4, title='Noisy signal', ylabel='x[n]')
 ```
 
@@ -176,6 +178,9 @@ $$ \underbrace{\sum_{n = kW}^{(k+1)W} s[n]x[n]}_{MF} \quad \overset{D=1}{\unders
 
 where $\displaystyle \tilde{\eta}=\sigma^2 \log(\eta) + \frac{1}{2}\sum_{n = kW}^{(k+1)W} s[n]^2$ depends on the threshold parameter $\eta$, which is determined by the type of detector (e.g. ML, MAP, NP, etc).
 
+
+
+
 ```python
 X = np.reshape(x, (K, W))
 
@@ -184,12 +189,8 @@ print(X.shape)
 
     (2000, 20)
     
-We can rewrite the LLRT by defining the test statistic 
-$$ T_k = \mathbf{x}_{k}^{T} \mathbf{s} $$   
-and target signal energy 
-$$ E = \sum_{n = kW}^{(k+1)W}s[n]^2 $$.
 
-If we implement an ML detector, $\eta=1 \implies \log( \eta)=0$. Then, the LLRT becomes
+We can rewrite the LLRT by defining the test statistic $\displaystyle T_{k} = \mathbf{x}_{k}^{T} \mathbf{s} $ and target signal energy $\displaystyle E = \sum_{n = kW}^{(k+1)W}s[n]^2$. If we implement a maximum likelihood (ML) detector, $\eta=1 \implies \log(\eta)=0$. Then, the LLRT becomes
 
 $$ T_k \gtrless \frac{1}{2}E $$
 
@@ -212,15 +213,15 @@ print('First 10 values of D:', D[:10])
 print('First 10 values of T:', T[:10])
 ```
 
-    Signal power E: 20.0
-    Threshold eta_tilde: 10.0
+    Signal power E: 20.000000000000004
+    Threshold eta_tilde: 10.000000000000002
     Shape of H: (2000,)
     Shape of T: (2000,)
     Shape of D: (2000,)
-    First 10 values of H: [0 0 0 0 1 1 1 0 0 0]
-    First 10 values of D: [0 0 0 0 1 1 1 0 0 0]
-    First 10 values of T: [-6.5133609  -8.46987125  9.04217375 -5.33902768 23.39117615 14.72106205
-     20.28379332 -2.3278463  -3.70028707 -2.62882768]
+    First 10 values of H: [1 0 0 1 1 0 0 0 1 0]
+    First 10 values of D: [1 0 0 1 1 0 0 0 1 0]
+    First 10 values of T: [11.33562858  5.43056701  7.45988828 18.03760684 14.68944898  0.35020151
+      6.15415609 -0.26436816 28.98408475  3.73804891]
     
 
 
@@ -261,10 +262,10 @@ print('False alarm probability P_FA:', prob_FA)
 print('Detection probability P_D:', prob_D)
 ```
 
-    Number of false alarms n_FA: 60
-    Number of detections n_D: 415
-    False alarm probability P_FA: 0.03816793893129771
-    Detection probability P_D: 0.969626168224299
+    Number of false alarms n_FA: 53
+    Number of detections n_D: 378
+    False alarm probability P_FA: 0.03291925465838509
+    Detection probability P_D: 0.9692307692307692
     
 
 
@@ -319,17 +320,25 @@ We now convolve (using ```np.convolve```) the signal with the linear matched fil
 
 
 ```python
-filtered_clean = np.convolve(z, s, mode='same')
+s_reversed = s[::-1]
+filtered_clean = np.convolve(z, s_reversed, mode='same')
 
-filtered = np.convolve(x, s, mode='same')
+filtered = np.convolve(x, s_reversed, mode='same')
+
 
 plot_segments(filtered_clean, n=800, n_rows=4, title='Clean signal filtered', ylabel='filtered_clean[n]')
 plot_segments(filtered, n=800, n_rows=4, title='Noisy signal filtered', ylabel='filtered[n]')
 
-D_filtered = np.where(filtered > eta_tilde, 1, 0)
-print('First 10 values of H:', H[:10])
-print('First 10 values of D:', D[:10])
-print('First 10 values of T:', T[:10])
+offset = W // 2
+T_per_bin = filtered[offset::W]
+D_filtered = np.where(T_per_bin > eta_tilde, 1, 0).flatten()
+print('Shape of H:', H.shape)
+print('Shape of D (filtered):', D_filtered.shape)
+print('First 10 values of H:           ', H[:10])
+print('First 10 values of D (filtered):', D_filtered[:10])
+
+plot_segments(H, n=100, n_rows=4)
+plot_segments(D_filtered, n=100, n_rows=4)
 ```
 
 
@@ -344,11 +353,23 @@ print('First 10 values of T:', T[:10])
     
 
 
-    First 10 values of H: [0 0 0 0 1 1 1 0 0 0]
-    First 10 values of D: [0 0 0 0 0 0 0 0 0 0]
-    First 10 values of T: [-6.5133609  -8.46987125  9.04217375 -5.33902768 23.39117615 14.72106205
-     20.28379332 -2.3278463  -3.70028707 -2.62882768]
+    Shape of H: (2000,)
+    Shape of D (filtered): (2000,)
+    First 10 values of H:            [1 0 0 1 1 0 0 0 1 0]
+    First 10 values of D (filtered): [1 0 0 1 1 0 0 0 1 0]
     
+
+
+    
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_24_3.png)
+    
+
+
+
+    
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_24_4.png)
+    
+
 
 # 3. Detection Under Impulsive Noise
 When the signal is corrupted with impulsive noise  (i.e. combined Gaussian noise with noticeable impulses), a matched filter performs markedly worse. This setup is typical of power-line communication (PLC) systems, motivating an improved filter.
@@ -388,17 +409,19 @@ def gFunction(x, var1, var2, epsilon):
 We test the simple matched filter from before on the new impulsive noise and compare the results to the results from the updated generative filter model. We use parameters
 
 $$ \epsilon = 0.15 $$  
-
 $$ \sigma_1^2 = 1 $$  
-
 $$ \sigma_2^2 = 50 $$  
 
 to define the impulsive noise, which we visualize below compared to the original Gaussian noise.
 
 
 ```python
-w_impulsive = impulsive_noise(0.15,1,50,40000)
-w_Gaussian = np.sqrt(1)*np.random.randn(40000)
+epsilon = 0.15
+var1 = 1
+var2 = 50
+
+w_impulsive = impulsive_noise(epsilon, var1, var2, L)
+w_Gaussian = np.sqrt(1)*np.random.randn(L)
 
 plt.figure()
 plt.subplot(221)
@@ -423,18 +446,27 @@ plt.show()
     
 
 
-We now implement the generative filter decision maker and compare it to the matched filter from earlier on the impulsive noise.
+The newly contaminated signal is shown below:
 
 
 ```python
-epsilon = 0.15
-var1 = 1
-var2 = 50
-
 # add noise
 x_hat = z + w_impulsive
 X_hat = np.reshape(x_hat, (K, W))
 
+plot_segments(x_hat, n=800, n_rows=4, title='Signal contaminated with impulsive noise')
+```
+
+
+    
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_31_0.png)
+    
+
+
+We now implement the generative filter decision maker and compare it to the matched filter from earlier on the impulsive noise.
+
+
+```python
 g = gFunction(x_hat, var1, var2, epsilon)
 G = np.reshape(g, (K, W))
 
@@ -469,9 +501,8 @@ plt.show()
 
 
     
-![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_31_0.png)
+![png](/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_33_0.png)
     
 
 
 Clearly, the updated LLRT is much more robust to this new impulsive noise.
-
