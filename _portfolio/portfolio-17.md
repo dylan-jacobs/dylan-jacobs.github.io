@@ -12,7 +12,7 @@ Completed to augment theory learned in Statistical Signal Processing class. Code
 
 In this project, I tackle the problem of **waveform detection**: detecting the presence of a known signal within a noisy observed signal. As a first step, I assume the noise to be taken from independent, identically distributed (IID) Gaussian distributions, which is representative of many applicable communication (i.e. sonar or radar) and signal detection systems.
 
-As an extension, in Section 3 I consider a signal contaminated with impulsive, rather than simple Gaussian noise, which is more representative of power-line communication systems and requires a more complex filtering system to resolve.
+As an extension, in Section 3, I consider a signal contaminated with impulsive, rather than simple Gaussian noise, which is more representative of power-line communication systems and requires a more complex filtering system to resolve.
 
 
 
