@@ -170,8 +170,8 @@ Partition the signal into temporal bins, then implement a matched filter (LTI) t
 # 2.1 The Matched Filter
 At time bin $k$, the detection problem has two hypotheses:
 
-$$ H=0: x[n] = w[n] $$
-$$ H=1: x[n] = s[n] + w[n] $$
+$$ H=0: x[n] = w[n] $$  
+$$ H=1: x[n] = s[n] + w[n] $$  
 
 Which can be solved using a logarithmic likelihood ratio test (LLRT)
 $$ \underbrace{\sum_{n = kW}^{(k+1)W} s[n]x[n]}_{MF} \quad \overset{D=1}{\underset{D=0}{\gtrless}} \quad \tilde{\eta} $$
