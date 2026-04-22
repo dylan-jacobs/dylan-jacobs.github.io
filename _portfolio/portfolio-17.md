@@ -176,9 +176,6 @@ $$ \underbrace{\sum_{n = kW}^{(k+1)W} s[n]x[n]}_{MF} \quad \overset{D=1}{\unders
 
 where $\displaystyle \tilde{\eta}=\sigma^2 \log(\eta) + \frac{1}{2}\sum_{n = kW}^{(k+1)W} s[n]^2$ depends on the threshold parameter $\eta$, which is determined by the type of detector (e.g. ML, MAP, NP, etc).
 
-
-
-
 ```python
 X = np.reshape(x, (K, W))
 
@@ -187,12 +184,9 @@ print(X.shape)
 
     (2000, 20)
     
-
 We can rewrite the LLRT by defining the test statistic 
-
-$$ T_k = \mathbf{x}_k^T \mathbf{s} $$   
+$$ T_k = \mathbf{x}_{k}^{T} \mathbf{s} $$   
 and target signal energy 
-
 $$ E = \sum_{n = kW}^{(k+1)W}s[n]^2 $$.
 
 If we implement an ML detector, $\eta=1 \implies \log( \eta)=0$. Then, the LLRT becomes
@@ -393,9 +387,11 @@ def gFunction(x, var1, var2, epsilon):
 # 3.1 Simple Matched Filter vs Updated Generative Model
 We test the simple matched filter from before on the new impulsive noise and compare the results to the results from the updated generative filter model. We use parameters
 
-$$ \epsilon = 0.15 $$
-$$ \sigma_1^2 = 1 $$
-$$ \sigma_2^2 = 50 $$
+$$ \epsilon = 0.15 $$  
+
+$$ \sigma_1^2 = 1 $$  
+
+$$ \sigma_2^2 = 50 $$  
 
 to define the impulsive noise, which we visualize below compared to the original Gaussian noise.
 
