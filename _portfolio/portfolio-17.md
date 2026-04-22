@@ -190,7 +190,14 @@ print(X.shape)
     (2000, 20)
     
 
-We can rewrite the LLRT by defining the test statistic $\displaystyle T_{k} = \mathbf{x}_{k}^{T} \mathbf{s} $ and target signal energy $\displaystyle E = \sum_{n = kW}^{(k+1)W}s[n]^2$. If we implement a maximum likelihood (ML) detector, $\eta=1 \implies \log(\eta)=0$. Then, the LLRT becomes
+We can rewrite the LLRT by defining the test statistic  
+$$\displaystyle T_{k} = \mathbf{x}_{k}^{T} \mathbf{s} $$  
+
+and target signal energy  
+
+$$\displaystyle E = \sum_{n = kW}^{(k+1)W}s[n]^2$$.   
+
+If we implement a maximum likelihood (ML) detector, $\eta=1 \implies \log(\eta)=0$. Then, the LLRT becomes
 
 $$ T_k \gtrless \frac{1}{2}E $$
 
