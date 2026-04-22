@@ -1,7 +1,7 @@
 ---
 title: "Statistical Signal Processing Event Detection using Matched Filters and Improved Generative Filters"
 date: April 21 2026
-excerpt: "Waveform detection using matched filter and improved likelihood ratio tests.<br/><img src='/images/project_icons/event-detection-roc.png' width='500'>"
+excerpt: "Waveform detection using matched filter and improved likelihood ratio tests.<br/><img src='/images/statistical_signal_processing_lab1_event_detection_files/statistical_signal_processing_lab1_event_detection_31_0.png' width='350'>"
 collection: portfolio-archive
 categories: 
     - ai
