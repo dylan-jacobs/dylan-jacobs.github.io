@@ -9,20 +9,23 @@ categories:
 
 > Author: Dylan Jacobs
 
-Project: [Github](https://github.com/dylan-jacobs/CNN-Drawing-Recognition)
+Project: [Github](https://github.com/dylan-jacobs/CNN-Drawing-Recognition)  
 **Interactive project demonstration:** [Click here](https://dylan-jacobs.github.io/cnn-hand-drawn-image-predictor-interactive-demo) to try out the model yourself
 
 
 ## Slide 1
 
-![Slide 1](../images/slides_images/slide_1.png)
-
+<figure>
+  <img src="/images/slides_images/slide_1.png" width="600">
+</figure>
 
 ---
 
 ## Slide 2
 
-![Slide 2](../images/slides_images/slide_2.png)
+<figure>
+  <img src="/images/slides_images/slide_2.png" width="600">
+</figure>
 
 Project Scope  
 ● GOAL: Classify a hand-drawn sketch into 1 of 250 categories  
@@ -44,7 +47,9 @@ Project Scope
 
 ## Slide 3
 
-![Slide 3](../images/slides_images/slide_3.png)
+<figure>
+  <img src="/images/slides_images/slide_3.png" width="600">
+</figure>
 
 Model Architecture  
 ● Input: grayscale image resized to 128x128  
@@ -67,7 +72,9 @@ sketches
 
 ## Slide 4
 
-![Slide 4](../images/slides_images/slide_4.png)
+<figure>
+  <img src="/images/slides_images/slide_4.png" width="600">
+</figure>
 
 Challenge: Limited Training Data  
 ~14,000 training samples  
@@ -77,7 +84,9 @@ Solution: use torch.RandomTransforms!
 
 ## Slide 5
 
-![Slide 5](../images/slides_images/slide_5.png)
+<figure>
+  <img src="/images/slides_images/slide_5.png" width="600">
+</figure>
 
 Training  
 ● Optimizer: Adam     
@@ -95,7 +104,9 @@ Training
 
 ## Slide 6
 
-![Slide 6](../images/slides_images/slide_6.png)
+<figure>
+  <img src="/images/slides_images/slide_6.png" width="600">
+</figure>
 
 Challenge: Overﬁtting on ﬁrst attempts!  
 
@@ -110,7 +121,9 @@ Solutions:
 
 ## Slide 7
 
-![Slide 7](../images/slides_images/slide_7.png)
+<figure>
+  <img src="/images/slides_images/slide_7.png" width="600">
+</figure>
 
 Post-Training Weights  
 First 8 ﬁlters from each of the 5 convolution layers  
@@ -119,7 +132,9 @@ First 8 ﬁlters from each of the 5 convolution layers
 
 ## Slide 8
 
-![Slide 8](../images/slides_images/slide_8.png)
+<figure>
+  <img src="/images/slides_images/slide_8.png" width="600">
+</figure>
 
 Results  
 ● Test accuracy: ~68%   
@@ -131,7 +146,9 @@ Results
 
 ## Slide 9
 
-![Slide 9](../images/slides_images/slide_9.png)
+<figure>
+  <img src="/images/slides_images/slide_9.png" width="600">
+</figure>
 
 More Results
 
@@ -139,7 +156,9 @@ More Results
 
 ## Slide 10
 
-![Slide 10](../images/slides_images/slide_10.png)
+<figure>
+  <img src="/images/slides_images/slide_10.png" width="600">
+</figure>
 
 Conclusion
 ● The ﬁnal model achieves 68% accuracy on a 250-class problem with a relatively small custom CNN  
