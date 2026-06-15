@@ -10,7 +10,7 @@ categories:
 > Author: Dylan Jacobs
 
 Project: [Github](https://github.com/dylan-jacobs/CNN-Drawing-Recognition)  
-**Interactive project demonstration:** [Click here](https://dylan-jacobs.github.io/cnn-hand-drawn-image-predictor-interactive-demo) to try out the model yourself
+**Interactive project demonstration:** [Click here](https://dylan-jacobs.github.io/cnn-hand-drawn-image-predictor-interactive-demo) to try out the model yourself!!
 
 
 ## Slide 1
@@ -30,18 +30,18 @@ Project: [Github](https://github.com/dylan-jacobs/CNN-Drawing-Recognition)
 Project Scope  
 ● GOAL: Classify a hand-drawn sketch into 1 of 250 categories  
 ● Dataset: TU-Berlin Hand Sketch  
-    ○ 250 image classes, 20,000 images  
-    ⤷ 80 images per class  
+  ○ 250 image classes, 20,000 images  
+  ⤷ 80 images per class  
 ● Difﬁculties:   
-    ○ Drawing variation  
-    ○ Sparse line drawings  
-    ○ Visually similar classes (mug vs cup, cat vs tiger)  
+  ○ Drawing variation  
+  ○ Sparse line drawings  
+  ○ Visually similar classes (mug vs cup, cat vs tiger)  
 ● 72/18/10 Train/Validation/Test split  
 ● Parameters:  
-    ○ Image size: 128x128  
-    ○ Batch size: 150  
-    ○ Learning Rate: 0.001 (scheduled)  
-    ○ Epochs: 130  
+  ○ Image size: 128x128  
+  ○ Batch size: 150  
+  ○ Learning Rate: 0.001 (scheduled)  
+  ○ Epochs: 130  
 
 ---
 
