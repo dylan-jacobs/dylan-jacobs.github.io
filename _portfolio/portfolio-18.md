@@ -1,6 +1,6 @@
 ---
 title: "Hand-Drawn Image Classification Using a Convolutional Neural Network"
-date: April 21 2026
+date: May 9 2026
 excerpt: "Classifies hand-drawn sketches into 1 of 250 categories, trained on images from the TU-Berlin Hand Sketch dataset.<br/><img src='/images/CNN_Image_Classification_files/CNN_Image_Classification_12_1.png' width='350'>"
 collection: portfolio-archive
 categories: 
