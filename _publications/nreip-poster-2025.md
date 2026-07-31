@@ -1,7 +1,7 @@
 ---
 title: "US Naval Research Laboratory Thermoelectric Materials Research Poster 2025"
 
-category: manuscripts
+category: posters
 collection: posters
 venue: Swarthmore Sigma Xi Poster Session
 permalink: /publication/nreip-poster-2025
