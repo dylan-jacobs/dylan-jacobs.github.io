@@ -20,7 +20,9 @@ Education
   * Electrical circuit applications and analysis (ENGR 072, ENGR 011)
   * Digital Signal Processing (ENGR 071)
   * Thermo-fluid Mechanics (ENGR 041)
+  * Computer Vision (taken at University of Carlos III in Madrid)
   * Real Analysis (MATH 063)
+  * Statistical Signal Processing (taken at University of Carlos III in Madrid)
   * Electromagnetism, waves, and optics with biomedical applications (PHYS 004L)
   * Ordinary & partial differential equations (MATH 043, MATH 054)
   * Data structures & algorithms (CPSC 035)
@@ -43,13 +45,12 @@ Work & research experience
   * Presented research updates to NRL scientists and engineers, wrote standard operating procedures for the LN2 dispenser and LFA.
   * I learned fundamentals of nanomaterial science, especially regarding crystal growth, chemical bonding, and electron physics.
   * Introduced me to semiconductor and solid-state physics; relevant topics included n and p-type doping, electron bands, p/n junctions, diodes, transistors, and thermoelectrics.
+  * Poster presentations: Swarthmore Sigma Xi 2025 poster session.
 
 * January 2024—present: Applied Mathematics Research Assistant                                                                
-  * Utilizing principles of **computational fluid dynamics and numerical methods** to research high-order 
-  accurate methods for time-dependent partial differential equations (PDEs), **plasma/kinetic models.** 
-  * Using **MATLAB** to implement PDE-solvers 
-  * Presenting research results at Swarthmore Sigma Xi poster session.  
+  * Utilizing computational fluid dynamics and numerical methods to research high-order accurate methods for partial differential equations (PDEs), plasma/kinetic models in MATLAB. 
   * Developing a novel low-rank, structure-preserving, highly accurate integrator for the Vlasov-Fokker-Planck equation in cylindrical coordinates; documenting research results in LaTeX journal 
+  * Poster presentations: 2025 SIAM NNP conference, 2024 & 2025 Sigma Xi Swarthmore poster sessions.
 
 * December 2023—May 2024: Electrical Engineering Research Assistant (project [link](/_portfolio/portfolio-5.md))
   * Researched electrical and aerospace science behind oscillatory wind-energy devices to develop a 
@@ -69,8 +70,8 @@ Work & research experience
   
 Skills
 ======
-* **Programming Languages**: Python, MATLAB, Java, C++, C#, Kotlin 
-* **Software**: VSCode, MATLAB, Git, SolidWorks, AutoCAD, MS Office 
+* **Programming Languages**: Python, MATLAB, Arduino, Java, C++, C#, Kotlin 
+* **Software**: VSCode, Git, SolidWorks, AutoCAD, MS Office, Tensorflow, PyTorch
 * **Foreign Languages**: Spanish (Fluent), Global Seal of Biliteracy (2022)
 
 Projects
@@ -81,6 +82,7 @@ Projects
 
 Awards
 ======
-* [Delaware Valley Engineers Undergraduate Scholarship](https://www.engrclub.org/content.aspx?page_id=22&club_id=386597&module_id=316482), 2025
-* [Donna Prentice Memorial Scholarship - American Society of Highway Engineers](https://delvalley.ashe.pro/education/scholarships/), 2024
-* [National Merit Scholarship](https://www.nationalmerit.org/s/1758/start.aspx?gid=2&pgid=61), 2023
+* [Tau Beta Pi Engineering Honors Society](https://www.tbp.org/home.cfm) - 2026
+* [Delaware Valley Engineers Undergraduate Scholarship](https://www.engrclub.org/content.aspx?page_id=22&club_id=386597&module_id=316482) - 2025, 2026
+* [Donna Prentice Memorial Scholarship - American Society of Highway Engineers](https://delvalley.ashe.pro/education/scholarships/) - 2024
+* [National Merit Scholarship](https://www.nationalmerit.org/s/1758/start.aspx?gid=2&pgid=61) - 2023
