@@ -50,8 +50,7 @@ Work & research experience
 * January 2024—present: Applied Mathematics Research Assistant                                                                
   * Utilizing computational fluid dynamics and numerical methods to research high-order accurate methods for partial differential equations (PDEs), plasma/kinetic models in MATLAB. 
   * Developed a novel low-rank, structure-preserving, highly accurate integrator for the Vlasov-Fokker-Planck equation in cylindrical coordinates. 
-      * Paper submitted for review August 2026:  
-      J. Nakao, D.T. Jacobs*, and W. Taitano, ["An adaptive and conservative low-rank IMEX solver for the hybrid ion Vlasov-Fokker-Planck and fluid electron system."](https://arxiv.org/pdf/2608.19603) __Submitted__.
+      * Paper submitted for review August 2026: J. Nakao, D.T. Jacobs*, and W. Taitano, ["An adaptive and conservative low-rank IMEX solver for the hybrid ion Vlasov-Fokker-Planck and fluid electron system."](https://arxiv.org/pdf/2608.19603) __Submitted__.
   * Poster presentations: 2025 SIAM NNP conference, 2024 & 2025 Sigma Xi Swarthmore poster sessions.
 
 * December 2023—May 2024: Electrical Engineering Research Assistant (project [link](/_portfolio/portfolio-5.md))
