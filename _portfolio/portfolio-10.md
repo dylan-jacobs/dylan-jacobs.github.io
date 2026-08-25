@@ -5,7 +5,7 @@ excerpt: "Current research project under Swarthmore Professor Joseph Nakao: solv
 collection: portfolio
 categories: cfd
 ---
-[Github Repository](https://github.com/dylan-jacobs/computational-fluid-dynamics/tree/main/Vlasov-Fokker-Planck-Solver)
+[Github Repository](https://github.com/dylan-jacobs/HybridVFPSolver)
 
 
 ### The model
