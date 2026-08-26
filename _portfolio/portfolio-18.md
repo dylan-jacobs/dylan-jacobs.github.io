@@ -10,7 +10,7 @@ categories:
 > Author: Dylan Jacobs
 
 Project: [Github](https://github.com/dylan-jacobs/CNN-Drawing-Recognition)  
-**Interactive project demonstration:** [Click here](https://dylan-jacobs.github.io/cnn-hand-drawn-image-predictor-interactive-demo) to try out the model yourself!!
+**Interactive project demonstration:** [Click here](https://dylan-jacobs.github.io/cnn-hand-drawn-image-predictor-interactive-demo){: .btn .btn--info} to try out the model yourself!!
 
 
 ## Slide 1
@@ -160,7 +160,7 @@ More Results
   <img src="/images/slides_images/slide_10.png" width="600">
 </figure>
 
-Conclusion
+Conclusion  
 ● The ﬁnal model achieves 68% accuracy on a 250-class problem with a relatively small custom CNN  
 ● 10,679,994 trainable parameters  
 ● The biggest lessons:  
