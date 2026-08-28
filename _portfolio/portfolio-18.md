@@ -9,8 +9,8 @@ categories:
 
 > Author: Dylan Jacobs
 
-Project: [Github](https://github.com/dylan-jacobs/CNN-Drawing-Recognition)  
-**Interactive project demonstration:** [Click here](https://dylan-jacobs.github.io/cnn-hand-drawn-image-predictor-interactive-demo){: .btn .btn--info} to try out the model yourself!!
+Project: [Github](https://github.com/dylan-jacobs/CNN-Drawing-Recognition){: target="_blank"}  
+**Interactive project demonstration:** [Click here](https://dylan-jacobs.github.io/cnn-hand-drawn-image-predictor-interactive-demo){: .btn .btn--info target="_blank"} to try out the model yourself!!
 
 
 ## Slide 1

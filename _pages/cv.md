@@ -9,8 +9,8 @@ redirect_from:
 
 {% include base_path %}
 
-[View Resume as PDF](/files/Resume.pdf){: .btn .btn--info}   
-[View Transcript as PDF](/files/Dylan_Jacobs_Swarthmore_transcript.pdf){: .btn .btn--info}
+[View Resume as PDF](/files/Resume.pdf){: .btn .btn--info target="_blank"}   
+[View Transcript as PDF](/files/Dylan_Jacobs_Swarthmore_transcript.pdf){: .btn .btn--info target="_blank"}
 
 Education
 ======

@@ -7,7 +7,7 @@ categories: cfd
 ---
 Vlasov-Poisson plasma model solver demonstrated on problems such as weak-Landau-damping and two-stream instability. The partial differential equation plasma system is solved using an explicit, third-order Runge-Kutta method in MATLAB. This project was a small part of my larger summer 2024 research project learning and implementing high-order accuracy, structure-preserving partial differential equation solvers for plasma kinetic models. 
 
-[Github Repository](https://github.com/dylan-jacobs/computational-fluid-dynamics)
+[Github Repository](https://github.com/dylan-jacobs/computational-fluid-dynamics){: target="_blank"}
 
 Presentation:
 ------

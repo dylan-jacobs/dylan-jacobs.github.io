@@ -5,7 +5,7 @@ excerpt: "Current research project under Swarthmore Professor Joseph Nakao: solv
 collection: portfolio
 categories: cfd
 ---
-[Github Repository](https://github.com/dylan-jacobs/HybridVFPSolver)
+[Github Repository](https://github.com/dylan-jacobs/HybridVFPSolver){: target="_blank"}
 
 
 ### The model

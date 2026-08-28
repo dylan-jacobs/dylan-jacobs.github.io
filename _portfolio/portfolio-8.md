@@ -9,7 +9,7 @@ categories:
 ---
 An iterative, inverse-kinematics **Python** algorithm to model the optimal movement of a human thumb between two given points in 3D space. This numerical methods algorithm was developed as a final project for my Computer Engineering class during the Fall of 2024. 
 
-[Github Repository](https://github.com/dylan-jacobs/e21-final-project)
+[Github Repository](https://github.com/dylan-jacobs/e21-final-project){: target="_blank"}
 
 Presentation:
 ------
