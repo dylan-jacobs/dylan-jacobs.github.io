@@ -13,11 +13,11 @@ During the summers of 2025 and 2026, I worked as a research intern in the Power 
 During the summer of 2026, I used scanning electron microscopy (SEM) and energy-dispersive x-ray spectroscopy (EDXS) to characterize nanomaterials synthesized using atomic layer deposition (ALD). I also designed and ran ALD experiments with the goal of improving precursor dose times while achieving uniform atomic-layer infiltration coatings on porous nanomaterial compacts. The applications of this research include high-interfacial-area nanocomposites and improved thermoelectrics with high electrical conductivity and low thermal conductivity.  
 
 I was also developing an inductively coupled plasma (ICP) reactor to synthesize nanoparticles. I built vacuum and cooling systems for the reactor, leak tested the system, and got the reactor online, after which I ran Argon and $H_2$ plasma experiments. I also minimized reflected RF power by tuning the matching network using a Smith chart, and mitigated RF electromagnetic interference by designing and constructing a Faraday cage around the plasma tube.
-<embed src="/files/NREIP-Research-Poster-2026.pdf#toolbar=0" type='application/pdf' width="100%" height="600px">
+<embed src="/files/NREIP-Research-Poster-2026.pdf#toolbar=0" type='application/pdf' width="100%">
 
 ## Advanced Materials Research Intern (NREIP 2025)
 During the summer of 2025, I used laser flash analysis (LFA) to characterize the thermal properties of semiconductor samples and thermoelectric nanomaterials, used to generate electricity from waste heat. I developed and optimized a procedure that yielded high-quality measurements of thermal diffusivity and conductivity for infrared-transparent samples that were previously prohibitively challenging to measure. I also created an Arduino-controlled liquid nitrogen (LN2) dispenser to automatically cool the LFA instrument, overcoming the need for researchers to constantly refill its LN2 dewar and enabling long, automated thermoelectric characterization.
-<embed src="/files/Sigma-Xi-Poster-2025.pdf#toolbar=0" type='application/pdf' width="100%" height="600px">
+<embed src="/files/Sigma-Xi-Poster-2025.pdf#toolbar=0" type='application/pdf' width="100%">
 
 
 # Computational Fluid Dynamics and Numerical Methods Research
@@ -131,7 +131,7 @@ Mass, momentum, and energy of the system across space, evolved over time.
 
 Most recently presented at SIAM NNP 2025 Conference poster session:
 ------
-<embed src='/files/SIAM_NNP_Poster_2025.pdf' type='application/pdf' width='100%' height='600px'>
+<embed src='/files/SIAM_NNP_Poster_2025.pdf#toolbar=0' type='application/pdf' width='100%' height='600px'>
 
 
 ### References
