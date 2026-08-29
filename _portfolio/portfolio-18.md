@@ -28,20 +28,20 @@ Project: [Github](https://github.com/dylan-jacobs/CNN-Drawing-Recognition){: tar
 </figure>
 
 Project Scope  
-● GOAL: Classify a hand-drawn sketch into 1 of 250 categories  
-● Dataset: TU-Berlin Hand Sketch  
-  ○ 250 image classes, 20,000 images  
+* GOAL: Classify a hand-drawn sketch into 1 of 250 categories  
+* Dataset: TU-Berlin Hand Sketch  
+  * 250 image classes, 20,000 images  
   ⤷ 80 images per class  
-● Difﬁculties:   
-  ○ Drawing variation  
-  ○ Sparse line drawings  
-  ○ Visually similar classes (mug vs cup, cat vs tiger)  
-● 72/18/10 Train/Validation/Test split  
-● Parameters:  
-  ○ Image size: 128x128  
-  ○ Batch size: 150  
-  ○ Learning Rate: 0.001 (scheduled)  
-  ○ Epochs: 130  
+* Difﬁculties:   
+  * Drawing variation  
+  * Sparse line drawings  
+  * Visually similar classes (mug vs cup, cat vs tiger)  
+* 72/18/10 Train/Validation/Test split  
+* Parameters:  
+  * Image size: 128x128  
+  * Batch size: 150  
+  * Learning Rate: 0.001 (scheduled)  
+  * Epochs: 130  
 
 ---
 
@@ -52,21 +52,21 @@ Project Scope
 </figure>
 
 Model Architecture  
-● Input: grayscale image resized to 128x128  
-● 5 convolutional blocks, increasing ﬁlters 32 → 64 → 128 → 256 → 512  
-● Each block: Conv2D + BatchNorm + ReLU + MaxPool  
-● Fully connected layers: 1024 → 512 → 256 → 250  
-● 50% Dropout to reduce overﬁtting   
+* Input: grayscale image resized to 128x128  
+* 5 convolutional blocks, increasing ﬁlters 32 → 64 → 128 → 256 → 512  
+* Each block: Conv2D + BatchNorm + ReLU + MaxPool  
+* Fully connected layers: 1024 → 512 → 256 → 250  
+* 50% Dropout to reduce overﬁtting   
 
  
 Architecture Reasoning  
 
 Increasing ﬁlters with depth lets the network move from simple low-level features to more 
 complex object structure  
-● Batch normalization stabilizes training and helps the model converge.  
-● Grayscale input matches the dataset, since shape matters more than color for hand-drawn 
+* Batch normalization stabilizes training and helps the model converge.  
+* Grayscale input matches the dataset, since shape matters more than color for hand-drawn 
 sketches  
-● Max pooling reduces spatial size and computation while preserving the most important features  
+* Max pooling reduces spatial size and computation while preserving the most important features  
 
 ---
 
@@ -89,16 +89,16 @@ Solution: use torch.RandomTransforms!
 </figure>
 
 Training  
-● Optimizer: Adam     
-    ○ Initial LR=0.001  
-    ○ weight_decay=1e-4  
-● Loss: CrossEntropyLoss with label smoothing 0.1  
-● Scheduler: ReduceLROnPlateau (factor=0.1)  
-● Best-checkpoint saving: only saves weights when validation loss improves  
-● Epochs: 130  
-● Batch size: 150  
-● Trained on Colab T4 GPU  
-● Lack of data → use torch.RandomTransforms!  
+* Optimizer: Adam     
+    * Initial LR=0.001  
+    * weight_decay=1e-4  
+* Loss: CrossEntropyLoss with label smoothing 0.1  
+* Scheduler: ReduceLROnPlateau (factor=0.1)  
+* Best-checkpoint saving: only saves weights when validation loss improves  
+* Epochs: 130  
+* Batch size: 150  
+* Trained on Colab T4 GPU  
+* Lack of data → use torch.RandomTransforms!  
 
 ---
 
@@ -111,11 +111,11 @@ Training
 Challenge: Overﬁtting on ﬁrst attempts!  
 
 Solutions:  
-● Add label_smoothing: replace hard 0/1 classiﬁcation labels with “softened” probabilities (e.g. 0.05, 0.95)  
-● Increase Dropout probabilities to 50%  
-● Add weight_decay to the optimizer  
-    ○ Penalize large weights to reduce reliance on single weights  
-● Aggressively apply torch.RandomTransforms → more training data augmentation  
+* Add label_smoothing: replace hard 0/1 classiﬁcation labels with “softened” probabilities (e.g. 0.05, 0.95)  
+* Increase Dropout probabilities to 50%  
+* Add weight_decay to the optimizer  
+    * Penalize large weights to reduce reliance on single weights  
+* Aggressively apply torch.RandomTransforms → more training data augmentation  
 
 ---
 
@@ -137,10 +137,10 @@ First 8 ﬁlters from each of the 5 convolution layers
 </figure>
 
 Results  
-● Test accuracy: ~68%   
-● Main problem: lack of data!!  
-    ○ 14,000 training images for 250 classes  ⇒ < 60 images per class  
-● Also, lack of GPU Compute Units  
+* Test accuracy: ~68%   
+* Main problem: lack of data!!  
+    * 14,000 training images for 250 classes  ⇒ < 60 images per class  
+* Also, lack of GPU Compute Units  
 
 ---
 
@@ -161,13 +161,13 @@ More Results
 </figure>
 
 Conclusion  
-● The ﬁnal model achieves 68% accuracy on a 250-class problem with a relatively small custom CNN  
-● 10,679,994 trainable parameters  
-● The biggest lessons:  
-    ○ Diagnose bottlenecks before iterating/changing design  
-    ○ Train acc > val acc means you can  likely push the model harder  
-    ○ Size of data set is extremely important, especially with lots of classes  
-    ○ GPU Compute Units are important!!  
+* The ﬁnal model achieves 68% accuracy on a 250-class problem with a relatively small custom CNN  
+* 10,679,994 trainable parameters  
+* The biggest lessons:  
+    * Diagnose bottlenecks before iterating/changing design  
+    * Train acc > val acc means you can  likely push the model harder  
+    * Size of data set is extremely important, especially with lots of classes  
+    * GPU Compute Units are important!!  
 
 ---
 

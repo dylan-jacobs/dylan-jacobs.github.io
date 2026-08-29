@@ -7,13 +7,13 @@ redirect_from:
 ---
 
 # US Naval Research Laboratory Power Electronics Research
-During the summers of 2025 and 2026, I worked as a research intern in the Power Electronics Division at the [US Naval Research Laboratory](https://www.nrl.navy.mil/).
+During the summers of 2025 and 2026, I worked as a research intern in the Power Electronics Division at the [US Naval Research Laboratory](https://www.nrl.navy.mil/){: target="_blank"}.
 
 ## Plasma Synthesis and Scanning Electron Microscopy Characterization of Nanomaterials (NREIP 2026)
 During the summer of 2026, I used scanning electron microscopy (SEM) and energy-dispersive x-ray spectroscopy (EDXS) to characterize nanomaterials synthesized using atomic layer deposition (ALD). I also designed and ran ALD experiments with the goal of improving precursor dose times while achieving uniform atomic-layer infiltration coatings on porous nanomaterial compacts. The applications of this research include high-interfacial-area nanocomposites and improved thermoelectrics with high electrical conductivity and low thermal conductivity.  
 
 I was also developing an inductively coupled plasma (ICP) reactor to synthesize nanoparticles. I built vacuum and cooling systems for the reactor, leak tested the system, and got the reactor online, after which I ran Argon and $H_2$ plasma experiments. I also minimized reflected RF power by tuning the matching network using a Smith chart, and mitigated RF electromagnetic interference by designing and constructing a Faraday cage around the plasma tube.
-<embed src="/files/NREIP-Research-Poster-2026.pdf#toolbar=0" type='application/pdf' width="100%" height="540px">
+<embed src="/files/NREIP-Research-Poster-2026.pdf#toolbar=0" type='application/pdf' width="100%" height="500px">
 
 ## Advanced Materials Research Intern (NREIP 2025)
 During the summer of 2025, I used laser flash analysis (LFA) to characterize the thermal properties of semiconductor samples and thermoelectric nanomaterials, used to generate electricity from waste heat. I developed and optimized a procedure that yielded high-quality measurements of thermal diffusivity and conductivity for infrared-transparent samples that were previously prohibitively challenging to measure. I also created an Arduino-controlled liquid nitrogen (LN2) dispenser to automatically cool the LFA instrument, overcoming the need for researchers to constantly refill its LN2 dewar and enabling long, automated thermoelectric characterization.
@@ -21,7 +21,7 @@ During the summer of 2025, I used laser flash analysis (LFA) to characterize the
 
 
 # Computational Fluid Dynamics and Numerical Methods Research
-Since January 2024, I have been applying my experience in MATLAB and fluid dynamics to computational mathematics research under Swarthmore professor [Dr. Joseph Nakao](https://jhknakao.github.io/). I am currently developing a novel high-accuracy, implicit, low-rank solver for the Vlasov-Dougherty-Fokker-Planck system in cylindrical coordinates, which has applications in plasma simulations. More general Vlasov-Fokker-Planck-type equations can be extended to model nuclear fusion, a research area I am especially drawn to because of its renewable energy applications. 
+Since January 2024, I have been applying my experience in MATLAB and fluid dynamics to computational mathematics research under Swarthmore professor [Dr. Joseph Nakao](https://jhknakao.github.io/){: target="_blank"}. I am currently developing a novel high-accuracy, implicit, low-rank solver for the Vlasov-Dougherty-Fokker-Planck system in cylindrical coordinates, which has applications in plasma simulations. More general Vlasov-Fokker-Planck-type equations can be extended to model nuclear fusion, a research area I am especially drawn to because of its renewable energy applications. 
 
 Plasma dynamics and fusion interaction models require systems of nonlinear PDEs. However, analytically solving nonlinear PDEs is often impossible, and experiments are resource-intensive, necessitating high-accuracy numerical solutions. Ideally, these solutions must capture sharp gradients, conserve physical structures (e.g. mass, momentum, energy), and maintain the positivity of the solution. Numerical solutions also suffer from the curse of dimensionality: increasing the numerical solution's dimensions causes exponential growth in computational cost. Plasma systems of interest are described in up to six-dimensional phase space--plus time--via probability density function $ f(x, v, t) $, which describes the likelihood particles exist at position $ \mathbf{x} \in \mathbb{R}^3 $ with velocity $ \mathbf{v} \in \mathbb{R}^3 $ at time $ t > 0 $.
 
