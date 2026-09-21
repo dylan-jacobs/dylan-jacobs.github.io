@@ -16,6 +16,6 @@ I am also a member of [Tau Beta Pi Engineering Honor Society](https://www.tbp.or
 
 When I am not studying or working on personal projects, I enjoy backpacking, playing soccer, skiing, reading, practicing Spanish, and playing guitar.
 
-[View Resume](/files/Resume.pdf){: .btn .btn--info target="_blank"}
+[View Resume](/files/Resume.pdf){: .btn .btn--info target="_blank"}  
 [View CV](/files/CV.pdf){: .btn .btn--info target="_blank"}
 
