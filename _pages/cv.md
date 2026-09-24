@@ -11,7 +11,6 @@ redirect_from:
 
 [View Resume as PDF](/files/Resume.pdf){: .btn .btn--info target="_blank"}   
 [View CV as PDF](/files/CV.pdf){: .btn .btn--info target="_blank"}  
-[View Transcript as PDF](/files/Dylan_Jacobs_Swarthmore_transcript.pdf){: .btn .btn--info target="_blank"}
 
 Education
 ======
