@@ -8,9 +8,9 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Dylan Jacobs"
+title                    : "Dylan T. Jacobs"
 title_separator          : "-"
-name                     : &name "Dylan Jacobs"
+name                     : &name "Dylan T. Jacobs"
 description              : &description "General Engineering and Applied Mathematics double major at Swarthmore College"
 url                      : https://dylan-jacobs.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -20,8 +20,8 @@ baseurl                  : "" # the subpath of your site, e.g. "/blog"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
-  name             : "Dylan Jacobs"
+  avatar           : "profile.jpg"
+  name             : "Dylan T. Jacobs"
   pronouns         : "he/him"  
   bio              : "General Engineering and Applied Mathematics double major at Swarthmore College"
   location         : "Philadelphia, PA | Portland, OR"
