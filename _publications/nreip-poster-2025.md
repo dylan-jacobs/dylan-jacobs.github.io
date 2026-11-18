@@ -5,7 +5,7 @@ category: posters
 venue: Swarthmore Sigma Xi Poster Session
 permalink: /publication/nreip-poster-2025
 excerpt: 'Poster on thermoelectric material characterization (Naval Research Enterprise Internship Program 2025).'
-date: August 2025
+date: 2025-09-25
 posterurl: 'https://dylan-jacobs.github.io/files/Sigma-Xi-Poster-2025.pdf'
 citation: 
 ---

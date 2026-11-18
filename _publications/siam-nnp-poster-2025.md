@@ -2,10 +2,10 @@
 title: "An Implicit, Low-Rank Solver for 1D2V Vlasov-Fokker-Planck Equation in Cylindrical Coordinates."
 
 category: posters
-venue: SIAM NNP 2025
+venue: SIAM NNP
 permalink: /publication/siam-nnp-poster-2025
 excerpt: 'Presented at the 2025 Society for Applied and Industrial Mathematics (SIAM) regional New York, New Jersey, Pennsylvania (NNP) conference poster session.'
-date: November 2025
+date: 2025-11-01
 posterurl: 'https://dylan-jacobs.github.io/files/SIAM_NNP_Poster_2025.pdf'
 citation: 
 ---
