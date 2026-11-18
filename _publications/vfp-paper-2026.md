@@ -5,7 +5,7 @@ category: manuscripts
 permalink: /publication/2026-an-adaptive-and-conservative-low-rank-IMEX-solver-for-the-hybrid-ion-vlasov-fokker-planck-and-fluid-electron-system
 excerpt: 'A macroscopically conservative, rank-adaptive method for solving a hybrid Vlasov-Fokker-Planck (VFP) equation in cylindrical coordinates.'
 date: August 2026
-venue: ""
+venue: "Communications in Computational Physics"
 citation: J. Nakao, D.T. Jacobs, and W. Taitano, "An adaptive and conservative low-rank IMEX solver for the hybrid ion Vlasov-Fokker-Planck and fluid electron system." Communications in Computational Physics, Accepted.
 ---
 Accepted on November 16, 2026.
